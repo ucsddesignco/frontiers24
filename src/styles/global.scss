@@ -16,6 +16,7 @@
 
 body {
   line-height: 1.5;
+  cursor: $cursor;
 }
 
 h1 {
@@ -66,4 +67,8 @@ button,
 textarea,
 select {
   font-family: $p-font;
+
+  &:hover {
+    cursor: $cursor-pointer;
+  }
 }
