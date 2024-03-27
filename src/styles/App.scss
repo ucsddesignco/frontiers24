@@ -1,0 +1,22 @@
+.main-content {
+  height: 100dvh;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  margin-inline: auto;
+  position: relative;
+
+  section {
+    height: 100dvh;
+    scroll-snap-align: start;
+    padding-left: $content-offset;
+    padding-right: calc($navbar-margin + $navbar-width + 3rem);
+
+    @media (max-width: $tablet-breakpoint) {
+      padding-right: 3rem;
+    }
+
+    @media (max-width: $mobile-breakpoint) {
+      padding: 0;
+    }
+  }
+}

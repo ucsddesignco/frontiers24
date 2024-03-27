@@ -1,0 +1,69 @@
+//Modfied version of https://piccalil.li/blog/a-more-modern-css-reset/ and Vite starter template
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  color: $primary-white;
+  background-color: $primary-blue;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  margin: 0;
+}
+
+body {
+  line-height: 1.5;
+}
+
+h1 {
+  font-family: $header-font;
+}
+
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: $subheader-font;
+}
+
+p {
+  font-family: $p-font;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -moz-text-size-adjust: none;
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
+  font-size: 16px;
+}
+
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+  color: currentColor;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  max-width: 100%;
+  display: block;
+}
+
+input,
+button,
+textarea,
+select {
+  font-family: $p-font;
+}

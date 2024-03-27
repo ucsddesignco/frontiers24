@@ -1,0 +1,152 @@
+nav {
+  position: fixed;
+  display: grid;
+  place-items: center;
+  height: 100dvh;
+  width: 100%;
+  right: $navbar-margin;
+  pointer-events: none;
+
+  .desktop-nav {
+    position: absolute;
+    right: 0;
+    pointer-events: auto;
+  }
+
+  .mobile-nav {
+    pointer-events: auto;
+    display: none;
+  }
+
+  .hamburger-planet {
+    pointer-events: auto;
+    display: none;
+  }
+
+  ul {
+    display: none;
+    pointer-events: auto;
+  }
+
+  @media (max-width: $tablet-breakpoint) {
+    left: 0;
+    right: 0;
+
+    .desktop-nav {
+      right: auto;
+      transform-origin: center bottom;
+      transform: rotate(-90deg) translateY(50%);
+      position: absolute;
+      bottom: 3rem;
+    }
+  }
+
+  @media (max-width: $mobile-breakpoint) {
+    position: absolute;
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+
+    .desktop-nav {
+      display: none;
+    }
+
+    .mobile-nav {
+      display: block;
+      top: 0;
+      margin-top: 2rem;
+      margin-inline: 1rem;
+    }
+
+    .dco-logo {
+      z-index: 1;
+    }
+
+    ul {
+      display: flex;
+      list-style: none;
+      padding: 0;
+      top: 0;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      background-color: $primary-blue;
+      width: 100%;
+      padding-top: 6rem;
+      list-style: none;
+      position: fixed;
+      transform: translateX(100%);
+      visibility: hidden;
+
+      &.panel-open {
+        transform: translateX(0%);
+        transition: 0.3s ease-out;
+        visibility: visible;
+      }
+
+      &.panel-close {
+        transform: translateX(-100%);
+        visibility: visible;
+        transition: 0.3s ease-out;
+      }
+
+      .hamburger-planet {
+        display: block;
+        position: absolute;
+        right: 0;
+        bottom: 0;
+      }
+
+      li {
+        width: 100%;
+        button {
+          text-decoration: none;
+          background-color: transparent;
+          border: none;
+          display: block;
+          width: 100%;
+          text-align: left;
+          color: $primary-white;
+          padding-inline: 5rem;
+          padding-block: 2rem;
+          font-size: 1.5rem;
+          font-family: $header-font;
+
+          &:focus {
+            outline-color: white;
+          }
+        }
+
+        &:before {
+          content: "";
+          display: block;
+          width: 100%;
+          height: 5px;
+          background-image: linear-gradient(
+            to right,
+            white 33%,
+            rgba(255, 255, 255, 0) 0%
+          );
+          background-position: top;
+          background-size: 11px 1px;
+          background-repeat: repeat-x;
+        }
+
+        &:last-child:after {
+          content: "";
+          display: block;
+          width: 100%;
+          height: 5px;
+          background-image: linear-gradient(
+            to right,
+            white 33%,
+            rgba(255, 255, 255, 0) 0%
+          );
+          background-position: top;
+          background-size: 11px 1px;
+          background-repeat: repeat-x;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,54 @@
+//Colors
+$primary-blue: #090921;
+$primary-orange: #ff671e;
+$primary-white: #f1f1f1;
+
+//Breakpoints
+$tablet-breakpoint: 1200px;
+$mobile-breakpoint: 600px;
+
+//Fonts
+$header-font: "Ridge Obligque Regular";
+$subheader-font: "NeuePlak Bold";
+$p-font: "NB International Regular";
+
+//Spacing and Sizing
+$navbar-margin: clamp(2rem, calc(0.5rem + 5vw), 8rem);
+$navbar-width: 45px;
+
+$planet-width: calc(50% + 20vw);
+$planet-radius: $planet-width / 2;
+
+//SASS variables can't update with media queries, so we have to use CSS variables
+:root {
+  --_planet-left-offset: 9;
+  --_planet-right-offset: 30vw;
+  @media (max-width: $tablet-breakpoint) {
+    --_planet-left-offset: 7;
+    --_planet-right-offset: 12vw;
+  }
+}
+
+$planet-offset: calc(
+  var(--_planet-left-offset) * -10% + var(--_planet-right-offset)
+);
+$content-offset: calc(
+  $planet-width - $planet-width * (var(--_planet-left-offset) / 10) +
+    var(--_planet-right-offset) + 1rem
+);
+
+//Import Fonts
+@font-face {
+  font-family: "NeuePlak Bold";
+  src: url("/fonts/NeuePlak-ExtendedBold.woff2");
+}
+
+@font-face {
+  font-family: "NB International Regular";
+  src: url("/fonts/NB-International-Regular.ttf");
+}
+
+@font-face {
+  font-family: "Ridge Obligque Regular";
+  src: url("/fonts/ridge-bold-oblique.otf");
+}

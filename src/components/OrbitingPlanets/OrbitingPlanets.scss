@@ -1,0 +1,21 @@
+.orbiting-planets-container {
+  position: fixed;
+  pointer-events: none;
+  height: 100dvh;
+  width: 100%;
+  display: grid;
+  align-items: center;
+
+  svg {
+    transform: translateX($planet-offset);
+
+    @media (max-width: $tablet-breakpoint) {
+      width: $planet-width;
+    }
+
+    @media (max-width: $mobile-breakpoint) {
+      transform: scale(1.5) translateX(30%) translateY(20%) rotate(-150deg);
+      position: absolute;
+    }
+  }
+}

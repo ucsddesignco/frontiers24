@@ -1,0 +1,44 @@
+{
+  "name": "frontiers24",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview",
+    "prepare": "husky",
+    "lint-fix": "eslint . --fix && prettier . --write",
+    "lint-check": "eslint . && prettier . --check"
+  },
+  "dependencies": {
+    "lint-staged": "^15.2.2",
+    "prettier": "^3.2.5",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "sass": "^1.72.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.66",
+    "@types/react-dom": "^18.2.22",
+    "@typescript-eslint/eslint-plugin": "^7.2.0",
+    "@typescript-eslint/parser": "^7.2.0",
+    "@vitejs/plugin-react-swc": "^3.5.0",
+    "eslint": "^8.57.0",
+    "eslint-plugin-react": "^7.34.1",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.6",
+    "husky": "^9.0.11",
+    "typescript": "^5.2.2",
+    "vite": "^5.2.0"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,html}": [
+      "eslint . --fix --report-unused-disable-directives --max-warnings 0",
+      "eslint . --report-unused-disable-directives --max-warnings 0",
+      "prettier . --write"
+    ],
+    "*.{scss, css, yml}": "prettier . --write"
+  }
+}
