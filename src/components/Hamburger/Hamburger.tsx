@@ -1,4 +1,4 @@
-import "./Hamburger.scss";
+import './Hamburger.scss';
 
 type HamburgerProps = {
   isHamburgerOpen: boolean;
@@ -7,18 +7,18 @@ type HamburgerProps = {
 
 export default function Hamburger({
   isHamburgerOpen,
-  toggleHamburger,
+  toggleHamburger
 }: HamburgerProps) {
   return (
     <>
       <button
         className={`mobile-nav hamburger hamburger--spin ${
-          isHamburgerOpen ? "is-active" : ""
+          isHamburgerOpen ? 'is-active' : ''
         }`}
         onClick={() => {
           toggleHamburger();
         }}
-        aria-label={isHamburgerOpen ? "Close menu" : "Open menu"}
+        aria-label={isHamburgerOpen ? 'Close menu' : 'Open menu'}
         aria-expanded={isHamburgerOpen}
       >
         <span className="hamburger-box">
@@ -26,7 +26,7 @@ export default function Hamburger({
         </span>
       </button>
       <div
-        className={`dark_overlay ${isHamburgerOpen ? "is-active" : ""}`}
+        className={`dark_overlay ${isHamburgerOpen ? 'is-active' : ''}`}
         onClick={() => {
           toggleHamburger();
         }}

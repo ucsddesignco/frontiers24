@@ -1,4 +1,4 @@
-import "./OrbitingPlanets.scss";
+import './OrbitingPlanets.scss';
 
 export default function OrbitingPlanets() {
   return (

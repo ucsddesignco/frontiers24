@@ -1,4 +1,4 @@
-import "./Judges.scss";
+import './Judges.scss';
 
 export default function Judges() {
   return (

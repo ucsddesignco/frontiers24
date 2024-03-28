@@ -1,4 +1,4 @@
-import "./Timeline.scss";
+import './Timeline.scss';
 
 export default function Timeline() {
   return (

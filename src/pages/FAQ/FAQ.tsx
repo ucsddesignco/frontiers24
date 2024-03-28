@@ -1,4 +1,4 @@
-import "./FAQ.scss";
+import './FAQ.scss';
 
 export default function FAQ() {
   return (
