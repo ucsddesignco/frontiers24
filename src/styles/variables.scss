@@ -13,8 +13,8 @@ $subheader-font: 'NeuePlak Bold';
 $p-font: 'NB International Regular';
 
 //Cursors
-$cursor: url("/images/cursor.svg"), auto;
-$cursor-pointer: url("/images/cursor-pointer.svg"), pointer;
+$cursor: url('/images/cursor.svg'), auto;
+$cursor-pointer: url('/images/cursor-pointer.svg'), pointer;
 
 //Spacing and Sizing
 $navbar-margin: clamp(2rem, calc(0.5rem + 5vw), 8rem);
