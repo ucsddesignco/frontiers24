@@ -11,12 +11,12 @@ pnpm i
 Run the development server:
 
 ```
-pnpm run dev
+pnpm dev
 ```
 
 ## Learn More
 
 Run these commands for linting and formating.
 
-- `pnpm run lint-check` - check all lint errors or code style issues without modifying any files
-- `pnpm run lint-fix` - fixes all auto-fixable lint errors and reformats code
+- `pnpm lint-check` - check all lint errors or code style issues without modifying any files
+- `pnpm lint-fix` - fixes all auto-fixable lint errors and reformats code
