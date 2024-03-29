@@ -1,4 +1,46 @@
+$heading-color: #ff671e;
+$text-color: white;
+
+@font-face {
+  font-family: "Neue Plak";
+  src: url("../../assets/fonts/Neue-Plak-Extended-Bold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Ridge Bold";
+  src: url("../../assets/fonts/ridge-bold-oblique.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "NB International";
+  src: url("../../assets/fonts/NB-International-Regular.ttf") format("truetype");
+}
+
 .home {
   display: grid;
   place-items: center;
+  margin: 0;
+}
+
+h2 {
+  color: $heading-color;
+}
+
+/* REGISTER BUTTON */
+.button {
+  background: $heading-color;
+  display: inline-block;
+  font-size: 1.5em;
+  padding: 0.5em 2em;
+  text-decoration: none;
+  color: $text-color;
+}
+
+.parallelogram {
+  transform: skew(-20deg);
+}
+
+.skew-fix {
+  display: inline-block;
+  transform: skew(20deg);
 }
