@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-key */
 import "./FAQ.scss";
 import { useRef } from "react";
 
@@ -55,9 +54,9 @@ export default function FAQ() {
         <div ref={faq1Ref} className="faq-container">
           <h2>FAQ</h2>
           {FaqList1.map((item) => (
-            <div className="block">
+            <div className="block" key={item.question}>
               <h4>{item.question}</h4>
-              <p dangerouslySetInnerHTML={{ __html: item.answer }} />
+              <p>{item.answer}</p>
             </div>
           ))}
         </div>
@@ -66,9 +65,9 @@ export default function FAQ() {
         <div ref={faq2Ref} className="faq-container">
           <h2>FAQ</h2>
           {FaqList2.map((item) => (
-            <div className="block">
+            <div className="block" key={item.question}>
               <h4>{item.question}</h4>
-              <p dangerouslySetInnerHTML={{ __html: item.answer }} />
+              <p>{item.answer}</p>
             </div>
           ))}
         </div>

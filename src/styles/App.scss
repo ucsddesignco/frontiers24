@@ -18,5 +18,11 @@
     @media (max-width: $mobile-breakpoint) {
       padding: 0;
     }
+
+    h2 {
+      font-family: $header-font;
+      font-size: 1.5rem;
+      margin: 0;
+    }
   }
 }

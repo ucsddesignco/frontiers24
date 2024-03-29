@@ -1,32 +1,9 @@
-$desktop-padding: 8vw;
-$heading-font: "Ridge Bold", sans-serif;
-$text-font: "NB International", sans-serif;
-
-@font-face {
-  font-family: "Ridge Bold";
-  src: url("../../assets/fonts/ridge-bold-oblique.otf") format("opentype");
-}
-
-@font-face {
-  font-family: "NB International";
-  src: url("../../assets/fonts/NB-International-Regular.ttf") format("truetype");
-}
-
-h2 {
-  font-family: "Ridge Bold";
-  font-size: 1.5rem;
-  margin: 0;
-}
-
 .faq {
   height: 100%;
   overflow: hidden;
   display: flex;
   align-items: center;
 
-  > .faq-container {
-    p {
-      font-family: $text-font;
-    }
+  .faq-container {
   }
 }
