@@ -1,4 +1,5 @@
 import "./JudgeComponent.scss";
+import duck from "../../images/duck.jpg";
 
 interface JudgeProps {
   name: string;
@@ -39,7 +40,7 @@ const JudgeComponent = (props: JudgeProps) => {
         >
           <image
             className="judge-image"
-            href="/images/duck.jpg"
+            href={duck}
             x="0"
             y="0"
             width="161"
@@ -47,6 +48,16 @@ const JudgeComponent = (props: JudgeProps) => {
           />
         </pattern>
       </svg>
+      <svg
+        width="95"
+        height="160"
+        viewBox="0 0 121 160"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path d="M0 159.231L50 0H70L20 159.231H0Z" fill="#ff671e" />
+      </svg>
+
       <div className="judge-info">
         <h3>Name: {props.name}</h3>
         <p>Pronouns: {props.pronouns}</p>
