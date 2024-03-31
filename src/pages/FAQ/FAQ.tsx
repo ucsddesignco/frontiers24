@@ -10,7 +10,7 @@ const FaqList1 = [
   {
     question: "Who can participate?",
     answer:
-      "Registration is open to <b>UCSD students</b> of all levels and backgrounds. We encourage everyone to apply and share their own unique perspectives, knowledge, and skills!",
+      "Registration is open to UCSD students of all levels and backgrounds. We encourage everyone to apply and share their own unique perspectives, knowledge, and skills!",
   },
   {
     question: "How big can my team be?",
@@ -20,7 +20,7 @@ const FaqList1 = [
   {
     question: "When is the deadline to register?",
     answer:
-      "Registration closes <b>Friday, April 5th at 11:59 PM</b>. We will cap the event at 60 participants, so register early!",
+      "Registration closes Friday, April 5th at 11:59 PM. We will cap the event at 60 participants, so register early!",
   },
 ];
 

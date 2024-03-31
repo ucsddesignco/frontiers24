@@ -1,11 +1,11 @@
 import "./JudgeComponent.scss";
-import duck from "../../images/duck.jpg";
 
 interface JudgeProps {
   name: string;
   pronouns: string;
   position: string;
   funFact: string;
+  imgLink: string;
 }
 
 const JudgeComponent = (props: JudgeProps) => {
@@ -38,9 +38,18 @@ const JudgeComponent = (props: JudgeProps) => {
           width="161"
           height="160"
         >
+          {/*
           <image
             className="judge-image"
-            href={duck}
+            href={props.imgLink}
+            x="0"
+            y="0"
+            width="161"
+            height="160"
+  />*/}
+          <image
+            className="judge-image"
+            href={props.imgLink}
             x="0"
             y="0"
             width="161"
@@ -57,7 +66,6 @@ const JudgeComponent = (props: JudgeProps) => {
       >
         <path d="M0 159.231L50 0H70L20 159.231H0Z" fill="#ff671e" />
       </svg>
-
       <div className="judge-info">
         <h3>Name: {props.name}</h3>
         <p>Pronouns: {props.pronouns}</p>

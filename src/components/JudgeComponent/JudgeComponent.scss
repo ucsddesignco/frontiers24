@@ -1,6 +1,7 @@
 .judge-image {
   mask: url(#trapezoidMask);
   -webkit-mask: url(#trapezoidMask);
+  background-repeat: no-repeat;
 }
 
 .judge-card {
