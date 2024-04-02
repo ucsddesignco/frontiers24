@@ -1,10 +1,10 @@
 .main-content {
   height: 100dvh;
-  overflow-y: scroll;
-  scroll-snap-type: y mandatory;
+
   margin-inline: auto;
   position: relative;
 
+  /*
   section {
     height: 100dvh;
     scroll-snap-align: start;
@@ -19,4 +19,5 @@
       padding: 0;
     }
   }
+  */
 }

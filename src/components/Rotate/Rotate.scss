@@ -1,0 +1,31 @@
+.scroll-cont {
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  height: 100vh;
+  .scroll-section-one,
+  .scroll-section-two,
+  .scroll-section-three,
+  .scroll-section-four {
+    top: 50%;
+    scroll-snap-align: start;
+    border: 1px solid red;
+    height: 100dvh;
+    padding-left: $content-offset;
+    padding-right: calc($navbar-margin + $navbar-width + 3rem);
+
+    @media (max-width: $tablet-breakpoint) {
+      padding-right: 3rem;
+    }
+
+    @media (max-width: $mobile-breakpoint) {
+      padding: 0;
+    }
+  }
+  .two,
+  .three,
+  .four {
+    height: 100dvh;
+    border: 1px solid red;
+    transform: rotate(80deg);
+  }
+}
