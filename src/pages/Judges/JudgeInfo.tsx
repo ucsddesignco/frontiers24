@@ -6,6 +6,7 @@ export const JudgeInfo = [
     funFact: "I enjoy designing and sewing my clothes for myself.",
     imgLink:
       "https://res.cloudinary.com/design-co-ucsd/image/upload/v1711863617/frontiers24/judges/julia_nguyen_a2mnj2.webp",
+    linkedin: "https://www.linkedin.com/in/nguyenjuliaa/",
   },
   {
     name: "Alan Tran",
@@ -15,6 +16,7 @@ export const JudgeInfo = [
       "I want to create a public website that objectively scores the best pho in San Diego/OC area.",
     imgLink:
       "https://res.cloudinary.com/design-co-ucsd/image/upload/v1711863614/frontiers24/judges/alan_tran_axarse.webp",
+    linkedin: "https://www.linkedin.com/in/alantran2/",
   },
   {
     name: "Dexter Zavalza",
@@ -23,6 +25,7 @@ export const JudgeInfo = [
     funFact: "First job out of college was in a surfboard factory.",
     imgLink:
       "https://res.cloudinary.com/design-co-ucsd/image/upload/v1711863615/frontiers24/judges/dexter_zavalza_pgx3sy.webp",
+    linkedin: "https://www.linkedin.com/in/dzh-s/",
   },
   {
     name: "Andrew Nguyen",
@@ -32,6 +35,7 @@ export const JudgeInfo = [
       "I’ve appeared on the livestreams of 2 separate large esports broadcasts: the 2017 Overwatch World Cup in an audience interview and the 2023 Valorant Champions Finals on the Stare Cam.",
     imgLink:
       "https://res.cloudinary.com/design-co-ucsd/image/upload/v1711863616/frontiers24/judges/andrew_nguyen_ur8x1m.webp",
+    linkedin: "https://www.linkedin.com/in/andrewduynguyen/",
   },
   {
     name: "Soon-Won Dy",
@@ -41,5 +45,6 @@ export const JudgeInfo = [
       "I love going to cafes & recreating their fancy coffees and baked goods at home.",
     imgLink:
       "https://res.cloudinary.com/design-co-ucsd/image/upload/v1711863613/frontiers24/judges/soon-won_dy_hwyj2p.webp",
+    linkedin: "https://www.linkedin.com/in/soonwondy/",
   },
 ];

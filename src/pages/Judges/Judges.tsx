@@ -29,6 +29,7 @@ export default function Judges() {
                   position={item.position}
                   funFact={item.funFact}
                   imgLink={item.imgLink}
+                  linkedin={item.linkedin}
                 />
               ))}
             </div>
@@ -44,6 +45,7 @@ export default function Judges() {
                   position={item.position}
                   funFact={item.funFact}
                   imgLink={item.imgLink}
+                  linkedin={item.linkedin}
                 />
               ))}
             </div>
@@ -61,6 +63,7 @@ export default function Judges() {
                 position={item.position}
                 funFact={item.funFact}
                 imgLink={item.imgLink}
+                linkedin={item.linkedin}
               />
             ))}
           </div>
