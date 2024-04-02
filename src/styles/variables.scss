@@ -8,9 +8,9 @@ $tablet-breakpoint: 1200px;
 $mobile-breakpoint: 800px;
 
 //Fonts
-$header-font: "Ridge Obligque Regular";
-$subheader-font: "NeuePlak Bold";
-$p-font: "NB International Regular";
+$header-font: 'Ridge Obligque Regular';
+$subheader-font: 'NeuePlak Bold';
+$p-font: 'NB International Regular';
 
 // Font Sizes
 $p-size: 20px;
@@ -46,16 +46,16 @@ $content-offset: calc(
 
 //Import Fonts
 @font-face {
-  font-family: "NeuePlak Bold";
-  src: url("/fonts/NeuePlak-ExtendedBold.woff2");
+  font-family: 'NeuePlak Bold';
+  src: url('/fonts/NeuePlak-ExtendedBold.woff2');
 }
 
 @font-face {
-  font-family: "NB International Regular";
-  src: url("/fonts/NB-International-Regular.ttf");
+  font-family: 'NB International Regular';
+  src: url('/fonts/NB-International-Regular.ttf');
 }
 
 @font-face {
-  font-family: "Ridge Obligque Regular";
-  src: url("/fonts/ridge-bold-oblique.otf");
+  font-family: 'Ridge Obligque Regular';
+  src: url('/fonts/ridge-bold-oblique.otf');
 }

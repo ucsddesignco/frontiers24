@@ -1,16 +1,16 @@
-import { useState } from "react";
-import Hamburger from "../Hamburger/Hamburger";
-import "./Navbar.scss";
-import HamrburgerPlanet from "../Hamburger/HamrburgerPlanet";
+import { useState } from 'react';
+import Hamburger from '../Hamburger/Hamburger';
+import './Navbar.scss';
+import HamrburgerPlanet from '../Hamburger/HamrburgerPlanet';
 
 export default function Navbar() {
   const [isHamburgerOpen, setIsHamburgerOpen] = useState(false);
 
   const links = [
-    { onClick: () => {}, text: "Home" },
-    { onClick: () => {}, text: "FAQ" },
-    { onClick: () => {}, text: "Timeline" },
-    { onClick: () => {}, text: "Judges" },
+    { onClick: () => {}, text: 'Home' },
+    { onClick: () => {}, text: 'FAQ' },
+    { onClick: () => {}, text: 'Timeline' },
+    { onClick: () => {}, text: 'Judges' }
   ];
 
   const toggleHamburger = () => {
@@ -18,18 +18,18 @@ export default function Navbar() {
 
     if (!isHamburgerOpen) {
       const handleKeyDown = (e: KeyboardEvent) => {
-        if (e.key === "Escape") {
+        if (e.key === 'Escape') {
           setIsHamburgerOpen(false);
-          document.body.style.overflow = "auto";
-          document.removeEventListener("keydown", handleKeyDown);
+          document.body.style.overflow = 'auto';
+          document.removeEventListener('keydown', handleKeyDown);
         }
       };
-      document.querySelector("main")?.setAttribute("aria-hidden", "true");
-      document.addEventListener("keydown", handleKeyDown);
-      document.body.style.overflow = "hidden";
+      document.querySelector('main')?.setAttribute('aria-hidden', 'true');
+      document.addEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = 'hidden';
     } else {
-      document.body.style.overflow = "auto";
-      document.querySelector("main")?.removeAttribute("aria-hidden");
+      document.body.style.overflow = 'auto';
+      document.querySelector('main')?.removeAttribute('aria-hidden');
     }
   };
 
