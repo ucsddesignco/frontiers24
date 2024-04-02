@@ -4,13 +4,14 @@ import { useRef } from "react";
 
 export default function Home() {
   const registerRef = useRef(null);
+  const logoRef = useRef(null);
 
   return (
     <section className="home">
       <div className="landing-container">
         <div className="right-container">
           <div className="logo-container">
-            <img src={Logo} alt="Design Frontiers Logo" />
+            <img ref={logoRef} src={Logo} alt="Design Frontiers Logo" />
           </div>
           <h3>Saturday, April 13th | 9am–5pm | DIB 208</h3>
           <p>Journey beyond the horizons of innovation!</p>

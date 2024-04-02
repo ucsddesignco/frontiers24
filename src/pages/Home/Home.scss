@@ -26,6 +26,13 @@ h2 {
   color: $heading-color;
 }
 
+.logo-container {
+  position: fixed;
+  transition: 0.5s, 0.5s, 0.5s;
+  transition-property: right, top, transform;
+  transform: translate(0%, -100%);
+}
+
 /* REGISTER BUTTON */
 .button {
   background: $heading-color;

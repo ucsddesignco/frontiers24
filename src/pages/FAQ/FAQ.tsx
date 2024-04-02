@@ -28,7 +28,7 @@ const FaqList2 = [
   {
     question: "Where is the Design and Innovation Building?",
     answer:
-      "DIB is located next to the Pepper Canyon Trolley Station, with entrances located across from the Structural Materials and Engineering building or next to the Regents Loop shuttle stop. Design Frontiers will be hosted in <b>Room 208</b> on the second floor.",
+      "DIB is located next to the Pepper Canyon Trolley Station, with entrances located across from the Structural Materials and Engineering building or next to the Regents Loop shuttle stop. Design Frontiers will be hosted in Room 208 on the second floor.",
   },
   {
     question:
