@@ -1,2 +1,93 @@
 .timeline {
+  p {
+    font-family: $p-font;
+    color: $primary-white;
+  }
+
+  h1 {
+    font-family: $header-font;
+    color: $primary-orange;
+  }
+
+  h2 {
+    font-family: $header-font;
+    color: $primary-orange;
+  }
+
+  h3 {
+    font-family: $subheader-font;
+    color: $primary-white;
+  }
+
+  h4 {
+    font-family: $subheader-font;
+    line-height: 15vw;
+    color: $primary-white;
+  }
+
+  li {
+    display: flex;
+    margin-bottom: 2vw;
+
+    @media screen and (max-width: $mobile-breakpoint) {
+      margin-bottom: 5vw;
+    }
+  }
+
+  .title {
+    display: flex;
+    width: 30vw;
+    line-height: 34px;
+    margin-bottom: 60px;
+    justify-content: start;
+
+    @media screen and (max-width: $mobile-breakpoint) {
+      width: 50vw;
+    }
+  }
+
+  .time {
+    display: flex;
+    width: 5rem;
+    line-height: 34px;
+    justify-content: start;
+
+    @media screen and (max-width: $mobile-breakpoint) {
+      width: 15vw;
+      font-size: 12px;
+    }
+  }
+
+  .orange-line {
+    background-color: $primary-orange;
+    margin-top: 15px;
+    margin-right: 7.5px;
+    margin-left: 7.5px;
+    width: 30px;
+    height: 3px;
+  }
+
+  .title-discription {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 50vw;
+
+    @media screen and (max-width: $mobile-breakpoint) {
+      width: 72vw;
+    }
+
+    p {
+      @media screen and (max-width: $mobile-breakpoint) {
+        margin-top: 3vw;
+        margin-bottom: 3vw;
+        margin-right: 5vw;
+      }
+    }
+  }
+
+  .timeline {
+    display: flex;
+    align-items: center;
+  }
 }
