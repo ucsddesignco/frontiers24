@@ -16,7 +16,9 @@
     }
 
     @media (max-width: $mobile-breakpoint) {
-      padding: 0;
+      padding: $mobile-padding;
+      height: auto;
+      margin-bottom: 5rem;
     }
 
     h2 {

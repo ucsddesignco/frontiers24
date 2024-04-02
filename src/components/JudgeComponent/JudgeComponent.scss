@@ -1,9 +1,54 @@
-.judge-image {
-  mask: url(#trapezoidMask);
-  -webkit-mask: url(#trapezoidMask);
-  background-repeat: no-repeat;
-}
-
 .judge-card {
   display: flex;
+  gap: 2rem;
+
+  &:nth-of-type(even) {
+    flex-direction: row-reverse;
+  }
+
+  @media (max-width: 438px) {
+    flex-direction: column;
+
+    &:nth-of-type(even) {
+      flex-direction: column;
+    }
+  }
+
+  // &:nth-of-type(3) {
+  //  We may need to change the image offset because it can be too close to thet planets on smaller screen sizes
+  //  Make sure to also account for mobile
+  //  transform: translateX(-50px);
+  // }
+
+  .svg-container {
+    display: flex;
+    position: relative;
+    min-width: 180px;
+
+    .svg-image {
+      min-width: 160px;
+      top: 0;
+      left: 0;
+
+      .judge-image {
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    .orange-bar {
+      position: absolute;
+      transform: translateX(145px);
+    }
+  }
+
+  .judge-info {
+    h3 {
+      margin-bottom: 1rem;
+    }
+
+    .fun-fact {
+      max-width: 65ch;
+    }
+  }
 }
