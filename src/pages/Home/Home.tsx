@@ -11,7 +11,13 @@ export default function Home() {
       <div className="landing-container">
         <div className="right-container">
           <div className="logo-container">
-            <img ref={logoRef} src={Logo} alt="Design Frontiers Logo" />
+            <img
+              ref={logoRef}
+              src={Logo}
+              className="logo"
+              alt="Design Frontiers Logo"
+            />
+            <img src={Logo} className="mobile-logo" alt="" />
           </div>
           <h3>Saturday, April 13th | 9am–5pm | DIB 208</h3>
           <p>Journey beyond the horizons of innovation!</p>
