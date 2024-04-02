@@ -2,18 +2,18 @@ $heading-color: #ff671e;
 $text-color: white;
 
 @font-face {
-  font-family: "Neue Plak";
-  src: url("../../assets/fonts/Neue-Plak-Extended-Bold.ttf") format("truetype");
+  font-family: 'Neue Plak';
+  src: url('../../assets/fonts/Neue-Plak-Extended-Bold.ttf') format('truetype');
 }
 
 @font-face {
-  font-family: "Ridge Bold";
-  src: url("../../assets/fonts/ridge-bold-oblique.otf") format("opentype");
+  font-family: 'Ridge Bold';
+  src: url('../../assets/fonts/ridge-bold-oblique.otf') format('opentype');
 }
 
 @font-face {
-  font-family: "NB International";
-  src: url("../../assets/fonts/NB-International-Regular.ttf") format("truetype");
+  font-family: 'NB International';
+  src: url('../../assets/fonts/NB-International-Regular.ttf') format('truetype');
 }
 
 .home {

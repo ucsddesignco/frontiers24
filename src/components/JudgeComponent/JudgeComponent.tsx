@@ -1,4 +1,4 @@
-import "./JudgeComponent.scss";
+import './JudgeComponent.scss';
 
 interface JudgeProps {
   name: string;
@@ -13,10 +13,10 @@ const JudgeComponent = ({
   pronouns,
   position,
   funFact,
-  imgLink,
+  imgLink
 }: JudgeProps) => {
   // Convert name to image ID
-  const imageID = name.split(" ").join("_").toLowerCase();
+  const imageID = name.split(' ').join('_').toLowerCase();
   return (
     //prettier-ignore
     <div className="judge-card">

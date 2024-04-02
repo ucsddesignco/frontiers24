@@ -1,6 +1,6 @@
-import "./Home.scss";
-import Logo from "../../../public/Logo.svg";
-import { useRef } from "react";
+import './Home.scss';
+import Logo from '../../../public/Logo.svg';
+import { useRef } from 'react';
 
 export default function Home() {
   const registerRef = useRef(null);
