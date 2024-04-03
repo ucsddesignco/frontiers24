@@ -65,7 +65,8 @@ svg {
 input,
 button,
 textarea,
-select {
+select,
+a {
   font-family: $p-font;
 
   &:hover {
