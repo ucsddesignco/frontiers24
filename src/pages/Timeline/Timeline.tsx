@@ -39,7 +39,7 @@ export default function Timeline() {
   return (
     <section className="timeline">
       <ul>
-        <div>
+        <div className="timeline-container">
           <h1 className="title">Timeline</h1>
           {TimlineList.map((item, index) => (
             <li key={index}>
