@@ -12,8 +12,6 @@ export default function Judges() {
 
   const isDesktop = useIsDesktop();
 
-  console.log(JudgeInfo.slice(3, 5));
-
   return (
     <div className="judge-stuff">
       {isDesktop ? (

@@ -6,7 +6,7 @@
     flex-direction: row-reverse;
   }
 
-  @media (max-width: 438px) {
+  @media (max-width: 390px) {
     flex-direction: column;
 
     &:nth-of-type(even) {
@@ -14,25 +14,29 @@
     }
   }
 
-  // &:nth-of-type(3) {
-  //  We may need to change the image offset because it can be too close to thet planets on smaller screen sizes
-  //  Make sure to also account for mobile
-  //  transform: translateX(-50px);
-  // }
-
   .svg-container {
     display: flex;
     position: relative;
     min-width: 180px;
 
-    .svg-image {
-      min-width: 160px;
-      top: 0;
-      left: 0;
-
-      .judge-image {
-        width: 100%;
+    a {
+      width: 161px;
+      height: 160px;
+      // https://www.plantcss.com/css-clip-path-converter
+      clip-path: polygon(0% 100%, 16.979% 0%, 100% 0%, 83.021% 100%, 0% 100%);
+      img {
+        // Solves sub pixel rendering issue with scale transform
+        will-change: transform;
         height: 100%;
+        width: 100%;
+        object-fit: cover;
+        transition:
+          transform 0.3s,
+          filter 0.3s;
+        &:hover {
+          transform: scale(1.05);
+          filter: brightness(1.1);
+        }
       }
     }
 
@@ -45,10 +49,69 @@
   .judge-info {
     h3 {
       margin-bottom: 1rem;
+
+      span {
+        font-family: $mono-font;
+        font-size: 0.8em;
+      }
     }
 
-    .fun-fact {
-      max-width: 65ch;
+    .fun-fact-container {
+      .trigger {
+        cursor: pointer;
+        display: inline;
+        border-bottom: 1.5px dotted $primary-orange;
+        padding-bottom: 1px;
+      }
+
+      .desc {
+        position: absolute;
+        opacity: 0;
+        pointer-events: none;
+        margin-top: 1rem;
+        max-width: 50ch;
+        transition: opacity 0.3s;
+        margin-inline: auto;
+        color: rgb(9, 9, 33);
+        background-color: rgba(255, 255, 255, 0.8);
+        border: 1px solid rgba(255, 255, 255, 1);
+        backdrop-filter: blur(5px);
+        padding: 1rem;
+        color: $primary-blue;
+        z-index: 1;
+        // 15 ch is about the length of fun fact trigger text
+        transform: translateX(calc((-15ch / 2 + 50%) * -1));
+
+        &:after {
+          content: "▲";
+          $triangle-size: 20px;
+          font-size: $triangle-size;
+          line-height: 0.65;
+          position: absolute;
+          color: rgba(255, 255, 255, 0.9);
+          top: calc($triangle-size * -0.65);
+          left: 0;
+          right: 0;
+          margin-inline: auto;
+          width: $triangle-size;
+          height: $triangle-size;
+
+          @media (max-width: $mobile-breakpoint) {
+            color: rgba(9, 9, 33, 0.8);
+          }
+        }
+
+        @media (max-width: $mobile-breakpoint) {
+          background-color: rgba(9, 9, 33, 0.8);
+          border: 1px solid rgba(9, 9, 33, 1);
+          color: $primary-white;
+          width: fit-content;
+          max-width: calc(100% - 2rem);
+          transform: translateX(0);
+          left: 0;
+          right: 0;
+        }
+      }
     }
   }
 }

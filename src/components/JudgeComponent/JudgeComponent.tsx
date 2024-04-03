@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import "./JudgeComponent.scss";
 
 interface JudgeProps {
@@ -17,35 +18,45 @@ const JudgeComponent = ({
   imgLink,
   linkedin,
 }: JudgeProps) => {
-  // Convert name to image ID
-  const imageID = name.split(" ").join("_").toLowerCase();
+  const funFactRef = useRef<HTMLParagraphElement>(null);
   return (
     //prettier-ignore
     <div className="judge-card">
       <div className="svg-container">
         <a href={linkedin} target="_blank" rel="noopener noreferrer">
-          <svg className='svg-image' width="161" height="160" viewBox="0 0 161 160" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <mask id="trapezoidMask">
-                <rect width="161" height="160" fill="black"/>
-                <path d="M0 159.231L27.3357 0H161L133.664 159.231H0Z" fill="white"/>
-              </mask>
-            </defs>
-            <rect width="161" height="160" mask="url(#trapezoidMask)" fill={`url(#${imageID})`}/>
-            <pattern id={imageID} patternUnits="userSpaceOnUse" width="161" height="160">
-              <image href={imgLink} className="judge-image" preserveAspectRatio="xMidYMid slice"/>
-            </pattern>
-          </svg>
+          <img src={imgLink} alt={'Headshot of ' + name} />
         </a>
         <svg className='orange-bar' width="37" height="160" viewBox="0 0 37 160" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path fillRule="evenodd" clipRule="evenodd" d="M0.664307 159.231H9.66431L37 0H28L0.664307 159.231Z" fill="#FF671E"/>
         </svg>
       </div>
       <div className="judge-info">
-        <h3>{name}</h3>
-        <p>{pronouns}</p>
+        <h3>
+          {name} <span>({pronouns})</span>
+        </h3>
         <p>{position}</p>
-        <p className="fun-fact">Fun Fact: {funFact}</p>
+        <div className="fun-fact-container">
+          <p
+            className="trigger"
+            onMouseEnter={() => {
+              if (funFactRef.current) {
+                funFactRef.current.style.opacity = '1';
+                funFactRef.current.style.pointerEvents = 'auto';
+              }
+            }}
+            onMouseLeave={() => {
+              if (funFactRef.current) {
+                funFactRef.current.style.opacity = '0';
+                funFactRef.current.style.pointerEvents = 'none';
+              }
+            }}
+          >
+            See my fun fact!
+          </p>
+          <p className="desc" ref={funFactRef}>
+            {funFact}
+          </p>
+        </div>
       </div>
     </div>
   );

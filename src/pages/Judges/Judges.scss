@@ -1,22 +1,26 @@
 .judge-stuff {
   .judges {
+    max-width: 1800px;
     overflow: hidden;
-    display: flex;
-    align-items: center;
 
     @media (max-width: $tablet-breakpoint) {
-      align-items: baseline;
+      align-content: baseline;
       padding-top: 3rem;
     }
 
     .judges-container {
       display: grid;
       gap: 3rem;
-    }
-  }
+      width: 100%;
 
-  .judge-component {
-    margin-bottom: 35px;
+      @media (max-width: $tablet-breakpoint) {
+        gap: 1rem;
+      }
+
+      @media (max-width: $mobile-breakpoint) {
+        margin-bottom: 5rem;
+      }
+    }
   }
 
   .mobile {

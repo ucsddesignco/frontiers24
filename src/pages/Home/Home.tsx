@@ -1,5 +1,5 @@
 import "./Home.scss";
-import Logo from "../../../public/Logo.svg";
+import Logo from "/Logo.svg";
 import { useRef } from "react";
 
 export default function Home() {
