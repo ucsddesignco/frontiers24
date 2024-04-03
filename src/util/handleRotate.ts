@@ -1,13 +1,28 @@
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
+import ScrollToPlugin from 'gsap/ScrollToPlugin';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(useGSAP);
 gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollToPlugin);
 
 const mm = gsap.matchMedia();
 
-export function handleRotate() {
+//Default transform origin
+let transformOrigin = '16% 74%';
+
+export function handleRotate(planetRef: React.RefObject<SVGSVGElement>) {
+  const planetInfo = planetRef.current?.getBoundingClientRect();
+  if (planetInfo) {
+    const planetMidX = planetInfo?.left + planetInfo?.width / 2;
+    const planetMidY = planetInfo?.top + planetInfo?.height / 2;
+    //Offset so it's not too close to planet
+    const xOffset = -150;
+    const yOffset = 100;
+    transformOrigin = `${planetMidX + xOffset}px ${planetMidY + yOffset}px`;
+  }
+
   mm.add('(min-width: 1200px)', () => {
     //Gsap Scroll Triggers for rotating pages in
     gsap.to('.one', {
@@ -21,7 +36,7 @@ export function handleRotate() {
       },
       rotation: -80,
       //Transform Origin makes the illusion that the planet is translating
-      transformOrigin: '16% 74%',
+      transformOrigin: transformOrigin,
       x: -200,
       y: -100,
       opacity: 0,
@@ -35,14 +50,7 @@ export function handleRotate() {
         trigger: '.scroll-section-two',
         scrub: 0.1,
         start: 'top 99%',
-        end: 'top',
-        markers: {
-          startColor: 'white',
-          endColor: 'white',
-          fontSize: '18px',
-          fontWeight: 'bold',
-          indent: 20
-        }
+        end: 'top'
       },
       opacity: 0,
       duration: 1,
@@ -58,14 +66,7 @@ export function handleRotate() {
         scrub: 0.1,
         //Where animation starts and ends
         start: 'bottom 99%',
-        end: 'bottom 1%',
-        markers: {
-          startColor: 'red',
-          endColor: 'red',
-          fontSize: '18px',
-          fontWeight: 'bold',
-          indent: 20
-        }
+        end: 'bottom 1%'
       },
       opacity: 1,
       duration: 1,
@@ -80,7 +81,7 @@ export function handleRotate() {
         end: 'bottom'
       },
       rotation: -80,
-      transformOrigin: '16% 74%',
+      transformOrigin: transformOrigin,
       duration: 1,
       ease: 'none'
     });
@@ -124,7 +125,7 @@ export function handleRotate() {
         end: 'bottom'
       },
       rotation: -80,
-      transformOrigin: '16% 74%',
+      transformOrigin: transformOrigin,
       duration: 1,
       ease: 'none'
     });
@@ -168,7 +169,7 @@ export function handleRotate() {
         end: 'bottom'
       },
       rotation: -80,
-      transformOrigin: '16% 74%',
+      transformOrigin: transformOrigin,
       duration: 1,
       ease: 'none'
     });

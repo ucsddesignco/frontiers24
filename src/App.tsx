@@ -1,23 +1,58 @@
+import { useGSAP } from '@gsap/react';
+
 import './styles/App.scss';
+import { handleRotate } from './util/handleRotate';
 import OrbitingPlanets from './components/OrbitingPlanets/OrbitingPlanets';
 import Navbar from './components/Navbar/Navbar';
-/*
 import Home from './pages/Home/Home';
-
 import FAQ from './pages/FAQ/FAQ';
 import Timeline from './pages/Timeline/Timeline';
 import Judges from './pages/Judges/Judges';
-*/
-import Rotate from './components/Rotate/Rotate';
+import { useRef } from 'react';
 
-function App() {
+function Rotate() {
+  const scrollContainerRef = useRef<HTMLElement>(null);
+  const scroll1Ref = useRef<HTMLElement>(null);
+  const scroll2Ref = useRef<HTMLElement>(null);
+  const scroll3Ref = useRef<HTMLElement>(null);
+  const scroll4Ref = useRef<HTMLElement>(null);
+  const planetRef = useRef<SVGSVGElement>(null);
+
+  const scrollRefList = [scroll1Ref, scroll2Ref, scroll3Ref, scroll4Ref];
+
+  useGSAP(() => {
+    handleRotate(planetRef);
+  });
+
   return (
-    <main className="main-content">
-      <OrbitingPlanets />
-      <Navbar />
-      <Rotate />
+    <main ref={scrollContainerRef} className="scroll-cont">
+      <OrbitingPlanets planetRef={planetRef} />
+      <Navbar
+        scrollRefList={scrollRefList}
+        scrollContainerRef={scrollContainerRef}
+      />
+      <section ref={scroll1Ref} className="scroll-section-one">
+        <div className="one">
+          <Home />
+        </div>
+      </section>
+      <section ref={scroll2Ref} className="scroll-section-two">
+        <div className="two">
+          <FAQ />
+        </div>
+      </section>
+      <section ref={scroll3Ref} className="scroll-section-three">
+        <div className="three">
+          <Timeline />
+        </div>
+      </section>
+      <section ref={scroll4Ref} className="scroll-section-four">
+        <div className="four">
+          <Judges />
+        </div>
+      </section>
     </main>
   );
 }
 
-export default App;
+export default Rotate;
