@@ -32,8 +32,8 @@ export default function Home() {
             </div>
             <div ref={mobileDateRef} className="mobile-h3-container">
               <h3>
-                SAT, MAY 20TH <br />
-                9AM–5PM
+                Saturday, May 20th <br />
+                9am-5pm
               </h3>
               <h3>DIB ROOM 208</h3>
             </div>

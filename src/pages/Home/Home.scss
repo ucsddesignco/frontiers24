@@ -1,6 +1,6 @@
 .home {
   display: grid;
-  place-items: center;
+  align-items: center;
   margin: 0;
 
   @media screen and (max-width: $mobile-breakpoint) {
@@ -15,7 +15,6 @@
 
   .landing-container {
     margin-top: 15rem;
-    padding-bottom: 20rem;
 
     h3 {
       margin-bottom: 1.5%;
@@ -23,9 +22,13 @@
   }
 
   .home-info {
-    margin-bottom: 2.5%;
+    margin-bottom: 4rem;
+    max-width: 70ch;
 
     .desktop-view {
+      display: grid;
+      gap: 1rem;
+
       @media screen and (max-width: $mobile-breakpoint) {
         display: none;
       }
@@ -53,6 +56,10 @@
       position: relative;
       width: 75%;
     }
+
+    @media (max-width: 550px) {
+      width: 100%;
+    }
   }
 
   .logo {
@@ -67,7 +74,6 @@
     @media screen and (max-width: $mobile-breakpoint) {
       display: block;
       margin: 0 auto 1rem;
-      width: 100%;
       position: relative;
     }
   }
@@ -78,18 +84,19 @@
       background: $primary-orange;
       display: inline-block;
       font-size: 1.5em;
-      padding: 0.5em 2em;
+      padding: 0.5em 1.2em;
       text-decoration: none;
       color: $primary-white;
+      letter-spacing: 2.4px;
     }
 
     .parallelogram {
-      transform: skew(-20deg);
+      transform: skew(-15deg);
     }
 
     .skew-fix {
       display: inline-block;
-      transform: skew(20deg);
+      transform: skew(15deg);
     }
 
     @media screen and (max-width: $mobile-breakpoint) {
