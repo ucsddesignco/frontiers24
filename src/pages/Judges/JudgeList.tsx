@@ -1,4 +1,4 @@
-export const JudgeInfo = [
+export const JudgeList = [
   {
     name: "Julia Nguyen",
     pronouns: "She/Her",

@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import "./JudgeComponent.scss";
+import "./JudgeCard.scss";
 
 interface JudgeProps {
   name: string;
@@ -10,7 +10,7 @@ interface JudgeProps {
   linkedin: string;
 }
 
-const JudgeComponent = ({
+const JudgeCard = ({
   name,
   pronouns,
   position,
@@ -62,4 +62,4 @@ const JudgeComponent = ({
   );
 };
 
-export default JudgeComponent;
+export default JudgeCard;

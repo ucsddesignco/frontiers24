@@ -1,5 +1,5 @@
-.judge-stuff {
-  .judges {
+.judges {
+  section {
     max-width: 1800px;
     overflow: hidden;
 
@@ -8,7 +8,7 @@
       padding-top: 3rem;
     }
 
-    .judges-container {
+    .card-container {
       display: grid;
       gap: 3rem;
       width: 100%;

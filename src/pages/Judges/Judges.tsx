@@ -1,7 +1,7 @@
 import "./Judges.scss";
-import JudgeComponent from "../../components/JudgeComponent/JudgeComponent";
+import JudgeCard from "../../components/JudgeCard/JudgeCard";
 import { useRef } from "react";
-import { JudgeInfo } from "./JudgeInfo";
+import { JudgeList } from "./JudgeList";
 import useIsDesktop from "../../util/useIsDesktop";
 
 export default function Judges() {
@@ -13,14 +13,14 @@ export default function Judges() {
   const isDesktop = useIsDesktop();
 
   return (
-    <div className="judge-stuff">
+    <div className="judges">
       {isDesktop ? (
         <>
-          <section className="desktop judges" ref={judge1ContainerRef}>
-            <div ref={judge1Ref} className="judges-container">
+          <section className="desktop" ref={judge1ContainerRef}>
+            <div ref={judge1Ref} className="card-container">
               <h2>Judges</h2>
-              {JudgeInfo.slice(0, 3).map((item) => (
-                <JudgeComponent
+              {JudgeList.slice(0, 3).map((item) => (
+                <JudgeCard
                   key={item.name}
                   name={item.name}
                   pronouns={item.pronouns}
@@ -32,11 +32,11 @@ export default function Judges() {
               ))}
             </div>
           </section>
-          <section className="desktop judges" ref={judge2ContainerRef}>
+          <section className="desktop" ref={judge2ContainerRef}>
             <div ref={judge2Ref} className="judges-container">
               <h2>Judges</h2>
-              {JudgeInfo.slice(3, 5).map((item) => (
-                <JudgeComponent
+              {JudgeList.slice(3, 5).map((item) => (
+                <JudgeCard
                   key={item.name}
                   name={item.name}
                   pronouns={item.pronouns}
@@ -50,11 +50,11 @@ export default function Judges() {
           </section>
         </>
       ) : (
-        <section className="mobile judges">
+        <section className="mobile">
           <div ref={judge2Ref} className="judges-container">
             <h2>Judges</h2>
-            {JudgeInfo.map((item) => (
-              <JudgeComponent
+            {JudgeList.map((item) => (
+              <JudgeCard
                 key={item.name}
                 name={item.name}
                 pronouns={item.pronouns}
