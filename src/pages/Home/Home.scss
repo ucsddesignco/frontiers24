@@ -10,6 +10,17 @@
     left: 0;
   }
 
+  .logo-container {
+    position: fixed;
+    overflow: hidden;
+  }
+
+  .logo {
+    @media screen and (max-width: $mobile-breakpoint) {
+      display: none;
+    }
+  }
+
   .mobile-logo {
     display: none;
 
@@ -20,42 +31,23 @@
       position: relative;
     }
   }
-}
 
-h2 {
-  color: $primary-orange;
-}
-
-.logo-container {
-  position: fixed;
-  overflow: hidden;
-  /*
-  transition: 0.5s, 0.5s, 0.5s;
-  transition-property: right, top, transform;
-  transform: translate(0%, -100%);*/
-}
-
-.logo {
-  @media screen and (max-width: $mobile-breakpoint) {
-    display: none;
+  /* REGISTER BUTTON */
+  .button {
+    background: $primary-orange;
+    display: inline-block;
+    font-size: 1.5em;
+    padding: 0.5em 2em;
+    text-decoration: none;
+    color: $primary-white;
   }
-}
 
-/* REGISTER BUTTON */
-.button {
-  background: $primary-orange;
-  display: inline-block;
-  font-size: 1.5em;
-  padding: 0.5em 2em;
-  text-decoration: none;
-  color: $primary-white;
-}
+  .parallelogram {
+    transform: skew(-20deg);
+  }
 
-.parallelogram {
-  transform: skew(-20deg);
-}
-
-.skew-fix {
-  display: inline-block;
-  transform: skew(20deg);
+  .skew-fix {
+    display: inline-block;
+    transform: skew(20deg);
+  }
 }
