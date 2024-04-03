@@ -23,6 +23,10 @@
     display: none;
     background-color: $primary-white;
     color: $primary-blue;
+
+    h2 {
+      color: $primary-orange;
+    }
   }
 
   @media (max-width: $mobile-breakpoint) {

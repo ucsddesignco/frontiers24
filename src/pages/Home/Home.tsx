@@ -19,13 +19,15 @@ export default function Home() {
             />
             <img src={Logo} className="mobile-logo" alt="" />
           </div>
-          <h3>Saturday, April 13th | 9am–5pm | DIB 208</h3>
-          <p>Journey beyond the horizons of innovation!</p>
-          <p>
-            Design Frontiers is Design Co&apos;s very own long day sprint, where
-            student teams of all backgrounds come together to create innovative
-            solutions for real-world problems.
-          </p>
+          <div className="home-info">
+            <h3>Saturday, April 13th | 9am–5pm | DIB 208</h3>
+            <p>Journey beyond the horizons of innovation!</p>
+            <p>
+              Design Frontiers is Design Co&apos;s very own long day sprint,
+              where student teams of all backgrounds come together to create
+              innovative solutions for real-world problems.
+            </p>
+          </div>
           <div className="register-button" ref={registerRef}>
             <a className="button parallelogram" href="#">
               <span className="skew-fix">REGISTER NOW</span>

@@ -5,13 +5,28 @@
 
   @media screen and (max-width: $mobile-breakpoint) {
     width: 100%;
-    position: relative;
-    top: 0;
-    left: 0;
+    font-size: 1px;
+  }
+
+  .landing-container {
+    margin-top: 25%;
   }
 
   .logo-container {
     position: fixed;
+    margin: -11.5rem 0 4rem;
+
+    @media screen and (max-width: $mobile-breakpoint) {
+      position: relative;
+      margin: -3vw 0;
+      width: 50%;
+    }
+
+    @media screen and (min-width: $mobile-breakpoint) and (max-width: $tablet-breakpoint) {
+      position: relative;
+      margin: -7vw 0;
+      width: 50%;
+    }
   }
 
   .logo {
@@ -24,30 +39,41 @@
     display: none;
 
     @media screen and (max-width: $mobile-breakpoint) {
-      display: none;
-      //display: block;
+      display: block;
       margin: 0 auto 2rem;
       width: 100%;
       position: relative;
     }
   }
 
+  .home-info {
+    margin-bottom: 2%;
+  }
+
   /* REGISTER BUTTON */
-  .button {
-    background: $primary-orange;
-    display: inline-block;
-    font-size: 1.5em;
-    padding: 0.5em 2em;
-    text-decoration: none;
-    color: $primary-white;
-  }
+  .register-button {
+    .button {
+      background: $primary-orange;
+      display: inline-block;
+      font-size: 1.5em;
+      padding: 0.5em 2em;
+      text-decoration: none;
+      color: $primary-white;
+    }
 
-  .parallelogram {
-    transform: skew(-20deg);
-  }
+    .parallelogram {
+      transform: skew(-20deg);
+    }
 
-  .skew-fix {
-    display: inline-block;
-    transform: skew(20deg);
+    .skew-fix {
+      display: inline-block;
+      transform: skew(20deg);
+    }
+
+    @media screen and (max-width: $mobile-breakpoint) {
+      display: block;
+      margin: 0 auto 2rem;
+      width: 100%;
+    }
   }
 }
