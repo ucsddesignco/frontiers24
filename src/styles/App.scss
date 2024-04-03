@@ -5,11 +5,17 @@
   margin-inline: auto;
   position: relative;
 
+  @media (max-width: $mobile-breakpoint) {
+    scroll-snap-type: none;
+  }
+
   section {
     height: 100dvh;
     scroll-snap-align: start;
     padding-left: $content-offset;
     padding-right: calc($navbar-margin + $navbar-width + 3rem);
+    display: grid;
+    align-content: center;
 
     @media (max-width: $tablet-breakpoint) {
       padding-right: 3rem;
