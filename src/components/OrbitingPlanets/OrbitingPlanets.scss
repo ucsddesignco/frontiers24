@@ -7,7 +7,7 @@
   align-items: center;
 
   svg {
-    height: 80dvh;
+    // height: 80dvh;
     transform: translateX($planet-offset);
 
     @media (max-width: $tablet-breakpoint) {
