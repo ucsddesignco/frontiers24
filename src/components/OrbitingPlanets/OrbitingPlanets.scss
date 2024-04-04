@@ -7,6 +7,7 @@
   align-items: center;
 
   svg {
+    height: 80dvh;
     transform: translateX($planet-offset);
 
     @media (max-width: $tablet-breakpoint) {
@@ -16,50 +17,6 @@
     @media (max-width: $mobile-breakpoint) {
       transform: scale(1.5) translateX(30%) translateY(20%) rotate(-150deg);
       position: absolute;
-    }
-  }
-
-  .planet-spin-yellow {
-    animation: $yellow-full-rotation-duration planet-rotation-yellow infinite
-      linear forwards;
-  }
-
-  .planet-spin-red {
-    animation: $red-full-rotation-duration planet-rotation-red infinite linear
-      forwards;
-  }
-
-  .planet-spin-purple {
-    animation: $purple-full-rotation-duration planet-rotation-purple infinite
-      linear forwards;
-  }
-
-  .planet-spin-blue {
-    animation: $blue-full-rotation-duration planet-rotation-blue infinite linear
-      forwards;
-  }
-
-  @keyframes planet-rotation-yellow {
-    to {
-      transform: translate(40px, 252px);
-    }
-  }
-
-  @keyframes planet-rotation-red {
-    to {
-      transform: translate(135px, 493px);
-    }
-  }
-
-  @keyframes planet-rotation-purple {
-    to {
-      transform: translate(218px, 100px);
-    }
-  }
-
-  @keyframes planet-rotation-blue {
-    to {
-      transform: translate(420px, 520px);
     }
   }
 }

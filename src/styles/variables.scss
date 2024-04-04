@@ -35,9 +35,12 @@ $blue-full-rotation-duration: 20s;
   }
 }
 
-$planet-offset: calc(
-  var(--_planet-left-offset) * -10% + var(--_planet-right-offset)
-);
+// $planet-offset: calc(
+//   var(--_planet-left-offset) * -10% + var(--_planet-right-offset)
+// );
+
+$planet-offset: -50%;
+
 $content-offset: calc(
   $planet-width - $planet-width * (var(--_planet-left-offset) / 10) +
     var(--_planet-right-offset) + 1rem

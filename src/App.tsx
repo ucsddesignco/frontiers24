@@ -17,16 +17,32 @@ function Rotate() {
   const scroll3Ref = useRef<HTMLElement>(null);
   const scroll4Ref = useRef<HTMLElement>(null);
   const planetRef = useRef<SVGSVGElement>(null);
+  const yellowPlanetRef = useRef<SVGSVGElement>(null);
+  const redPlanetRef = useRef<SVGSVGElement>(null);
+  const purplePlanetRef = useRef<SVGSVGElement>(null);
+  const bluePlanetRef = useRef<SVGSVGElement>(null);
 
   const scrollRefList = [scroll1Ref, scroll2Ref, scroll3Ref, scroll4Ref];
 
   useGSAP(() => {
-    handleRotate(planetRef);
+    handleRotate(
+      planetRef,
+      yellowPlanetRef,
+      redPlanetRef,
+      purplePlanetRef,
+      bluePlanetRef
+    );
   });
 
   return (
     <main ref={scrollContainerRef} className="scroll-cont">
-      <OrbitingPlanets planetRef={planetRef} />
+      <OrbitingPlanets
+        planetRef={planetRef}
+        yellowPlanetRef={yellowPlanetRef}
+        redPlanetRef={redPlanetRef}
+        purplePlanetRef={purplePlanetRef}
+        bluePlanetRef={bluePlanetRef}
+      />
       <Navbar
         scrollRefList={scrollRefList}
         scrollContainerRef={scrollContainerRef}

@@ -12,7 +12,13 @@ const mm = gsap.matchMedia();
 //Default transform origin
 let transformOrigin = '16% 74%';
 
-export function handleRotate(planetRef: React.RefObject<SVGSVGElement>) {
+export function handleRotate(
+  planetRef: React.RefObject<SVGSVGElement>,
+  yellowPlanetRef: React.RefObject<SVGSVGElement>,
+  redPlanetRef: React.RefObject<SVGSVGElement>,
+  purplePlanetRef: React.RefObject<SVGSVGElement>,
+  bluePlanetRef: React.RefObject<SVGSVGElement>
+) {
   const planetInfo = planetRef.current?.getBoundingClientRect();
   if (planetInfo) {
     const planetMidX = planetInfo?.left + planetInfo?.width / 2;
@@ -21,10 +27,51 @@ export function handleRotate(planetRef: React.RefObject<SVGSVGElement>) {
     const xOffset = -150;
     const yOffset = 100;
     transformOrigin = `${planetMidX + xOffset}px ${planetMidY + yOffset}px`;
+
+    const planetRefs = [
+      yellowPlanetRef,
+      redPlanetRef,
+      purplePlanetRef,
+      bluePlanetRef
+    ];
+    planetRefs.map(planetRef => {
+      const planetBoundingRect = planetRef.current?.getBoundingClientRect();
+      if (planetBoundingRect) {
+        const originOffsetX = planetMidX - planetBoundingRect?.left;
+        const originOffsetY = planetMidY - planetBoundingRect?.top;
+        console.log(planetBoundingRect?.top);
+        if (planetRef.current) {
+          planetRef.current.style.transformOrigin = `${originOffsetX}px ${originOffsetY}px`;
+          console.log(
+            planetRef.current,
+            `${originOffsetX}px ${originOffsetY}px`
+          );
+        }
+      }
+    });
   }
 
   mm.add('(min-width: 1200px)', () => {
     //Gsap Scroll Triggers for rotating pages in
+    gsap.to(
+      ['#planet1-yellow', '#planet2-red', '#planet3-purple', '#planet4-blue'],
+      {
+        scrollTrigger: {
+          scroller: '.scroll-cont',
+          trigger: '.scroll-section-one',
+          scrub: 0.01,
+          //Where animation starts and ends
+          start: 'bottom 99%',
+          end: 'bottom'
+        },
+        rotation: 360,
+        //Transform Origin makes the illusion that the planet is translating
+        //   transformOrigin: 'center, center',
+        duration: 1,
+        ease: 'none'
+      }
+    );
+
     gsap.to('.one', {
       scrollTrigger: {
         scroller: '.scroll-cont',

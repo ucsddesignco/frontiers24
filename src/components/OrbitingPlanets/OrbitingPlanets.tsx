@@ -2,9 +2,19 @@ import './OrbitingPlanets.scss';
 
 type OrbitingPlanetsProps = {
   planetRef: React.RefObject<SVGSVGElement>;
+  bluePlanetRef: React.RefObject<SVGGElement>;
+  purplePlanetRef: React.RefObject<SVGGElement>;
+  redPlanetRef: React.RefObject<SVGGElement>;
+  yellowPlanetRef: React.RefObject<SVGGElement>;
 };
 
-export default function OrbitingPlanets({ planetRef }: OrbitingPlanetsProps) {
+export default function OrbitingPlanets({
+  planetRef,
+  bluePlanetRef,
+  purplePlanetRef,
+  redPlanetRef,
+  yellowPlanetRef
+}: OrbitingPlanetsProps) {
   const blueSpinDuration = 10;
   const purpleSpinDuration = 8;
   const redSpinDuration = 13;
@@ -12,12 +22,12 @@ export default function OrbitingPlanets({ planetRef }: OrbitingPlanetsProps) {
   return (
     // prettier-ignore
     <div className="orbiting-planets-container">
-    <svg ref={planetRef} className="orbiting-planets" width="843" height="797" viewBox="0 0 843 797" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg ref={planetRef} className="orbiting-planets" viewBox="0 0 900 797" fill="none" xmlns="http://www.w3.org/2000/svg">
       <circle id="orbit4" cx="398.5" cy="398.5" r="397" transform="matrix(-1 0 0 1 797 0)" stroke="#F1F1F1" strokeWidth="3" strokeDasharray="7.43 7.43"></circle>
       <circle id="orbit2" cx="228" cy="228" r="226.5" transform="matrix(-1 0 0 1 626 170.254)" stroke="#F1F1F1" strokeWidth="3" strokeDasharray="7.43 7.43"></circle>
       <circle id="orbit3" cx="285" cy="285" r="283.5" transform="matrix(-1 0 0 1 683.992 113.004)" stroke="#F1F1F1" strokeWidth="3" strokeDasharray="7.43 7.43"></circle>
       <circle id="orbit1" cx="93" cy="93" r="91.5" transform="matrix(-1 0 0 1 491.434 304.82)" stroke="#F1F1F1" strokeWidth="3" strokeDasharray="7.43 7.43"></circle>
-      <g id="planet1-yellow">
+      <g ref={yellowPlanetRef} id="planet1-yellow">
         <g id="Ellipse 299" filter="url(#filter0_f_1092_1256)">
           <circle cx="462.755" cy="346.757" r="32.7554" fill="#F57F17"></circle>
         </g>
@@ -46,7 +56,7 @@ export default function OrbitingPlanets({ planetRef }: OrbitingPlanetsProps) {
         </g>
         <path id="Star 222" d="M490.576 326.135L487.866 321.71C486.971 320.249 484.789 320.448 484.173 322.047L482.31 326.89C482.183 327.218 481.904 327.463 481.562 327.545L476.517 328.755C474.85 329.155 474.365 331.292 475.696 332.371L479.726 335.64C479.999 335.861 480.146 336.203 480.118 336.553L479.71 341.726C479.575 343.434 481.458 344.556 482.896 343.623L487.25 340.801C487.544 340.61 487.915 340.576 488.239 340.711L493.032 342.697C494.616 343.353 496.264 341.909 495.822 340.254L494.483 335.241C494.392 334.901 494.475 334.539 494.703 334.272L498.073 330.327C499.187 329.024 498.323 327.01 496.611 326.919L491.43 326.643C491.079 326.624 490.76 326.434 490.576 326.135Z" fill="#FFFDE7" stroke="#FFFDE7"></path>
       </g>
-      <g id="planet4-blue">
+      <g ref={bluePlanetRef} id="planet4-blue">
         <g id="Ellipse 299_2" filter="url(#filter1_f_1092_1256)">
           <circle cx="759.755" cy="588.755" r="32.7554" fill="#42A5F5"></circle>
         </g>
@@ -67,7 +77,7 @@ export default function OrbitingPlanets({ planetRef }: OrbitingPlanetsProps) {
         <circle id="Ellipse 302" cx="732.5" cy="569.5" r="12.5" fill="#A8E8FA"></circle>
         <circle id="Ellipse 301" cx="744.5" cy="549.5" r="7.5" fill="#A8E8FA"></circle>
       </g>
-      <g id="planet2-purple">
+      <g ref={purplePlanetRef} id="planet3-purple">
         <g id="Ellipse 299_3" filter="url(#filter2_f_1092_1256)">
           <circle cx="604.755" cy="187.574" r="32.7554" fill="#7B1FA2"></circle>
         </g>
@@ -94,7 +104,7 @@ export default function OrbitingPlanets({ planetRef }: OrbitingPlanetsProps) {
           <path d="M583.913 190.608L582.926 190.765L582.926 190.765L583.913 190.608ZM623.673 217.202L624.634 217.474L622.744 216.836L623.673 217.202ZM614.071 227.106L614.225 228.094L614.225 228.094L614.071 227.106ZM589.807 189.728L590.795 189.571L590.795 189.571L589.807 189.728ZM613.993 153.445L613.211 154.07L614.832 152.898L613.993 153.445ZM584.901 190.45C582.981 178.122 583.52 166.646 585.903 158.074C588.312 149.406 592.473 144.104 597.49 143.306L597.182 141.33C590.913 142.328 586.426 148.734 583.977 157.544C581.502 166.449 580.973 178.22 582.926 190.765L584.901 190.45ZM611.208 231.404C606.191 232.203 600.62 228.45 595.693 220.95C590.821 213.532 586.821 202.779 584.901 190.45L582.926 190.765C584.879 203.309 588.96 214.347 594.022 222.053C599.029 229.675 605.246 234.378 611.516 233.38L611.208 231.404ZM622.712 216.931C620.289 225.428 616.166 230.615 611.208 231.404L611.516 233.38C617.713 232.394 622.169 226.12 624.634 217.474L622.712 216.931ZM622.744 216.836C620.567 222.33 617.474 225.552 613.918 226.118L614.225 228.094C618.84 227.36 622.334 223.294 624.602 217.569L622.744 216.836ZM613.918 226.118C611.752 226.463 609.463 225.825 607.14 224.232C604.811 222.636 602.498 220.109 600.348 216.798C596.05 210.177 592.509 200.578 590.795 189.571L588.82 189.886C590.567 201.104 594.187 210.985 598.671 217.892C600.912 221.344 603.395 224.094 606.007 225.885C608.624 227.679 611.421 228.54 614.225 228.094L613.918 226.118ZM590.795 189.571C589.081 178.565 589.534 168.33 591.612 160.694C592.652 156.875 594.085 153.752 595.816 151.509C597.543 149.272 599.527 147.955 601.693 147.61L601.385 145.634C598.581 146.08 596.181 147.768 594.236 150.289C592.294 152.804 590.767 156.192 589.684 160.174C587.516 168.14 587.073 178.667 588.82 189.886L590.795 189.571ZM601.693 147.61C605.346 147.028 609.386 149.267 613.211 154.07L614.776 152.819C610.804 147.833 606.123 144.88 601.385 145.634L601.693 147.61ZM597.49 143.306C602.559 142.499 608.193 146.34 613.155 153.991L614.832 152.898C609.795 145.13 603.515 140.322 597.182 141.33L597.49 143.306Z" fill="#7B1FA2" mask="url(#path-67-outside-2_1092_1256)"></path>
         </g>
       </g>
-      <g id="planet2-red">
+      <g ref={redPlanetRef} id="planet2-red">
         <g id="Mask group_4">
           <g id="Ellipse 298_4" filter="url(#filter3_f_1092_1256)">
             <circle cx="500.753" cy="588.755" r="32.7554" fill="#AD1457"></circle>
