@@ -1,20 +1,30 @@
-.main-content {
-  height: 100dvh;
-  overflow-y: scroll;
-  scroll-snap-type: y mandatory;
-  margin-inline: auto;
+// Mobile Styling
+.scroll-cont {
+  height: 100vh;
   position: relative;
+  &:before,
+  &:after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: calc(5rem + 5vw);
+    margin-left: calc($content-offset - (25rem - 15vw));
+    background-image: linear-gradient(to bottom, $primary-blue, transparent);
+    z-index: 1;
+  }
+
+  &:after {
+    top: auto;
+    bottom: 0;
+    background-image: linear-gradient(to top, $primary-blue, transparent);
+  }
 
   section {
-    height: 100dvh;
-    scroll-snap-align: start;
-    padding-left: $content-offset;
-    padding-right: calc($navbar-margin + $navbar-width + 3rem);
-
-    @media (max-width: $tablet-breakpoint) {
-      padding-right: 3rem;
-    }
-
+    height: 100vh;
+    display: grid;
+    align-items: center;
     @media (max-width: $mobile-breakpoint) {
       padding: $mobile-padding;
       height: auto;
@@ -25,6 +35,41 @@
       font-family: $header-font;
       font-size: 1.5rem;
       margin: 0;
+    }
+  }
+}
+
+//Desktop Styling
+@media screen and (min-width: $tablet-breakpoint) {
+  .scroll-cont {
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+    //Card Stylings
+    .scroll-section-one,
+    .scroll-section-two,
+    .scroll-section-three,
+    .scroll-section-four {
+      scroll-snap-align: center;
+      height: 100vh;
+      padding-left: $content-offset;
+      padding-right: calc($navbar-margin + $navbar-width + 3rem);
+      @media (max-width: $tablet-breakpoint) {
+        padding-right: 3rem;
+      }
+
+      @media (max-width: $mobile-breakpoint) {
+        padding: 0;
+      }
+    }
+
+    .two,
+    .three,
+    .four {
+      opacity: 1;
+      height: 100vh;
+      transform: rotate(80deg);
+      transform-origin: '16% 74%';
+      //transform: translate(-400px, 0px) rotate(80deg);
     }
   }
 }

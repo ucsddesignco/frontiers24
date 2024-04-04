@@ -76,3 +76,7 @@ textarea,
 select {
   font-family: $p-font;
 }
+
+::-webkit-scrollbar {
+  display: none;
+}
