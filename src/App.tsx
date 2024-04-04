@@ -31,26 +31,10 @@ function Rotate() {
         scrollRefList={scrollRefList}
         scrollContainerRef={scrollContainerRef}
       />
-      <section ref={scroll1Ref} className="scroll-section-one">
-        <div className="one">
-          <Home />
-        </div>
-      </section>
-      <section ref={scroll2Ref} className="scroll-section-two">
-        <div className="two">
-          <FAQ />
-        </div>
-      </section>
-      <section ref={scroll3Ref} className="scroll-section-three">
-        <div className="three">
-          <Timeline />
-        </div>
-      </section>
-      <section ref={scroll4Ref} className="scroll-section-four">
-        <div className="four">
-          <Judges />
-        </div>
-      </section>
+      <Home scroll1Ref={scroll1Ref} />
+      <FAQ scroll2Ref={scroll2Ref} />
+      <Timeline scroll3Ref={scroll3Ref} />
+      <Judges scroll4Ref={scroll4Ref} />
     </main>
   );
 }

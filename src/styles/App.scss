@@ -48,7 +48,9 @@
     .scroll-section-one,
     .scroll-section-two,
     .scroll-section-three,
-    .scroll-section-four {
+    .scroll-section-four,
+    .scroll-section-five,
+    .scroll-section-six {
       scroll-snap-align: center;
       height: 100vh;
       padding-left: $content-offset;
@@ -64,7 +66,9 @@
 
     .two,
     .three,
-    .four {
+    .four,
+    .five,
+    .six {
       opacity: 1;
       height: 100vh;
       transform: rotate(80deg);

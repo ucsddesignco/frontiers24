@@ -152,7 +152,7 @@ export function handleRotate(planetRef: React.RefObject<SVGSVGElement>) {
         trigger: '.scroll-section-four',
         scrub: 0.1,
         //Where animation starts and ends
-        start: 'bottom 100%',
+        start: 'bottom 99%',
         end: 'bottom'
       },
       opacity: 1,
@@ -164,6 +164,92 @@ export function handleRotate(planetRef: React.RefObject<SVGSVGElement>) {
       scrollTrigger: {
         scroller: '.scroll-cont',
         trigger: '.scroll-section-four',
+        scrub: 0.01,
+        start: 'top 99%',
+        end: 'bottom'
+      },
+      rotation: -80,
+      transformOrigin: transformOrigin,
+      duration: 1,
+      ease: 'none'
+    });
+
+    gsap.from('.five', {
+      scrollTrigger: {
+        scroller: '.scroll-cont',
+        trigger: '.scroll-section-five',
+        scrub: 0.1,
+        start: 'top 99%',
+        end: 'top'
+      },
+      opacity: 0,
+      duration: 1,
+      ease: 'out',
+      x: -1000,
+      y: 200
+    });
+
+    gsap.from('.five', {
+      scrollTrigger: {
+        scroller: '.scroll-cont',
+        trigger: '.scroll-section-five',
+        scrub: 0.1,
+        //Where animation starts and ends
+        start: 'bottom 99%',
+        end: 'bottom'
+      },
+      opacity: 1,
+      duration: 1,
+      ease: 'none'
+    });
+
+    gsap.to('.five', {
+      scrollTrigger: {
+        scroller: '.scroll-cont',
+        trigger: '.scroll-section-five',
+        scrub: 0.01,
+        start: 'top 99%',
+        end: 'bottom'
+      },
+      rotation: -80,
+      transformOrigin: transformOrigin,
+      duration: 1,
+      ease: 'none'
+    });
+
+    gsap.from('.six', {
+      scrollTrigger: {
+        scroller: '.scroll-cont',
+        trigger: '.scroll-section-six',
+        scrub: 0.1,
+        start: 'top 99%',
+        end: 'top'
+      },
+      opacity: 0,
+      duration: 1,
+      ease: 'out',
+      x: -1000,
+      y: 200
+    });
+
+    gsap.from('.six', {
+      scrollTrigger: {
+        scroller: '.scroll-cont',
+        trigger: '.scroll-section-six',
+        scrub: 0.1,
+        //Where animation starts and ends
+        start: 'bottom 99%',
+        end: 'bottom'
+      },
+      opacity: 1,
+      duration: 1,
+      ease: 'none'
+    });
+
+    gsap.to('.six', {
+      scrollTrigger: {
+        scroller: '.scroll-cont',
+        trigger: '.scroll-section-six',
         scrub: 0.01,
         start: 'top 99%',
         end: 'bottom'
