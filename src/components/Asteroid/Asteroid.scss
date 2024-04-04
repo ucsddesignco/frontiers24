@@ -1,0 +1,24 @@
+.asteroid-container {
+    position: fixed;
+    pointer-events: none;
+    height: 100%;
+    width: 100%;
+    display: grid;
+    align-items: center;
+
+
+    .ainimation{
+        position: absolute;
+        animation : Large-Asteroid-2 3s linear infinite;
+    }
+    
+    @keyframes Large-Asteroid-2 {
+        0% {
+            transform: translate(-100%, -100%);
+        }
+        100% {
+            transform: translate(0, 0);
+        }
+    }
+}
+
