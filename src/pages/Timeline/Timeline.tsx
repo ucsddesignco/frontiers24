@@ -8,7 +8,7 @@ const TimlineList = [
     time: ' 9:00 AM',
     title: 'Event Kickoff',
     description:
-      'Designers will begain with registration and sign-in, an intorduction to the event, and energizing lighting talks'
+      'Design Frontiers will begin with registration and sign-in, an introduction to the event, and energizing lightning talks.'
   },
   {
     time: '10:00 AM',
@@ -24,13 +24,13 @@ const TimlineList = [
   },
   {
     time: ' 4:30 PM',
-    title: 'Closing Cenemony',
+    title: 'Closing Ceremony',
     description:
       '3 winners and 2 honorable mentions announced, prize distribution, and networking session.'
   },
   {
     time: ' 5:00 PM',
-    title: 'Even Ends',
+    title: 'Event Ends',
     description: ''
   }
 ];
