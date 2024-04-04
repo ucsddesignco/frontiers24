@@ -12,40 +12,36 @@ type AsteroidProps = {
 export default function Asteroid({homeRef}: AsteroidProps) {
 
   const [numAsteroids, setNumAsteroids] = useState(0);
-  const [contentInfo, setContentInfo] = useState({paddingLeft: 0,  width: 0});
+  const [contentInfo, setContentInfo] = useState({paddingLeft: 0, width: 0});
 
   type Point = {
         x: number;
         y: number;
    };
 
-  //Startpt x: -window.innerWidth < x < 0
-  //Startpt y: 0 < y < window.innerHeight
   const generateStartPT = () => {
     const startPT = { x: -(Math.random() * window.innerWidth/4), y: Math.random() * window.innerHeight}
     return startPT
   }
 
-
-  //Endpt x: 0 < x < left padding || left padding + contentWidth < x < window.innerWidth
-  //Endpt y: 0 < y < window.innerHeight
   const generateEndPT = () => {
+    const boundaryOffset = 100;
     const contentPaddingLeft = contentInfo.paddingLeft;
     const contentWidth = contentInfo.width;
     const contentMidPoint = contentPaddingLeft + contentWidth/2;
 
-    let endX = Math.random() * window.innerWidth;
+    let endX = Math.min(contentPaddingLeft - 94, Math.random() * window.innerWidth + boundaryOffset);
 
     if(endX < contentMidPoint) { 
-      endX = Math.min(contentPaddingLeft - (Math.random() * 100), endX)
+      endX = Math.min(contentPaddingLeft, endX)
     }
 
     if(endX > contentMidPoint) {
-        endX = Math.max(contentWidth - (Math.random() * 500), endX)
+        endX = Math.max(contentPaddingLeft + contentWidth, endX)
     }
 
     const endPT = {x: endX, 
-                  y: Math.random() * (window.innerHeight - 100)
+                  y: Math.random() * window.innerHeight
     };
     return endPT;
   }
@@ -59,17 +55,16 @@ export default function Asteroid({homeRef}: AsteroidProps) {
     const endPT = generateEndPT();
     const distance = calculateDistance(startPT, endPT);
 
-    const speed = 200; // pixels per second
+    const speed = 500; // pixels per second
     const duration = distance / speed; // seconds
 
     return {
       initial: startPT,
       animate: endPT,
-      transition: {duration: duration, ease: [0.1, 0.87, 0.44, 1] },
+      transition: { duration: duration }
     }
   }
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const homeElement = homeRef.current;
     if (homeElement) {
