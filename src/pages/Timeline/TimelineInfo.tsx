@@ -12,7 +12,7 @@ export const TimelineInfo = [
       'Participants will have around 4 hours to design for the given prompt and prepare to present their solution. '
   },
   {
-    time: '2:00 PM',
+    time: '3:00 PM',
     title: 'Sprint Ends',
     description:
       'Teams will present their design solutions to our panel of judges. Finalist presentations begin.'
