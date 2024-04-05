@@ -132,7 +132,7 @@ export default function Asteroid({ homeRef }: AsteroidProps) {
       const generateFragmentEndPT = () => {
         const endPT = {
           x: (Math.random() * 2 - 1) * window.innerWidth,
-          y: Math.random() * 100 + window.innerHeight
+          y: (Math.random() * 2 - 1) * window.innerHeight
         };
         return endPT;
       };
