@@ -1,6 +1,6 @@
 import './LogoAndRegister.scss';
 import { useEffect, useRef } from 'react';
-import Logo from '/Logo.svg';
+import Logo from '/images/Logo.svg';
 
 type LogoAndRegisterProps = {
   scrollContainerRef: React.RefObject<HTMLElement>;

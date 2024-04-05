@@ -1,5 +1,5 @@
 import './Home.scss';
-import Logo from '/Logo.svg';
+import Logo from '/images/Logo.svg';
 import { useRef } from 'react';
 import mobilePlanets from '/images/mobile-planets.svg';
 //write the typescript type for this prop
