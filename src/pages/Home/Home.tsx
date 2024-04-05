@@ -8,12 +8,14 @@ type HomeProps = {
   scroll1Ref: React.RefObject<HTMLElement>;
   fakeLogoRef: React.RefObject<HTMLImageElement>;
   fakeRegisterRef: React.RefObject<HTMLDivElement>;
+  setLogoLoaded: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export default function Home({
   scroll1Ref,
   fakeLogoRef,
-  fakeRegisterRef
+  fakeRegisterRef,
+  setLogoLoaded
 }: HomeProps) {
   const mobileDateRef = useRef(null);
 
@@ -27,6 +29,9 @@ export default function Home({
             className="fake-logo"
             alt="Design Frontiers Logo"
             aria-hidden="true"
+            onLoad={() => {
+              setLogoLoaded(true);
+            }}
           />
           <img src={Logo} className="mobile-logo" alt="" />
         </div>

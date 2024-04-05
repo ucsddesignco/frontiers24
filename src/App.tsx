@@ -23,6 +23,7 @@ function Rotate() {
   const navRef = useRef<HTMLDivElement>(null);
   const mobileFAQRef = useRef<HTMLDivElement>(null);
   const mobileJudgesRef = useRef<HTMLDivElement>(null);
+  const [logoLoaded, setLogoLoaded] = useState(false);
 
   const scrollRefList = [scroll1Ref, scroll2Ref, scroll3Ref, scroll4Ref];
   const mobileScrollRefList = [
@@ -53,11 +54,13 @@ function Rotate() {
         scrollContainerRef={scrollContainerRef}
         fakeLogoRef={fakeLogoRef}
         fakeRegisterRef={fakeRegisterRef}
+        logoLoaded={logoLoaded}
       />
       <Home
         scroll1Ref={scroll1Ref}
         fakeLogoRef={fakeLogoRef}
         fakeRegisterRef={fakeRegisterRef}
+        setLogoLoaded={setLogoLoaded}
       />
       <FAQ scroll2Ref={scroll2Ref} mobileFAQRef={mobileFAQRef} />
       <Timeline scroll3Ref={scroll3Ref} />

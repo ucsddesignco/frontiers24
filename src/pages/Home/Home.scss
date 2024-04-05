@@ -72,7 +72,7 @@ $text-color: white;
     }
 
     .fake-logo {
-      opacity: 1;
+      opacity: 0;
       @media screen and (max-width: $mobile-breakpoint) {
         display: none;
       }
@@ -91,7 +91,7 @@ $text-color: white;
 
   /* REGISTER BUTTON */
   .register-button {
-    opacity: 1;
+    opacity: 0;
     .button {
       background: $primary-orange;
       display: inline-block;
