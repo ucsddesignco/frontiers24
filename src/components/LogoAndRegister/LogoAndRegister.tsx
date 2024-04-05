@@ -17,9 +17,6 @@ export default function LogoAndRegister({
   navRef,
   logoLoaded
 }: LogoAndRegisterProps) {
-  //Temporarily disable animation
-  // return;
-
   const logoRef = useRef<HTMLImageElement>(null);
   const registerRef = useRef<HTMLImageElement>(null);
   const lastScrollTopRef = useRef(0);
@@ -27,12 +24,10 @@ export default function LogoAndRegister({
   useEffect(() => {
     if (!logoLoaded) return;
     const fakeLogoInfo = fakeLogoRef.current?.getBoundingClientRect();
-    const logoInfo = logoRef.current?.getBoundingClientRect();
-    const initialLogoWidth = logoInfo!.width || 0;
-    // const initialLogoWidth =
-    //   parseInt(
-    //     window.getComputedStyle(fakeLogoRef.current!).getPropertyValue('width')
-    //   ) || 0;
+    const initialLogoWidth =
+      parseInt(
+        window.getComputedStyle(fakeLogoRef.current!).getPropertyValue('width')
+      ) || 0;
     const navRightValue = navRef.current
       ? parseInt(
           window.getComputedStyle(navRef.current).getPropertyValue('right')
@@ -67,7 +62,10 @@ export default function LogoAndRegister({
         if (st > lastScrollTopRef.current && st > window.innerHeight / 2) {
           // Scrolling Down
           const logoScaleFactor = 0.5;
-          const registerScaleFactor = 0.7;
+          const registerScaleFactor = Math.min(
+            (window.innerWidth * 1.2) / 1920,
+            1
+          );
           logoRef.current!.style.transform = `translate(${window.innerWidth - (initialLogoWidth * logoScaleFactor * (1 + (1 - logoScaleFactor)) + navRightValue)}px) scale(${logoScaleFactor})`;
           registerRef.current!.style.transform = `translate(${window.innerWidth - (initialRegisterWidth * registerScaleFactor * (1 + (1 - registerScaleFactor)) + navRightValue)}px,
            ${window.innerHeight - (registerInfo!.height + 30)}px) scale(${registerScaleFactor})`;
