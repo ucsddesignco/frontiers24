@@ -1,15 +1,21 @@
 .asteroid-container {
-  position: absolute;
+  position: fixed;
   height: 100%;
   width: 100%;
   display: grid;
   align-items: start;
+  pointer-events: none;
 
   .asteroid {
-    z-index: 100;
+    z-index: 2;
     position: absolute;
     top: 0;
     left: 0;
+    pointer-events: auto;
+
+    &:hover {
+      cursor: $cursor-pointer;
+    }
   }
 
   .fragment {
