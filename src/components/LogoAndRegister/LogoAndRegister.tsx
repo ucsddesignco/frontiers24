@@ -19,16 +19,18 @@ export default function LogoAndRegister({
   useEffect(() => {
     const fakeLogoInfo = fakeLogoRef.current?.getBoundingClientRect();
     const logoInfo = logoRef.current?.getBoundingClientRect();
-    const initialLogoWidth = parseInt(logoInfo!.width);
+    const initialLogoWidth = logoInfo!.width;
     // Change to ref in the future
     const navigationElement = document.querySelector('nav');
-    const navRightValue = parseInt(
-      window.getComputedStyle(navigationElement).getPropertyValue('right')
-    );
+    const navRightValue = navigationElement
+      ? parseInt(
+          window.getComputedStyle(navigationElement).getPropertyValue('right')
+        )
+      : 0;
 
     const fakeRegisterInfo = fakeRegisterRef.current?.getBoundingClientRect();
     const registerInfo = registerRef.current?.getBoundingClientRect();
-    const initialRegisterWidth = parseInt(registerInfo!.width);
+    const initialRegisterWidth = registerInfo!.width;
 
     if (logoRef.current && fakeLogoInfo) {
       logoRef.current.style.transform = `translate(${fakeLogoInfo.x}px, ${fakeLogoInfo.y - 10}px)`;
