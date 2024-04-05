@@ -50,7 +50,7 @@ export default function LogoAndRegister({
       setTimeout(() => {
         logoRef.current!.style.transition =
           'transform 0.4s ease-out, scale 0.4s ease-out';
-      }, 0);
+      }, 500);
     }
 
     if (registerRef.current && fakeRegisterInfo) {
