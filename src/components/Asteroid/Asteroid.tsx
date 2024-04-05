@@ -4,13 +4,25 @@ import { useState } from 'react';
 
 import './Asteroid.scss';
 import LargeAsteroid2 from './Large-Asteroid-2';
-import FragmentAsteroid1 from './Fragment-Asteroid-1';
-import FragmentAsteroid2 from './Fragment-Asteroid-2';
-import FragmentAsteroid3 from './Fragment-Asteroid-3';
-import FragmentAsteroid4 from './Fragment-Asteroid-4';
+import FragmentAsteroid1 from './Fragments/Fragment-Asteroid-1';
+import FragmentAsteroid2 from './Fragments/Fragment-Asteroid-2';
+import FragmentAsteroid3 from './Fragments/Fragment-Asteroid-3';
+import FragmentAsteroid4 from './Fragments/Fragment-Asteroid-4';
+import asteroidLogic from './asteroidLogic';
 
 type AsteroidProps = {
   homeRef: React.RefObject<HTMLElement>;
+};
+
+type animationProps = {
+  initial: Point;
+  animate: Point;
+  transition: { duration: number; ease: number[] };
+};
+
+export type Point = {
+  x: number;
+  y: number;
 };
 
 export default function Asteroid({ homeRef }: AsteroidProps) {
@@ -24,17 +36,6 @@ export default function Asteroid({ homeRef }: AsteroidProps) {
   const [asteroidExploded, setAsteroidExploded] = useState<boolean[]>([]);
   const [fragmentEdPts, setFragmentEndPts] = useState<Point[]>([]);
   const [asteroidRotations, setAsteroidRotations] = useState<number[]>([]);
-
-  type animationProps = {
-    initial: Point;
-    animate: Point;
-    transition: { duration: number; ease: number[] };
-  };
-
-  type Point = {
-    x: number;
-    y: number;
-  };
 
   const onButtonClick = (index: number) => {
     console.log(index);
@@ -68,93 +69,16 @@ export default function Asteroid({ homeRef }: AsteroidProps) {
   useEffect(() => {
     const homeElement = homeRef.current;
     if (homeElement) {
-      const style = window.getComputedStyle(homeElement);
-      const paddingLeftValue = style.paddingLeft;
-      setContentInfo({
-        paddingLeft: parseFloat(paddingLeftValue),
-        width: homeElement.getBoundingClientRect().width
+      asteroidLogic({
+        homeElement,
+        setContentInfo,
+        contentPaddingLeft: contentInfo.paddingLeft,
+        contentWidth: contentInfo.width,
+        setNumAsteroids,
+        setAsteroidVisibility,
+        setAsteroidAnimations,
+        setFragmentEndPts
       });
-
-      const numAsteroids = 5;
-      setNumAsteroids(numAsteroids);
-
-      setAsteroidVisibility(Array(numAsteroids).fill(true));
-
-      //Startpt x: -window.innerWidth < x < 0
-      //Startpt y: 0 < y < window.innerHeight
-      const generateStartPT = () => {
-        const startPT = {
-          x: -((Math.random() * window.innerWidth) / 4),
-          y: Math.random() * window.innerHeight
-        };
-        return startPT;
-      };
-
-      //Endpt x: 0 < x < left padding || left padding + contentWidth < x < window.innerWidth
-      //Endpt y: 0 < y < window.innerHeight
-      const generateEndPT = () => {
-        const contentPaddingLeft = contentInfo.paddingLeft;
-        const contentWidth = contentInfo.width;
-        const contentMidPoint = contentPaddingLeft + contentWidth / 2;
-
-        let endX = Math.random() * window.innerWidth;
-
-        if (endX < contentMidPoint) {
-          endX = Math.min(contentPaddingLeft - Math.random() * 100, endX);
-        }
-
-        if (endX > contentMidPoint) {
-          endX = Math.max(contentWidth - 500 - Math.random() * 100, endX);
-        }
-
-        const endPT = {
-          x: endX,
-          y: Math.random() * (window.innerHeight - 100)
-        };
-        return endPT;
-      };
-
-      const calculateDistance = (startPT: Point, endPT: Point) => {
-        return Math.sqrt(
-          Math.pow(endPT.x - startPT.x, 2) + Math.pow(endPT.y - startPT.y, 2)
-        );
-      };
-
-      const generateAnimationProps = () => {
-        const startPT = generateStartPT();
-        const endPT = generateEndPT();
-        const distance = calculateDistance(startPT, endPT);
-
-        const speed = 200; // pixels per second
-        const duration = distance / speed; // seconds
-
-        return {
-          initial: startPT,
-          animate: endPT,
-          transition: { duration: duration, ease: [0.1, 0.87, 0.44, 1] }
-        };
-      };
-
-      // Generate animations for each asteroid
-      const newAnimations = Array.from({ length: numAsteroids }, () =>
-        generateAnimationProps()
-      );
-
-      setAsteroidAnimations(newAnimations);
-
-      const generateFragmentEndPT = () => {
-        const endPT = {
-          x: (Math.random() * 2 - 1) * window.innerWidth,
-          y: (Math.random() * 2 - 1) * window.innerHeight
-        };
-        return endPT;
-      };
-
-      // Generate animations for each fragment
-      const newFragments = Array.from({ length: numAsteroids * 4 }, () =>
-        generateFragmentEndPT()
-      );
-      setFragmentEndPts(newFragments);
     }
   }, [homeRef, contentInfo.paddingLeft, contentInfo.width]);
 
@@ -167,6 +91,8 @@ export default function Asteroid({ homeRef }: AsteroidProps) {
     setAsteroidRotations(rotations);
   }, [numAsteroids]);
 
+  const clickMeLocation = { x: window.innerWidth / 3, y: 100 };
+
   return (
     <section className="asteroid-container">
       {Array.from({ length: numAsteroids }, (_, index) =>
@@ -176,7 +102,7 @@ export default function Asteroid({ homeRef }: AsteroidProps) {
               className="fragment"
               initial={
                 index === 0
-                  ? { x: 1200, y: 100 }
+                  ? clickMeLocation
                   : asteroidAnimations[index]?.animate
               }
               animate={{
@@ -195,7 +121,7 @@ export default function Asteroid({ homeRef }: AsteroidProps) {
               className="fragment"
               initial={
                 index === 0
-                  ? { x: 1200, y: 100 }
+                  ? clickMeLocation
                   : asteroidAnimations[index]?.animate
               }
               animate={{
@@ -212,7 +138,7 @@ export default function Asteroid({ homeRef }: AsteroidProps) {
               className="fragment"
               initial={
                 index === 0
-                  ? { x: 1200, y: 100 }
+                  ? clickMeLocation
                   : asteroidAnimations[index]?.animate
               }
               animate={{
@@ -229,7 +155,7 @@ export default function Asteroid({ homeRef }: AsteroidProps) {
               className="fragment"
               initial={
                 index === 0
-                  ? { x: 1200, y: 100 }
+                  ? clickMeLocation
                   : asteroidAnimations[index]?.animate
               }
               animate={{
@@ -251,7 +177,7 @@ export default function Asteroid({ homeRef }: AsteroidProps) {
               initial={asteroidAnimations[index]?.initial}
               animate={
                 index === 0
-                  ? { x: window.innerWidth / 3, y: 100 }
+                  ? clickMeLocation
                   : asteroidAnimations[index]?.animate
               }
               transition={asteroidAnimations[index]?.transition}
