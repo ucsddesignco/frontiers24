@@ -22,6 +22,7 @@ export default function Asteroid({ homeRef }: AsteroidProps) {
   const [asteroidVisibility, setAsteroidVisibility] = useState<boolean[]>([]);
   const [asteroidExploded, setAsteroidExploded] = useState<boolean[]>([]);
   const [fragmentEdPts, setFragmentEndPts] = useState<Point[]>([]);
+  const [asteroidRotations, setAsteroidRotations] = useState<number[]>([]);
 
   type animationProps = {
     initial: Point;
@@ -145,6 +146,15 @@ export default function Asteroid({ homeRef }: AsteroidProps) {
     }
   }, [homeRef, contentInfo.paddingLeft, contentInfo.width]);
 
+  // Initialize asteroid rotation values
+  useEffect(() => {
+    const rotations = Array.from(
+      { length: numAsteroids },
+      () => Math.random() * 360
+    );
+    setAsteroidRotations(rotations);
+  }, [numAsteroids]);
+
   return (
     <section className="asteroid-container">
       {Array.from({ length: numAsteroids }, (_, index) =>
@@ -195,6 +205,7 @@ export default function Asteroid({ homeRef }: AsteroidProps) {
               initial={asteroidAnimations[index]?.initial}
               animate={asteroidAnimations[index]?.animate}
               transition={asteroidAnimations[index]?.transition}
+              style={{ rotate: `${asteroidRotations[index]}deg` }}
             >
               <LargeAsteroid2 />
             </motion.div>
