@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef } from 'react';
 import './OrbitingPlanets.scss';
+import useIsDesktop from '../../util/useIsDesktop';
 
 type OrbitingPlanetsProps = {
   planetRef: React.RefObject<SVGSVGElement>;
@@ -10,6 +11,7 @@ export default function OrbitingPlanets({
   planetRef,
   pausedPlanet
 }: OrbitingPlanetsProps) {
+  const isDesktop = useIsDesktop();
   const blueSpinDuration = 10;
   const purpleSpinDuration = 8;
   const redSpinDuration = 13;
@@ -149,6 +151,9 @@ export default function OrbitingPlanets({
       }
     };
   }, [pausedPlanet, orbitingElements]);
+
+  // Hide on mobile
+  if (!isDesktop) return;
 
   return (
     // prettier-ignore

@@ -26,8 +26,6 @@ function Rotate() {
 
   const [pausedPlanet, setPausedPlanet] = useState('');
 
-  console.log(pausedPlanet);
-
   useGSAP(() => {
     handleRotate(planetRef);
   });

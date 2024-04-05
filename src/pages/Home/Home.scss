@@ -1,41 +1,20 @@
 $heading-color: #ff671e;
 $text-color: white;
 
-@font-face {
-  font-family: 'Neue Plak';
-  src: url('../../assets/fonts/Neue-Plak-Extended-Bold.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'Ridge Bold';
-  src: url('../../assets/fonts/ridge-bold-oblique.otf') format('opentype');
-}
-
-@font-face {
-  font-family: 'NB International';
-  src: url('../../assets/fonts/NB-International-Regular.ttf') format('truetype');
-}
-
-.home {
-  display: grid;
-  align-items: center;
-  margin: 0;
+//.one is for extra specificity to override App.scss styling
+.one.home {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 
   @media screen and (max-width: $mobile-breakpoint) {
-    width: 100%;
+    position: relative;
+    padding-bottom: 20rem;
+    justify-content: flex-start;
+    margin-top: 5rem;
 
     .home-info p {
       display: none;
-    }
-
-    font-size: 77.5%;
-  }
-
-  .landing-container {
-    margin-top: 15rem;
-
-    h3 {
-      margin-bottom: 1.5%;
     }
   }
 
@@ -43,6 +22,12 @@ $text-color: white;
     margin-bottom: 4rem;
     max-width: 70ch;
 
+    @media (max-width: $mobile-breakpoint) {
+      max-width: 100%;
+      width: 100%;
+      margin-bottom: 2rem;
+      max-height: 100dvh;
+    }
     .desktop-view {
       display: grid;
       gap: 1rem;
@@ -59,7 +44,12 @@ $text-color: white;
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-        width: 100%;
+        width: 80%;
+      }
+
+      @media screen and (max-width: 550px) {
+        flex-direction: column;
+        gap: 10px;
       }
     }
   }
@@ -67,12 +57,9 @@ $text-color: white;
   /* LOGO STYLING */
 
   .logo-container {
-    position: fixed;
-    margin: -11.5rem 0 1rem;
-
     @media screen and (max-width: $tablet-breakpoint) {
+      width: 80%;
       position: relative;
-      width: 75%;
     }
 
     @media (max-width: 550px) {
@@ -91,7 +78,7 @@ $text-color: white;
 
       @media screen and (max-width: $mobile-breakpoint) {
         display: block;
-        margin: 0 auto 1rem;
+        width: 100%;
         position: relative;
       }
     }
@@ -108,6 +95,14 @@ $text-color: white;
       text-decoration: none;
       color: $primary-white;
       letter-spacing: 2.4px;
+      transition:
+        background-color 0.3s,
+        color 0.3s;
+
+      &:hover {
+        background-color: $primary-white;
+        color: $primary-orange;
+      }
     }
 
     .parallelogram {
@@ -120,9 +115,33 @@ $text-color: white;
     }
 
     @media screen and (max-width: $mobile-breakpoint) {
-      display: block;
+      opacity: 1;
       margin: 0 auto 2rem;
       width: 100%;
+    }
+
+    @media screen and (max-width: 550px) {
+      font-size: 0.8em;
+    }
+  }
+
+  /* MOBILE PLANETS */
+  .mobile-planets {
+    display: none;
+
+    @media screen and (max-width: $mobile-breakpoint) {
+      display: block;
+      z-index: -1;
+      margin: 0 auto;
+      position: absolute;
+      width: calc(450px + 25vw);
+      bottom: -40%;
+      right: -30%;
+    }
+
+    @media screen and (max-width: 550px) {
+      transform: scale(1.2);
+      bottom: -20vw;
     }
   }
 }

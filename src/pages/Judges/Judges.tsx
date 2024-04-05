@@ -53,7 +53,7 @@ export default function Judges({ scroll4Ref }: JudgesProps) {
         </>
       ) : (
         <section className="mobile">
-          <div className="judges-container">
+          <div className="card-container">
             <h2>Judges</h2>
             {JudgeList.map(item => (
               <JudgeCard

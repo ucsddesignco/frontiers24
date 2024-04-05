@@ -33,14 +33,16 @@
 
   section {
     height: 100vh;
-    display: grid;
     max-width: 85ch;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
 
-    align-items: center;
     @media (max-width: $mobile-breakpoint) {
       padding: $mobile-padding;
       height: auto;
-      margin-bottom: 5rem;
+      padding-bottom: 5rem;
       max-width: 100%;
     }
 

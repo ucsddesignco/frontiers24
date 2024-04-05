@@ -51,7 +51,10 @@ export default function Navbar({
     } else {
       //Mobile Scroll
       toggleHamburger();
-      window.scrollTo({ top: scrollOffset });
+      setTimeout(() => {
+        window.scrollTo({ top: 30 });
+        window.scrollTo({ top: scrollOffset });
+      }, 2000);
     }
   }
 
@@ -87,7 +90,7 @@ export default function Navbar({
   };
 
   useEffect(() => {
-    if (scrollContainerRef.current) {
+    if (scrollContainerRef.current && isDesktop) {
       scrollContainerRef.current.addEventListener('scroll', () => {
         if (currentlyNavigatingRef.current) return;
         const scrollPosition = scrollContainerRef.current?.scrollTop || 0;
@@ -107,7 +110,7 @@ export default function Navbar({
         }
       });
     }
-  }, [scrollContainerRef, scrollRefList, setPausedPlanet]);
+  }, [scrollContainerRef, scrollRefList, setPausedPlanet, isDesktop]);
 
   return (
     // prettier-ignore

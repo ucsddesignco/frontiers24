@@ -4,6 +4,10 @@
     color: $primary-white;
   }
 
+  ul {
+    padding-left: 0;
+  }
+
   h3 {
     font-size: 1.4em;
     line-height: 1;
@@ -17,6 +21,10 @@
 
     @media screen and (max-width: $mobile-breakpoint) {
       margin-bottom: 5vw;
+    }
+
+    @media screen and (max-width: 550px) {
+      flex-direction: column;
     }
   }
 
@@ -46,14 +54,18 @@
 
   .time {
     display: flex-inline;
-    width: 9ch;
     text-align: right;
+    width: calc($p-size * 6);
     line-height: 34px;
     justify-content: start;
 
     @media screen and (max-width: $mobile-breakpoint) {
-      width: 15vw;
-      font-size: 12px;
+      width: calc($p-size * 5);
+      font-size: 14px;
+    }
+
+    @media screen and (max-width: 550px) {
+      text-align: left;
     }
   }
 
@@ -64,6 +76,10 @@
     margin-left: 7.5px;
     width: 30px;
     height: 3px;
+
+    @media screen and (max-width: 550px) {
+      margin: 0;
+    }
   }
 
   .title-discription {
@@ -73,7 +89,6 @@
     width: 100%;
 
     @media screen and (max-width: $mobile-breakpoint) {
-      width: 72vw;
     }
 
     p {

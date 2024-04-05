@@ -34,6 +34,7 @@ export default function LogoAndRegister({
     const initialRegisterWidth = registerInfo!.width;
 
     if (logoRef.current && fakeLogoInfo) {
+      logoRef.current.style.width = fakeLogoInfo.width + 'px';
       logoRef.current.style.transform = `translate(${fakeLogoInfo.x}px, ${fakeLogoInfo.y - 10}px)`;
       logoRef.current.style.opacity = '1';
       setTimeout(() => {
