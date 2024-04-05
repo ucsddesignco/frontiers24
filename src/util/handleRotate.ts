@@ -10,7 +10,7 @@ gsap.registerPlugin(ScrollToPlugin);
 const mm = gsap.matchMedia();
 
 //Default transform origin
-let transformOrigin = '16% 74%';
+let transformOrigin = '50% 50%';
 
 export function handleRotate(planetRef: React.RefObject<SVGSVGElement>) {
   const planetInfo = planetRef.current?.getBoundingClientRect();
@@ -31,7 +31,7 @@ export function handleRotate(planetRef: React.RefObject<SVGSVGElement>) {
         trigger: '.scroll-section-one',
         scrub: 0.01,
         //Where animation starts and ends
-        start: 'bottom 99%',
+        start: 'bottom 100%',
         end: 'bottom'
       },
       rotation: -80,
@@ -49,7 +49,7 @@ export function handleRotate(planetRef: React.RefObject<SVGSVGElement>) {
         scroller: '.scroll-cont',
         trigger: '.scroll-section-two',
         scrub: 0.1,
-        start: 'top 99%',
+        start: 'top 100%',
         end: 'top'
       },
       opacity: 0,
@@ -65,7 +65,7 @@ export function handleRotate(planetRef: React.RefObject<SVGSVGElement>) {
         trigger: '.scroll-section-two',
         scrub: 0.1,
         //Where animation starts and ends
-        start: 'bottom 99%',
+        start: 'bottom 100%',
         end: 'bottom 1%'
       },
       opacity: 1,
@@ -77,7 +77,7 @@ export function handleRotate(planetRef: React.RefObject<SVGSVGElement>) {
         scroller: '.scroll-cont',
         trigger: '.scroll-section-two',
         scrub: 0.01,
-        start: 'top 99%',
+        start: 'top 100%',
         end: 'bottom'
       },
       rotation: -80,
@@ -92,7 +92,7 @@ export function handleRotate(planetRef: React.RefObject<SVGSVGElement>) {
         scroller: '.scroll-cont',
         trigger: '.scroll-section-three',
         scrub: 0.1,
-        start: 'top 99%',
+        start: 'top 100%',
         end: 'top'
       },
       opacity: 0,
@@ -108,7 +108,7 @@ export function handleRotate(planetRef: React.RefObject<SVGSVGElement>) {
         trigger: '.scroll-section-three',
         scrub: 0.1,
         //Where animation starts and ends
-        start: 'bottom 99%',
+        start: 'bottom 100%',
         end: 'bottom'
       },
       opacity: 1,
@@ -121,7 +121,7 @@ export function handleRotate(planetRef: React.RefObject<SVGSVGElement>) {
         scroller: '.scroll-cont',
         trigger: '.scroll-section-three',
         scrub: 0.01,
-        start: 'top 99%',
+        start: 'top 100%',
         end: 'bottom'
       },
       rotation: -80,
@@ -136,7 +136,7 @@ export function handleRotate(planetRef: React.RefObject<SVGSVGElement>) {
         scroller: '.scroll-cont',
         trigger: '.scroll-section-four',
         scrub: 0.1,
-        start: 'top 99%',
+        start: 'top 100%',
         end: 'top'
       },
       opacity: 0,
@@ -152,7 +152,7 @@ export function handleRotate(planetRef: React.RefObject<SVGSVGElement>) {
         trigger: '.scroll-section-four',
         scrub: 0.1,
         //Where animation starts and ends
-        start: 'bottom 99%',
+        start: 'bottom 100%',
         end: 'bottom'
       },
       opacity: 1,
@@ -165,7 +165,7 @@ export function handleRotate(planetRef: React.RefObject<SVGSVGElement>) {
         scroller: '.scroll-cont',
         trigger: '.scroll-section-four',
         scrub: 0.01,
-        start: 'top 99%',
+        start: 'top 100%',
         end: 'bottom'
       },
       rotation: -80,
@@ -179,7 +179,7 @@ export function handleRotate(planetRef: React.RefObject<SVGSVGElement>) {
         scroller: '.scroll-cont',
         trigger: '.scroll-section-five',
         scrub: 0.1,
-        start: 'top 99%',
+        start: 'top 100%',
         end: 'top'
       },
       opacity: 0,
@@ -195,7 +195,7 @@ export function handleRotate(planetRef: React.RefObject<SVGSVGElement>) {
         trigger: '.scroll-section-five',
         scrub: 0.1,
         //Where animation starts and ends
-        start: 'bottom 99%',
+        start: 'bottom 100%',
         end: 'bottom'
       },
       opacity: 1,
@@ -208,7 +208,7 @@ export function handleRotate(planetRef: React.RefObject<SVGSVGElement>) {
         scroller: '.scroll-cont',
         trigger: '.scroll-section-five',
         scrub: 0.01,
-        start: 'top 99%',
+        start: 'top 100%',
         end: 'bottom'
       },
       rotation: -80,
@@ -222,7 +222,7 @@ export function handleRotate(planetRef: React.RefObject<SVGSVGElement>) {
         scroller: '.scroll-cont',
         trigger: '.scroll-section-six',
         scrub: 0.1,
-        start: 'top 99%',
+        start: 'top 100%',
         end: 'top'
       },
       opacity: 0,
@@ -238,7 +238,7 @@ export function handleRotate(planetRef: React.RefObject<SVGSVGElement>) {
         trigger: '.scroll-section-six',
         scrub: 0.1,
         //Where animation starts and ends
-        start: 'bottom 99%',
+        start: 'bottom 100%',
         end: 'bottom'
       },
       opacity: 1,
@@ -251,7 +251,7 @@ export function handleRotate(planetRef: React.RefObject<SVGSVGElement>) {
         scroller: '.scroll-cont',
         trigger: '.scroll-section-six',
         scrub: 0.01,
-        start: 'top 99%',
+        start: 'top 100%',
         end: 'bottom'
       },
       rotation: -80,
