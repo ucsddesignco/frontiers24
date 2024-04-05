@@ -4,6 +4,10 @@ import { useState } from 'react';
 
 import './Asteroid.scss';
 import LargeAsteroid2 from './Large-Asteroid-2';
+import FragmentAsteroid1 from './Fragment-Asteroid-1';
+import FragmentAsteroid2 from './Fragment-Asteroid-2';
+import FragmentAsteroid3 from './Fragment-Asteroid-3';
+import FragmentAsteroid4 from './Fragment-Asteroid-4';
 
 type AsteroidProps = {
   homeRef: React.RefObject<HTMLElement>;
@@ -15,6 +19,9 @@ export default function Asteroid({homeRef}: AsteroidProps) {
   const [contentInfo, setContentInfo] = useState({paddingLeft: 0,  width: 0});
   const [asteroidAnimations, setAsteroidAnimations] = useState<animationProps[]>([]); // [ {x: number, y: number}
   const [asteroidVisibility, setAsteroidVisibility] = useState<boolean[]>([]);
+  const [asteroidExploded, setAsteroidExploded] = useState<boolean[]>([]);
+  const [fragmentEdPts, setFragmentEndPts] = useState<Point[]>([]);
+
 
   type animationProps = {
     initial: Point;
@@ -58,6 +65,14 @@ export default function Asteroid({homeRef}: AsteroidProps) {
     return endPT;
   }
 
+  const generateFragmentEndPT = () => {
+    const endPT = {
+      x: (Math.random() * 2 - 1) * window.innerWidth,  
+      y: Math.random() * 100 + window.innerHeight
+    };
+    return endPT;
+  }
+
   const calculateDistance = (startPT: Point, endPT: Point) => {
     return Math.sqrt(Math.pow(endPT.x - startPT.x, 2) + Math.pow(endPT.y - startPT.y, 2));
   }
@@ -78,14 +93,21 @@ export default function Asteroid({homeRef}: AsteroidProps) {
   }
 
   const onButtonClick = (index : number) => {
-    console.log('button clicked');
     console.log(index);
+    console.log(fragmentEdPts);
 
     // Update the visibility state to hide the clicked asteroid
     setAsteroidVisibility(prevVisibility => {
       const newVisibility = [...prevVisibility];
       newVisibility[index] = false;
       return newVisibility;
+    });
+
+    // Update the exploded state to show the fragments
+    setAsteroidExploded(prevExploded => {
+      const newExploded = [...prevExploded];
+      newExploded[index] = true;
+      return newExploded;
     });
   }
 
@@ -105,12 +127,56 @@ export default function Asteroid({homeRef}: AsteroidProps) {
       // Generate animations for each asteroid
       const newAnimations = Array.from({ length: numAsteroids }, () => generateAnimationProps());
       setAsteroidAnimations(newAnimations);
-    }
-  }, [])
+
+      // Generate animations for each fragment
+      const newFragments = Array.from({ length: numAsteroids * 4 }, () => generateFragmentEndPT());
+      setFragmentEndPts(newFragments);
+    }}, [])
     
   return (
     <section className='asteroid-container'>
       {Array.from({ length: numAsteroids }, (_, index) => (
+        asteroidExploded[index] ? (
+        <>
+          <motion.div
+            className='fragment'
+            initial={asteroidAnimations[index]?.animate}
+            animate={fragmentEdPts[(index * 4) + 0]}
+            transition={{duration: 10, ease: [0.1, 0.87, 0.44, 1]}}
+          >
+            <FragmentAsteroid1/>      
+          </motion.div>
+
+          <motion.div
+            className='fragment'
+            initial={asteroidAnimations[index]?.animate}
+            animate={fragmentEdPts[(index * 4) + 1]}
+            transition={{duration: 10, ease: [0.1, 0.87, 0.44, 1]}}
+          >
+            <FragmentAsteroid2/>      
+          </motion.div>
+
+          <motion.div
+            className='fragment'
+            initial={asteroidAnimations[index]?.animate}
+            animate={fragmentEdPts[(index * 4) + 2]}
+            transition={{duration: 10, ease: [0.1, 0.87, 0.44, 1]}}
+          >
+            <FragmentAsteroid3/>      
+          </motion.div>
+
+          <motion.div
+            className='fragment'
+            initial={asteroidAnimations[index]?.animate}
+            animate={fragmentEdPts[(index * 4) + 3]}
+            transition={{duration: 10, ease: [0.1, 0.87, 0.44, 1]}}
+          >
+            <FragmentAsteroid4/>      
+          </motion.div>
+        </>
+        ) :
+        
+
         asteroidVisibility[index] && (
           <motion.div 
             key={index}
@@ -123,6 +189,7 @@ export default function Asteroid({homeRef}: AsteroidProps) {
             <LargeAsteroid2 />
           </motion.div>
         )
+        
       ))}
     </section>
   );
