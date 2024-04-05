@@ -39,23 +39,18 @@ export default function LogoAndRegister({
         )
       : 0;
 
-    //DEBUGGING
-    console.log('fake logo info:', fakeLogoInfo);
-
     const fakeRegisterInfo = fakeRegisterRef.current?.getBoundingClientRect();
     const registerInfo = registerRef.current?.getBoundingClientRect();
     const initialRegisterWidth = registerInfo!.width;
 
     if (logoRef.current && fakeLogoInfo && fakeLogoRef.current) {
-      console.log('initial logo width', initialLogoWidth);
       logoRef.current.style.width = initialLogoWidth + 'px';
       logoRef.current.style.transform = `translate(${fakeLogoInfo.x}px, ${fakeLogoInfo.y - 20}px)`;
       logoRef.current.style.opacity = '1';
       setTimeout(() => {
-        (logoRef.current!.style.transition =
-          'transform 0.4s ease-out, scale 0.4s ease-out'),
-          300;
-      });
+        logoRef.current!.style.transition =
+          'transform 0.4s ease-out, scale 0.4s ease-out';
+      }, 0);
     }
 
     if (registerRef.current && fakeRegisterInfo) {
