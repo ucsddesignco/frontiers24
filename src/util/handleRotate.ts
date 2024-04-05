@@ -10,7 +10,7 @@ gsap.registerPlugin(ScrollToPlugin);
 const mm = gsap.matchMedia();
 
 //Default transform origin
-let transformOrigin = '50% 50%';
+let transformOrigin = '16% 74%';
 
 export function handleRotate(planetRef: React.RefObject<SVGSVGElement>) {
   const planetInfo = planetRef.current?.getBoundingClientRect();

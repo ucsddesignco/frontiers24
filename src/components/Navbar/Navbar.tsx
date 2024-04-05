@@ -17,6 +17,7 @@ export default function Navbar({
   const [isHamburgerOpen, setIsHamburgerOpen] = useState(false);
   const pagesList = ['Home', 'FAQ', 'Timeline', 'Judges'];
   const isDesktop = useIsDesktop();
+  const [pageSelected, setPageSelected] = useState('Home');
 
   function scrollToSection(scrollOffset: number) {
     if (isDesktop) {
@@ -35,6 +36,7 @@ export default function Navbar({
     return {
       onClick: () => {
         scrollToSection(scrollRefList[index].current?.offsetTop || 0);
+        setPageSelected(pageName);
       },
       name: pageName
     };
@@ -65,11 +67,42 @@ export default function Navbar({
     <nav role='navigation'>
       {/* Desktop Nav */}
       <ul className='desktop-nav'>
-        {links.map(link => (
-          <li key={link.name}>
-            <button onClick={link.onClick}>{link.name}</button>
+        {links.slice(0, -1).map(link => (
+          <li key={link.name} className={link.name === pageSelected ? 'active' : ''}>
+             <div className='outerCont' onClick={link.onClick}>
+             {link.name === pageSelected ? (
+              <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg" className={link.name === pageSelected ? 'active' : ''}>
+                <rect x="30" width="30" height="30" rx="15" transform="rotate(90 30 0)" fill="#F1F1F1"/>
+                <rect x="26.7271" y="3.27295" width="23.4545" height="23.4545" rx="11.7273" transform="rotate(90 26.7271 3.27295)" fill="#F1F1F1" stroke="#090921" strokeWidth="3"/>
+              </svg>
+             ) : (
+              <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="28.5" y="1.5" width="27" height="27" rx="13.5" transform="rotate(90 28.5 1.5)" stroke="#F1F1F1" strokeWidth="3"/>
+              </svg>
+            )}
+            </div>
+            <svg width="4" height="30" viewBox="0 0 4 30" fill="none" xmlns="http://www.w3.org/2000/svg" className='divider'>
+              <path d="M2 0L2 30" stroke="#F1F1F1" strokeWidth="3" strokeDasharray="10 10"/>
+            </svg>
           </li>
         ))}
+        {links.slice(-1).map(link => (
+          <li key={link.name} className={link.name === pageSelected ? 'active' : ''}>
+            <div className='outerCont' onClick={link.onClick}>
+             {link.name === pageSelected ? (
+              <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg" className={link.name === pageSelected ? 'active' : ''}>
+                <rect x="30" width="30" height="30" rx="15" transform="rotate(90 30 0)" fill="#F1F1F1"/>
+                <rect x="26.7271" y="3.27295" width="23.4545" height="23.4545" rx="11.7273" transform="rotate(90 26.7271 3.27295)" fill="#F1F1F1" stroke="#090921" strokeWidth="3"/>
+              </svg>
+             ) : (
+              <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg" >
+                <rect x="28.5" y="1.5" width="27" height="27" rx="13.5" transform="rotate(90 28.5 1.5)" stroke="#F1F1F1" strokeWidth="3"/>
+              </svg>
+            )}
+            </div>
+          </li>
+        ))}
+       
       </ul>
       
 

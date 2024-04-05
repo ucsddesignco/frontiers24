@@ -1,7 +1,7 @@
 .hamburger {
   display: none;
 
-  @media screen and (max-width: $mobile-breakpoint) {
+  @media screen and (max-width: $tablet-breakpoint) {
     display: block;
     padding: 0;
     z-index: 99;

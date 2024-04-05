@@ -2,6 +2,7 @@
 .scroll-cont {
   height: 100vh;
   position: relative;
+  overflow-x: hidden;
   &:before,
   &:after {
     content: '';

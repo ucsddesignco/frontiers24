@@ -1,4 +1,5 @@
 nav {
+  border: 1px solid red;
   position: fixed;
   display: grid;
   place-items: center;
@@ -8,15 +9,41 @@ nav {
   pointer-events: none;
   z-index: 1;
 
+  &:hover {
+    cursor: pointer;
+  }
+
   .desktop-nav {
     list-style-type: none;
     padding-left: 0;
     display: block;
     position: absolute;
     right: 0;
-    pointer-events: auto;
-    li button {
-      font-size: 20px;
+    li {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    li div {
+      height: 44px;
+      width: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      svg {
+        transition: all 0.3s ease;
+      }
+      .active {
+        transform: scale(1.2);
+      }
+    }
+
+    li {
+      .divider {
+        padding: 4px 0 4px 0;
+      }
     }
   }
 
@@ -34,21 +61,11 @@ nav {
     display: none;
     pointer-events: auto;
   }
+}
 
-  @media (max-width: $tablet-breakpoint) {
-    left: 0;
+@media (max-width: $tablet-breakpoint) {
+  nav {
     right: 0;
-
-    .desktop-nav {
-      right: auto;
-      transform-origin: center bottom;
-      transform: rotate(-90deg) translateY(50%);
-      position: absolute;
-      bottom: 3rem;
-    }
-  }
-
-  @media (max-width: $mobile-breakpoint) {
     position: absolute;
     display: flex;
     align-items: start;
