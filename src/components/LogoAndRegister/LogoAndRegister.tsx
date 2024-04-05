@@ -35,7 +35,7 @@ export default function LogoAndRegister({
 
     if (logoRef.current && fakeLogoInfo) {
       logoRef.current.style.width = fakeLogoInfo.width + 'px';
-      logoRef.current.style.transform = `translate(${fakeLogoInfo.x}px, ${fakeLogoInfo.y - 10}px)`;
+      logoRef.current.style.transform = `translate(${fakeLogoInfo.x}px, ${fakeLogoInfo.y - 20}px)`;
       logoRef.current.style.opacity = '1';
       setTimeout(() => {
         (logoRef.current!.style.transition =
@@ -66,7 +66,7 @@ export default function LogoAndRegister({
           // upscroll code
           logoRef.current!.style.scale = '1';
           if (fakeLogoInfo) {
-            logoRef.current!.style.transform = `translate(${fakeLogoInfo?.x}px, ${fakeLogoInfo?.y - 10}px)`;
+            logoRef.current!.style.transform = `translate(${fakeLogoInfo?.x}px, ${fakeLogoInfo?.y - 20}px)`;
           }
           if (fakeRegisterInfo) {
             registerRef.current!.style.transform = `translate(${fakeRegisterInfo?.x}px, ${fakeRegisterInfo?.y}px)`;

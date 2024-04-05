@@ -18,8 +18,8 @@ export default function FAQ({ scroll2Ref }: FAQProps) {
               <div className="faq-container">
                 <h2>FAQ</h2>
                 {FAQInfo.slice(0, 3).map(item => (
-                  <div className="block" key={item.question}>
-                    <h4>{item.question}</h4>
+                  <div className="card" key={item.question}>
+                    <h3>{item.question}</h3>
                     <p>{item.answer}</p>
                   </div>
                 ))}
@@ -31,8 +31,8 @@ export default function FAQ({ scroll2Ref }: FAQProps) {
               <div className="faq-container">
                 <h2>FAQ</h2>
                 {FAQInfo.slice(3, 6).map(item => (
-                  <div className="block" key={item.question}>
-                    <h4>{item.question}</h4>
+                  <div className="card" key={item.question}>
+                    <h3>{item.question}</h3>
                     <p>{item.answer}</p>
                   </div>
                 ))}
@@ -45,8 +45,8 @@ export default function FAQ({ scroll2Ref }: FAQProps) {
           <div className="faq-container">
             <h2>FAQ</h2>
             {FAQInfo.map(item => (
-              <div className="block" key={item.question}>
-                <h4>{item.question}</h4>
+              <div className="card" key={item.question}>
+                <h3>{item.question}</h3>
                 <p>{item.answer}</p>
               </div>
             ))}

@@ -12,11 +12,13 @@
     .faq-container {
       display: grid;
       gap: 2rem;
-    }
-  }
 
-  h4 {
-    margin-bottom: 1rem;
+      .card {
+        h3 {
+          margin-bottom: 1rem;
+        }
+      }
+    }
   }
 
   .mobile {

@@ -9,8 +9,7 @@ $mobile-breakpoint: 1200px;
 
 // Font Sizes
 $p-size: clamp(16px, calc(8px + 0.7vw), 20px);
-
-$h4-size: 24px;
+$h3-size: clamp(22px, calc(12px + 0.8vw), 32px);
 $h2-size: 40px;
 
 //Spacing and Sizing
@@ -27,7 +26,7 @@ $cursor-pointer:
   pointer;
 
 //Spacing and Sizing
-$mobile-padding: max(34px, 6vw) max(30px, 8vw);
+$mobile-padding: max(30px, 6vw) max(24px, 8vw);
 
 $navbar-margin: clamp(2rem, calc(0.5rem + 5vw), 8rem);
 $navbar-width: 45px;

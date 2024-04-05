@@ -48,8 +48,13 @@ $text-color: white;
       }
 
       @media screen and (max-width: 550px) {
+        width: 100%;
         flex-direction: column;
         gap: 10px;
+
+        h3 {
+          font-size: 16px;
+        }
       }
     }
   }
@@ -135,13 +140,13 @@ $text-color: white;
       margin: 0 auto;
       position: absolute;
       width: calc(450px + 25vw);
-      bottom: -40%;
+      bottom: -35%;
       right: -30%;
     }
 
-    @media screen and (max-width: 550px) {
-      transform: scale(1.2);
-      bottom: -20vw;
+    @media screen and (max-width: 500px) {
+      transform: scale(1.15);
+      bottom: calc(-20vw - 75px);
     }
   }
 }
