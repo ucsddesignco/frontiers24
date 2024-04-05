@@ -1,13 +1,14 @@
 .orbiting-planets-container {
   position: fixed;
   pointer-events: none;
-  height: 100dvh;
+  height: 100vh;
   width: 100%;
   display: grid;
   align-items: center;
 
   svg {
     transform: translateX($planet-offset);
+    height: 100%;
 
     @media (max-width: $tablet-breakpoint) {
       width: $planet-width;
@@ -17,5 +18,10 @@
       transform: scale(1.5) translateX(30%) translateY(20%) rotate(-150deg);
       position: absolute;
     }
+  }
+
+  .planet {
+    opacity: 0;
+    transition: opacity 0.5s;
   }
 }

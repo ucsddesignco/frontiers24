@@ -1,2 +1,40 @@
 .judges {
+  section {
+    overflow: hidden;
+
+    @media (max-width: $tablet-breakpoint) {
+      align-content: baseline;
+      padding-top: 3rem;
+    }
+
+    .card-container {
+      display: grid;
+      gap: 3rem;
+      width: 100%;
+
+      @media (max-width: $tablet-breakpoint) {
+        gap: 2rem;
+      }
+
+      @media (max-width: $mobile-breakpoint) {
+        margin-bottom: 5rem;
+      }
+    }
+  }
+
+  .mobile {
+    display: none;
+    background-color: $primary-white;
+    color: $primary-blue;
+  }
+
+  @media (max-width: $mobile-breakpoint) {
+    .mobile {
+      display: block;
+    }
+
+    .desktop {
+      display: none;
+    }
+  }
 }

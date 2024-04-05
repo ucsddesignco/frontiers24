@@ -1,16 +1,169 @@
+import { useEffect, useMemo, useRef } from 'react';
 import './OrbitingPlanets.scss';
+import useIsDesktop from '../../util/useIsDesktop';
 
-export default function OrbitingPlanets() {
+type OrbitingPlanetsProps = {
+  planetRef: React.RefObject<SVGSVGElement>;
+  pausedPlanet: string;
+};
+
+export default function OrbitingPlanets({
+  planetRef,
+  pausedPlanet
+}: OrbitingPlanetsProps) {
+  const isDesktop = useIsDesktop();
+  const blueSpinDuration = 10;
+  const purpleSpinDuration = 8;
+  const redSpinDuration = 13;
+  const yellowSpinDuration = 11.5;
+
+  const yellowPlanetRef = useRef<SVGSVGElement>(null);
+  const redPlanetRef = useRef<SVGSVGElement>(null);
+  const purplePlanetRef = useRef<SVGSVGElement>(null);
+  const bluePlanetRef = useRef<SVGSVGElement>(null);
+
+  const lastFrameTime = useRef<number | null>(null);
+  const requestID = useRef<number>();
+
+  const orbitingElements = useMemo(
+    () => [
+      {
+        ref: yellowPlanetRef,
+        offsetX: 155,
+        offsetY: 45,
+        centerX: 93,
+        centerY: 93,
+        radius: 91.5,
+        angle: -0.6,
+        duration: 8,
+        initialSpeed: 0,
+        color: 'yellow'
+      },
+      {
+        ref: redPlanetRef,
+        offsetX: 340,
+        offsetY: 410,
+        centerX: 228,
+        centerY: 228,
+        radius: 226.5,
+        angle: 0.5,
+        duration: 4.5,
+        initialSpeed: 0,
+        color: 'red'
+      },
+      {
+        ref: purplePlanetRef,
+        offsetX: 500,
+        offsetY: 70,
+        centerX: 285,
+        centerY: 285,
+        radius: 283.5,
+        angle: -0.3,
+        duration: 9.7,
+        initialSpeed: 0,
+        color: 'purple'
+      },
+      {
+        ref: bluePlanetRef,
+        offsetX: 760,
+        offsetY: 580,
+        centerX: 398.5,
+        centerY: 398.5,
+        radius: 397,
+        angle: 0.7,
+        duration: 6.5,
+        initialSpeed: 0,
+        color: 'blue'
+      }
+    ],
+    []
+  );
+
+  useEffect(() => {
+    function animateOrbits(timestamp: number) {
+      if (lastFrameTime.current === null) {
+        lastFrameTime.current = timestamp;
+      }
+
+      const deltaTime = timestamp - lastFrameTime.current;
+      lastFrameTime.current = timestamp;
+
+      // Display planets initially
+      orbitingElements.forEach(planet => {
+        const { ref, offsetX, offsetY, centerX, centerY, radius } = planet;
+
+        const x = centerX + radius * Math.cos(planet.angle) - offsetX;
+        const y = centerY + radius * Math.sin(planet.angle) - offsetY;
+
+        const orbitingElement = ref.current;
+        if (orbitingElement) {
+          orbitingElement.setAttribute('transform', `translate(${x}, ${y})`);
+          ref.current.style.opacity = '1';
+        }
+      });
+
+      // Update each element's position based on its unique properties
+      orbitingElements.forEach(planet => {
+        const {
+          ref,
+          offsetX,
+          offsetY,
+          centerX,
+          centerY,
+          radius,
+          duration,
+          color
+        } = planet;
+
+        const speed = (2 * Math.PI) / (duration * 1000);
+        planet.angle += speed * deltaTime; // Update the angle based on elapsed time and speed
+
+        ref.current ? (ref.current.style.opacity = '1') : null;
+        if (pausedPlanet === color) {
+          const normalized_angle = (planet.angle + 2 * Math.PI) % (2 * Math.PI);
+          if (normalized_angle > -0.3 && normalized_angle < 0.3) {
+            planet.angle = speed;
+            return;
+          }
+          planet.angle += 0.0006 * (radius / 2);
+        }
+
+        const x = centerX + radius * Math.cos(planet.angle) - offsetX;
+        const y = centerY + radius * Math.sin(planet.angle) - offsetY;
+
+        const orbitingElement = ref.current;
+        if (orbitingElement) {
+          orbitingElement.setAttribute('transform', `translate(${x}, ${y})`);
+        }
+      });
+
+      requestID.current = requestAnimationFrame(animateOrbits);
+    }
+
+    requestID.current = requestAnimationFrame(animateOrbits);
+
+    return () => {
+      if (lastFrameTime.current) {
+        cancelAnimationFrame(lastFrameTime.current);
+      }
+      if (requestID.current) {
+        cancelAnimationFrame(requestID.current);
+      }
+    };
+  }, [pausedPlanet, orbitingElements]);
+
+  // Hide on mobile
+  if (!isDesktop) return;
+
   return (
     // prettier-ignore
     <div className="orbiting-planets-container">
-
-    <svg className="orbiting-planets" width="843" height="797" viewBox="0 0 843 797" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg ref={planetRef} className="orbiting-planets" width="875" height="797" viewBox="0 0 875 797" fill="none" xmlns="http://www.w3.org/2000/svg">
       <circle id="orbit4" cx="398.5" cy="398.5" r="397" transform="matrix(-1 0 0 1 797 0)" stroke="#F1F1F1" strokeWidth="3" strokeDasharray="7.43 7.43"></circle>
-      <circle id="orbit2" cx="228" cy="228" r="226.5" transform="matrix(-1 0 0 1 626 170.254)" stroke="#F1F1F1" strokeWidth="3" strokeDasharray="7.43 7.43"></circle>
       <circle id="orbit3" cx="285" cy="285" r="283.5" transform="matrix(-1 0 0 1 683.992 113.004)" stroke="#F1F1F1" strokeWidth="3" strokeDasharray="7.43 7.43"></circle>
+      <circle id="orbit2" cx="228" cy="228" r="226.5" transform="matrix(-1 0 0 1 626 170.254)" stroke="#F1F1F1" strokeWidth="3" strokeDasharray="7.43 7.43"></circle>
       <circle id="orbit1" cx="93" cy="93" r="91.5" transform="matrix(-1 0 0 1 491.434 304.82)" stroke="#F1F1F1" strokeWidth="3" strokeDasharray="7.43 7.43"></circle>
-      <g id="planet1-yellow">
+      <g id="planet1-yellow" className='planet' ref={yellowPlanetRef}>
         <g id="Ellipse 299" filter="url(#filter0_f_1092_1256)">
           <circle cx="462.755" cy="346.757" r="32.7554" fill="#F57F17"></circle>
         </g>
@@ -19,27 +172,14 @@ export default function OrbitingPlanets() {
             <circle id="Ellipse 298" cx="463.001" cy="347" r="33" fill="#D9D9D9"></circle>
           </mask>
           <g mask="url(#mask0_1092_1256)">
-            <g id="Group 6972">
-              <path id="2024 (Stroke)" d="M434.296 380.01L445.516 314.01H448.816L437.596 380.01H434.296Z" fill="#8C4A4A"></path>
-              <path id="2024 (Stroke)_2" d="M487.091 380.01L498.311 314.01H501.611L490.391 380.01H487.091Z" fill="#8C4A4A"></path>
-              <path id="2024 (Stroke)_3" d="M477.188 380.01L488.408 314.01H491.708L480.488 380.01H477.188Z" fill="#B66161"></path>
-              <path id="2024 (Stroke)_4" d="M430.99 380.01L442.21 314.01H445.51L434.29 380.01H430.99Z" fill="#DA8F8F"></path>
-              <path id="2024 (Stroke)_5" d="M424.393 380.01L435.613 314.01H442.213L430.993 380.01H424.393Z" fill="#B66161"></path>
-              <path id="2024 (Stroke)_6" d="M480.49 380.01L491.71 314.01H498.31L487.09 380.01H480.49Z" fill="#DA8F8F"></path>
-              <path id="2024 (Stroke)_7" d="M437.591 380.01L448.811 314.01H458.711L447.491 380.01H437.591Z" fill="#B66161"></path>
-              <path id="2024 (Stroke)_8" d="M411.188 380.01L422.408 314.01H435.608L424.388 380.01H411.188Z" fill="#DA8F8F"></path>
-              <path id="2024 (Stroke)_9" d="M463.986 380.01L475.206 314.01H488.406L477.186 380.01H463.986Z" fill="#8C4A4A"></path>
-              <path id="2024 (Stroke)_10" d="M447.49 380.01L458.71 314.01H475.21L463.99 380.01H447.49Z" fill="#DA8F8F"></path>
-              <path id="2024 (Stroke)_11" d="M490.393 380.01L501.613 314.01H518.113L506.893 380.01H490.393Z" fill="#B66161"></path>
-              <g id="Group 6976">
-                <path id="2024 (Stroke)_12" d="M471.289 404.299L497.14 252.234H504.743L478.892 404.299H471.289Z" fill="#FDD835"></path>
-                <path id="2024 (Stroke)_13" d="M448.48 404.299L474.331 252.234H481.934L456.083 404.299H448.48Z" fill="#FBC02D"></path>
-                <path id="2024 (Stroke)_14" d="M456.082 404.299L481.933 252.234H497.139L471.288 404.299H456.082Z" fill="#F57F17"></path>
-                <path id="2024 (Stroke)_15" d="M418.066 404.299L443.917 252.234H474.33L448.479 404.299H418.066Z" fill="#FDD835"></path>
-                <path id="2024 (Stroke)_16" d="M380.05 404.299L405.901 252.234H443.917L418.066 404.299H380.05Z" fill="#F57F17"></path>
-                <path id="2024 (Stroke)_17" d="M478.891 404.299L504.742 252.234H542.758L516.907 404.299H478.891Z" fill="#FBC02D"></path>
-              </g>
-            </g>
+            {/* Spin Animation */}
+            {/* image x = mask x - 17 (magic number) */}
+            {/* image y = mask y */}
+            <image href="./images/yellow-spin.svg" x="413" y="314">
+            {/* 398.5 is midpoint */}
+            {/* animate to = starting image x - midpoint + mask radius */}
+            <animate attributeName="x" to="47.5" dur={yellowSpinDuration} repeatCount="indefinite" />
+            </image>
           </g>
         </g>
         <g id="Subtract">
@@ -52,7 +192,7 @@ export default function OrbitingPlanets() {
         </g>
         <path id="Star 222" d="M490.576 326.135L487.866 321.71C486.971 320.249 484.789 320.448 484.173 322.047L482.31 326.89C482.183 327.218 481.904 327.463 481.562 327.545L476.517 328.755C474.85 329.155 474.365 331.292 475.696 332.371L479.726 335.64C479.999 335.861 480.146 336.203 480.118 336.553L479.71 341.726C479.575 343.434 481.458 344.556 482.896 343.623L487.25 340.801C487.544 340.61 487.915 340.576 488.239 340.711L493.032 342.697C494.616 343.353 496.264 341.909 495.822 340.254L494.483 335.241C494.392 334.901 494.475 334.539 494.703 334.272L498.073 330.327C499.187 329.024 498.323 327.01 496.611 326.919L491.43 326.643C491.079 326.624 490.76 326.434 490.576 326.135Z" fill="#FFFDE7" stroke="#FFFDE7"></path>
       </g>
-      <g id="planet4-blue">
+      <g id="planet4-blue" className='planet' ref={bluePlanetRef}>
         <g id="Ellipse 299_2" filter="url(#filter1_f_1092_1256)">
           <circle cx="759.755" cy="588.755" r="32.7554" fill="#42A5F5"></circle>
         </g>
@@ -61,33 +201,19 @@ export default function OrbitingPlanets() {
             <circle id="Ellipse 298_2" cx="760" cy="589" r="33" fill="#D9D9D9"></circle>
           </mask>
           <g mask="url(#mask1_1092_1256)">
-            <g id="Group 6972_2">
-              <path id="2024 (Stroke)_18" d="M731.294 622L742.514 556H745.814L734.594 622H731.294Z" fill="#8C4A4A"></path>
-              <path id="2024 (Stroke)_19" d="M784.09 622L795.31 556H798.61L787.39 622H784.09Z" fill="#8C4A4A"></path>
-              <path id="2024 (Stroke)_20" d="M774.189 622L785.409 556H788.709L777.489 622H774.189Z" fill="#B66161"></path>
-              <path id="2024 (Stroke)_21" d="M727.987 622L739.207 556H742.507L731.287 622H727.987Z" fill="#DA8F8F"></path>
-              <path id="2024 (Stroke)_22" d="M721.39 622L732.61 556H739.21L727.99 622H721.39Z" fill="#B66161"></path>
-              <path id="2024 (Stroke)_23" d="M777.489 622L788.709 556H795.309L784.089 622H777.489Z" fill="#DA8F8F"></path>
-              <path id="2024 (Stroke)_24" d="M734.591 622L745.811 556H755.711L744.491 622H734.591Z" fill="#B66161"></path>
-              <path id="2024 (Stroke)_25" d="M708.188 622L719.408 556H732.608L721.388 622H708.188Z" fill="#DA8F8F"></path>
-              <path id="2024 (Stroke)_26" d="M760.987 622L772.207 556H785.407L774.187 622H760.987Z" fill="#8C4A4A"></path>
-              <path id="2024 (Stroke)_27" d="M744.489 622L755.709 556H772.209L760.989 622H744.489Z" fill="#DA8F8F"></path>
-              <path id="2024 (Stroke)_28" d="M787.391 622L798.611 556H815.111L803.891 622H787.391Z" fill="#B66161"></path>
-              <g id="Group 6965">
-                <path id="2024 (Stroke)_29" d="M757.645 630.132L779.295 502.777H785.663L764.013 630.132H757.645Z" fill="#42A5F5"></path>
-                <path id="2024 (Stroke)_30" d="M738.541 630.132L760.191 502.777H766.559L744.908 630.132H738.541Z" fill="#63D4F4"></path>
-                <path id="2024 (Stroke)_31" d="M744.907 630.132L766.557 502.777H779.293L757.643 630.132H744.907Z" fill="#A7FFEB"></path>
-                <path id="2024 (Stroke)_32" d="M713.069 630.132L734.719 502.777H760.19L738.54 630.132H713.069Z" fill="#42A5F5"></path>
-                <path id="2024 (Stroke)_33" d="M681.23 630.132L702.88 502.777H734.719L713.069 630.132H681.23Z" fill="#A7FFEB"></path>
-                <path id="2024 (Stroke)_34" d="M764.012 630.132L785.662 502.777H817.501L795.85 630.132H764.012Z" fill="#63D4F4"></path>
-              </g>
-            </g>
+            {/* Spin Animation */}
+            {/* image x = mask x - 17 (magic number) */}
+            <image href="./images/blue-spin.svg" x="710" y="556">
+            {/* 398.5 is midpoint */}
+            {/* animate to = starting image x - midpoint + mask radius */}
+            <animate attributeName="x" to="344.5" dur={blueSpinDuration} repeatCount="indefinite" />
+            </image>
           </g>
         </g>
         <circle id="Ellipse 302" cx="732.5" cy="569.5" r="12.5" fill="#A8E8FA"></circle>
         <circle id="Ellipse 301" cx="744.5" cy="549.5" r="7.5" fill="#A8E8FA"></circle>
       </g>
-      <g id="planet2-purple">
+      <g id="planet2-purple" className='planet' ref={purplePlanetRef}>
         <g id="Ellipse 299_3" filter="url(#filter2_f_1092_1256)">
           <circle cx="604.755" cy="187.574" r="32.7554" fill="#7B1FA2"></circle>
         </g>
@@ -96,27 +222,13 @@ export default function OrbitingPlanets() {
             <circle id="Ellipse 298_3" cx="605" cy="187.818" r="33" fill="#D9D9D9"></circle>
           </mask>
           <g mask="url(#mask2_1092_1256)">
-            <g id="Group 6972_3">
-              <path id="2024 (Stroke)_35" d="M576.294 220.818L587.514 154.818H590.814L579.594 220.818H576.294Z" fill="#8C4A4A"></path>
-              <path id="2024 (Stroke)_36" d="M629.088 220.818L640.308 154.818H643.608L632.388 220.818H629.088Z" fill="#8C4A4A"></path>
-              <path id="2024 (Stroke)_37" d="M619.188 220.818L630.408 154.818H633.708L622.488 220.818H619.188Z" fill="#B66161"></path>
-              <path id="2024 (Stroke)_38" d="M572.989 220.818L584.209 154.818H587.509L576.289 220.818H572.989Z" fill="#DA8F8F"></path>
-              <path id="2024 (Stroke)_39" d="M566.39 220.818L577.61 154.818H584.21L572.99 220.818H566.39Z" fill="#B66161"></path>
-              <path id="2024 (Stroke)_40" d="M622.489 220.818L633.709 154.818H640.309L629.089 220.818H622.489Z" fill="#DA8F8F"></path>
-              <path id="2024 (Stroke)_41" d="M579.592 220.818L590.812 154.818H600.712L589.492 220.818H579.592Z" fill="#B66161"></path>
-              <path id="2024 (Stroke)_42" d="M553.188 220.818L564.407 154.818H577.607L566.387 220.818H553.188Z" fill="#DA8F8F"></path>
-              <path id="2024 (Stroke)_43" d="M605.989 220.818L617.209 154.818H630.409L619.189 220.818H605.989Z" fill="#8C4A4A"></path>
-              <path id="2024 (Stroke)_44" d="M589.489 220.818L600.709 154.818H617.209L605.989 220.818H589.489Z" fill="#DA8F8F"></path>
-              <path id="2024 (Stroke)_45" d="M632.39 220.818L643.61 154.818H660.11L648.89 220.818H632.39Z" fill="#B66161"></path>
-              <g id="Group 6967">
-                <path id="2024 (Stroke)_46" d="M620.157 242.765L645.934 91.1348H653.516L627.739 242.765H620.157Z" fill="#CE93D8"></path>
-                <path id="2024 (Stroke)_47" d="M597.408 242.765L623.185 91.1348H630.767L604.99 242.765H597.408Z" fill="#7B1FA2"></path>
-                <path id="2024 (Stroke)_48" d="M604.988 242.765L630.765 91.1348H645.928L620.151 242.765H604.988Z" fill="#AB47BC"></path>
-                <path id="2024 (Stroke)_49" d="M567.083 242.765L592.86 91.1348H623.186L597.408 242.765H567.083Z" fill="#CE93D8"></path>
-                <path id="2024 (Stroke)_50" d="M529.172 242.765L554.949 91.1348H592.857L567.08 242.765H529.172Z" fill="#AB47BC"></path>
-                <path id="2024 (Stroke)_51" d="M627.737 242.765L653.514 91.1348H691.422L665.645 242.765H627.737Z" fill="#7B1FA2"></path>
-              </g>
-            </g>
+            {/* Spin Animation */}
+            {/* image x = mask x - 17 (magic number) */}
+            <image href="./images/purple-spin.svg" x="555" y="154">
+            {/* 398.5 is midpoint */}
+            {/* animate to = starting image x - midpoint + mask radius */}
+            <animate attributeName="x" to="189.5" dur={purpleSpinDuration} repeatCount="indefinite" />
+            </image>
           </g>
         </g>
         <g id="Subtract_2">
@@ -128,7 +240,7 @@ export default function OrbitingPlanets() {
           <path d="M583.913 190.608L582.926 190.765L582.926 190.765L583.913 190.608ZM623.673 217.202L624.634 217.474L622.744 216.836L623.673 217.202ZM614.071 227.106L614.225 228.094L614.225 228.094L614.071 227.106ZM589.807 189.728L590.795 189.571L590.795 189.571L589.807 189.728ZM613.993 153.445L613.211 154.07L614.832 152.898L613.993 153.445ZM584.901 190.45C582.981 178.122 583.52 166.646 585.903 158.074C588.312 149.406 592.473 144.104 597.49 143.306L597.182 141.33C590.913 142.328 586.426 148.734 583.977 157.544C581.502 166.449 580.973 178.22 582.926 190.765L584.901 190.45ZM611.208 231.404C606.191 232.203 600.62 228.45 595.693 220.95C590.821 213.532 586.821 202.779 584.901 190.45L582.926 190.765C584.879 203.309 588.96 214.347 594.022 222.053C599.029 229.675 605.246 234.378 611.516 233.38L611.208 231.404ZM622.712 216.931C620.289 225.428 616.166 230.615 611.208 231.404L611.516 233.38C617.713 232.394 622.169 226.12 624.634 217.474L622.712 216.931ZM622.744 216.836C620.567 222.33 617.474 225.552 613.918 226.118L614.225 228.094C618.84 227.36 622.334 223.294 624.602 217.569L622.744 216.836ZM613.918 226.118C611.752 226.463 609.463 225.825 607.14 224.232C604.811 222.636 602.498 220.109 600.348 216.798C596.05 210.177 592.509 200.578 590.795 189.571L588.82 189.886C590.567 201.104 594.187 210.985 598.671 217.892C600.912 221.344 603.395 224.094 606.007 225.885C608.624 227.679 611.421 228.54 614.225 228.094L613.918 226.118ZM590.795 189.571C589.081 178.565 589.534 168.33 591.612 160.694C592.652 156.875 594.085 153.752 595.816 151.509C597.543 149.272 599.527 147.955 601.693 147.61L601.385 145.634C598.581 146.08 596.181 147.768 594.236 150.289C592.294 152.804 590.767 156.192 589.684 160.174C587.516 168.14 587.073 178.667 588.82 189.886L590.795 189.571ZM601.693 147.61C605.346 147.028 609.386 149.267 613.211 154.07L614.776 152.819C610.804 147.833 606.123 144.88 601.385 145.634L601.693 147.61ZM597.49 143.306C602.559 142.499 608.193 146.34 613.155 153.991L614.832 152.898C609.795 145.13 603.515 140.322 597.182 141.33L597.49 143.306Z" fill="#7B1FA2" mask="url(#path-67-outside-2_1092_1256)"></path>
         </g>
       </g>
-      <g id="planet2-red">
+      <g id="planet2-red" className='planet' ref={redPlanetRef}>
         <g id="Mask group_4">
           <g id="Ellipse 298_4" filter="url(#filter3_f_1092_1256)">
             <circle cx="500.753" cy="588.755" r="32.7554" fill="#AD1457"></circle>
@@ -137,27 +249,14 @@ export default function OrbitingPlanets() {
             <circle id="Ellipse 299_4" cx="500.753" cy="588.755" r="32.7554" fill="#D9D9D9"></circle>
           </mask>
           <g mask="url(#mask3_1092_1256)">
-            <g id="Group 6972_4">
-              <path id="2024 (Stroke)_52" d="M472.254 621.512L483.391 556.001H486.667L475.53 621.512H472.254Z" fill="#8C4A4A"></path>
-              <path id="2024 (Stroke)_53" d="M524.66 621.512L535.797 556.001H539.073L527.936 621.512H524.66Z" fill="#8C4A4A"></path>
-              <path id="2024 (Stroke)_54" d="M514.829 621.512L525.966 556.001H529.241L518.105 621.512H514.829Z" fill="#B66161"></path>
-              <path id="2024 (Stroke)_55" d="M468.974 621.512L480.11 556.001H483.386L472.249 621.512H468.974Z" fill="#DA8F8F"></path>
-              <path id="2024 (Stroke)_56" d="M462.43 621.512L473.567 556.001H480.118L468.981 621.512H462.43Z" fill="#B66161"></path>
-              <path id="2024 (Stroke)_57" d="M518.11 621.512L529.247 556.001H535.798L524.661 621.512H518.11Z" fill="#DA8F8F"></path>
-              <path id="2024 (Stroke)_58" d="M475.529 621.512L486.666 556.001H496.493L485.356 621.512H475.529Z" fill="#B66161"></path>
-              <path id="2024 (Stroke)_59" d="M449.324 621.512L460.461 556.001H473.563L462.426 621.512H449.324Z" fill="#DA8F8F"></path>
-              <path id="2024 (Stroke)_60" d="M501.729 621.512L512.866 556.001H525.968L514.832 621.512H501.729Z" fill="#8C4A4A"></path>
-              <path id="2024 (Stroke)_61" d="M485.349 621.512L496.485 556.001H512.863L501.726 621.512H485.349Z" fill="#DA8F8F"></path>
-              <path id="2024 (Stroke)_62" d="M527.935 621.512L539.072 556.001H555.45L544.313 621.512H527.935Z" fill="#B66161"></path>
-              <g id="Group 6966">
-                <path id="2024 (Stroke)_63" d="M500.25 634.329L524.471 491.853H531.595L507.374 634.329H500.25Z" fill="#D81B60"></path>
-                <path id="2024 (Stroke)_64" d="M478.882 634.329L503.103 491.853H510.227L486.006 634.329H478.882Z" fill="#F06292"></path>
-                <path id="2024 (Stroke)_65" d="M486.003 634.329L510.224 491.853H524.472L500.251 634.329H486.003Z" fill="#AD1457"></path>
-                <path id="2024 (Stroke)_66" d="M450.388 634.329L474.609 491.853H503.104L478.883 634.329H450.388Z" fill="#D81B60"></path>
-                <path id="2024 (Stroke)_67" d="M414.768 634.329L438.989 491.853H474.608L450.387 634.329H414.768Z" fill="#AD1457"></path>
-                <path id="2024 (Stroke)_68" d="M507.376 634.329L531.597 491.853H567.217L542.996 634.329H507.376Z" fill="#F06292"></path>
-              </g>
-            </g>
+            {/* Spin Animation */}
+            {/* image x = mask x - 17 (magic number) */}
+            {/* image y = mask y */}
+            <image href="./images/red-spin.svg" x="450" y="556">
+            {/* 398.5 is midpoint *
+            {/* animate to = starting image x - midpoint + mask radius */}
+            <animate attributeName="x" to="84.5" dur={redSpinDuration} repeatCount="indefinite" />
+            </image>
           </g>
         </g>
         <g id="Subtract_3">

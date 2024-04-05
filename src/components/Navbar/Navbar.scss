@@ -2,15 +2,48 @@ nav {
   position: fixed;
   display: grid;
   place-items: center;
-  height: 100dvh;
+  height: 100vh;
   width: 100%;
   right: $navbar-margin;
   pointer-events: none;
+  z-index: 1;
 
   .desktop-nav {
+    list-style-type: none;
+    padding-left: 0;
+    display: block;
     position: absolute;
     right: 0;
-    pointer-events: auto;
+    li {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    li div {
+      height: 44px;
+      width: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      svg {
+        transition: all 0.3s ease;
+
+        &:not(.divider):hover {
+          cursor: $cursor-pointer;
+        }
+      }
+      .active {
+        transform: scale(1.2);
+      }
+    }
+
+    li {
+      .divider {
+        padding: 4px 0 4px 0;
+      }
+    }
   }
 
   .mobile-nav {
@@ -27,25 +60,19 @@ nav {
     display: none;
     pointer-events: auto;
   }
+}
 
-  @media (max-width: $tablet-breakpoint) {
-    left: 0;
+@media (max-width: $tablet-breakpoint) {
+  nav {
     right: 0;
-
-    .desktop-nav {
-      right: auto;
-      transform-origin: center bottom;
-      transform: rotate(-90deg) translateY(50%);
-      position: absolute;
-      bottom: 3rem;
-    }
-  }
-
-  @media (max-width: $mobile-breakpoint) {
     position: absolute;
     display: flex;
     align-items: start;
     justify-content: space-between;
+
+    @media (max-width: $mobile-breakpoint) {
+      position: fixed;
+    }
 
     .desktop-nav {
       display: none;
@@ -54,8 +81,8 @@ nav {
     .mobile-nav {
       display: block;
       top: 0;
-      margin-top: 2rem;
-      margin-inline: 1rem;
+
+      padding: $mobile-padding;
     }
 
     .dco-logo {

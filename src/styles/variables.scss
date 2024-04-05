@@ -5,12 +5,25 @@ $primary-white: #f1f1f1;
 
 //Breakpoints
 $tablet-breakpoint: 1200px;
-$mobile-breakpoint: 600px;
+$mobile-breakpoint: 1200px;
 
-//Fonts
+// Font Sizes
+$p-size: clamp(16px, calc(10px + 0.7vw), 20px);
+$h3-size: clamp(22px, calc(12px + 0.8vw), 32px);
+$h2-size: 40px;
+
+//Spacing and Sizing
 $header-font: 'Ridge Obligque Regular';
 $subheader-font: 'NeuePlak Bold';
 $p-font: 'NB International Regular';
+$mono-font: 'NB International Mono', monospace;
+
+//Cursors
+$cursor: url('/images/cursor.svg'), auto;
+// Svg width is 35, cursor hotspot is located in the middle so we divide by 2
+$cursor-pointer:
+  url('/images/cursor-pointer.svg') 17.5 0,
+  pointer;
 
 //Cursors
 $cursor: url('/images/cursor.svg'), auto;
@@ -20,11 +33,19 @@ $cursor-pointer:
   pointer;
 
 //Spacing and Sizing
+$mobile-padding: max(30px, 6vw) max(24px, 8vw);
+
 $navbar-margin: clamp(2rem, calc(0.5rem + 5vw), 8rem);
 $navbar-width: 45px;
 
 $planet-width: calc(50% + 20vw);
 $planet-radius: $planet-width / 2;
+
+//Planet Rotation Timings
+$yellow-full-rotation-duration: 12.5s;
+$red-full-rotation-duration: 15s;
+$purple-full-rotation-duration: 17.5s;
+$blue-full-rotation-duration: 20s;
 
 //SASS variables can't update with media queries, so we have to use CSS variables
 :root {
@@ -53,6 +74,11 @@ $content-offset: calc(
 @font-face {
   font-family: 'NB International Regular';
   src: url('/fonts/NB-International-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'NB International Mono';
+  src: url('/fonts/NB-International-Mono.ttf');
 }
 
 @font-face {

@@ -23,6 +23,14 @@ h1 {
   font-family: $header-font;
 }
 
+h2 {
+  font-size: $h2-size;
+}
+
+h3 {
+  font-size: $h3-size;
+}
+
 h2,
 h3,
 h4,
@@ -33,6 +41,7 @@ h6 {
 
 p {
   font-family: $p-font;
+  font-size: $p-size;
 }
 
 *,
@@ -72,4 +81,8 @@ a {
   &:hover {
     cursor: $cursor-pointer;
   }
+}
+
+::-webkit-scrollbar {
+  display: none;
 }

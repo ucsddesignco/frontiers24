@@ -1,0 +1,50 @@
+.logo-and-register {
+  @media (max-width: $mobile-breakpoint) {
+    display: none;
+  }
+
+  img {
+    position: fixed;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .register-button {
+    position: fixed;
+    opacity: 0;
+    z-index: 5;
+    .button {
+      background: $primary-orange;
+      display: inline-block;
+      font-size: 1.5em;
+      padding: 0.5em 1.2em;
+      text-decoration: none;
+      color: $primary-white;
+      letter-spacing: 2.4px;
+      transition:
+        background-color 0.3s,
+        color 0.3s;
+
+      &:hover {
+        background-color: $primary-white;
+        color: $primary-orange;
+      }
+    }
+
+    .parallelogram {
+      transform: skew(-15deg);
+    }
+
+    .skew-fix {
+      display: inline-block;
+      transform: skew(15deg);
+    }
+
+    @media screen and (max-width: $mobile-breakpoint) {
+      display: block;
+      margin: 0 auto 2rem;
+      width: 100%;
+    }
+  }
+}

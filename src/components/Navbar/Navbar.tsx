@@ -1,17 +1,81 @@
-import { useState } from 'react';
+import { MutableRefObject, useEffect, useRef, useState } from 'react';
 import Hamburger from '../Hamburger/Hamburger';
 import './Navbar.scss';
 import HamrburgerPlanet from '../Hamburger/HamrburgerPlanet';
+import gsap from 'gsap';
+import useIsDesktop from '../../util/useIsDesktop';
 
-export default function Navbar() {
+type NavbarProps = {
+  scrollRefList: MutableRefObject<HTMLElement | null>[];
+  scrollContainerRef: MutableRefObject<HTMLElement | null>;
+  setPausedPlanet: (pausedPlanet: string) => void;
+  navRef?: MutableRefObject<HTMLDivElement | null>;
+  mobileScrollRefList?: MutableRefObject<HTMLElement | null>[];
+};
+
+type Pages = 'Home' | 'FAQ' | 'Timeline' | 'Judges';
+
+export default function Navbar({
+  scrollRefList,
+  scrollContainerRef,
+  setPausedPlanet,
+  navRef,
+  mobileScrollRefList
+}: NavbarProps) {
   const [isHamburgerOpen, setIsHamburgerOpen] = useState(false);
+  const pagesList = ['Home', 'FAQ', 'Timeline', 'Judges'];
+  const planetColorsPages = {
+    Home: '',
+    FAQ: 'blue',
+    Timeline: 'purple',
+    Judges: 'red'
+  };
+  const isDesktop = useIsDesktop();
+  const [pageSelected, setPageSelected] = useState('Home');
+  const currentlyNavigatingRef = useRef(false);
+  const lastScrollTopRef = useRef(0);
 
-  const links = [
-    { onClick: () => {}, text: 'Home' },
-    { onClick: () => {}, text: 'FAQ' },
-    { onClick: () => {}, text: 'Timeline' },
-    { onClick: () => {}, text: 'Judges' }
-  ];
+  const setCurrentlyNavigating = (value: boolean) => {
+    currentlyNavigatingRef.current = value;
+  };
+
+  function scrollToSection(scrollOffset: number) {
+    if (isDesktop) {
+      gsap.to(scrollContainerRef.current, {
+        scrollTo: { y: scrollOffset },
+        ease: 'power2',
+        onStart: function () {
+          setCurrentlyNavigating(true);
+        },
+        onComplete: function () {
+          setCurrentlyNavigating(false);
+        }
+      });
+    } else {
+      //Mobile Scroll
+      toggleHamburger();
+      scrollContainerRef.current?.scrollTo({
+        top: mobileScrollRefList
+          ? mobileScrollRefList[scrollOffset].current?.offsetTop || 0
+          : 0
+      });
+    }
+  }
+
+  const links = pagesList.map((pageName, index) => {
+    return {
+      onClick: () => {
+        if (isDesktop) {
+          scrollToSection(scrollRefList[index].current?.offsetTop || 0);
+          setPageSelected(pageName);
+          setPausedPlanet(planetColorsPages[pageName as Pages]);
+        } else {
+          scrollToSection(index);
+        }
+      },
+      name: pageName
+    };
+  });
 
   const toggleHamburger = () => {
     setIsHamburgerOpen(!isHamburgerOpen);
@@ -33,27 +97,97 @@ export default function Navbar() {
     }
   };
 
+  useEffect(() => {
+    if (scrollContainerRef.current && isDesktop) {
+      const pageHeight = window.innerHeight;
+      scrollContainerRef.current.addEventListener('scroll', () => {
+        if (currentlyNavigatingRef.current) return;
+        const scrollPosition = scrollContainerRef.current!.scrollTop || 0;
+        if (scrollPosition > lastScrollTopRef.current) {
+          // Scrolling Down
+          if (
+            scrollPosition >
+            scrollRefList[2].current!.offsetTop + pageHeight / 2
+          ) {
+            setPageSelected('Judges');
+            setPausedPlanet('red');
+          } else if (
+            scrollPosition >
+            scrollRefList[1].current!.offsetTop + pageHeight / 2
+          ) {
+            setPageSelected('Timeline');
+            setPausedPlanet('purple');
+          } else if (scrollPosition > pageHeight / 2) {
+            setPageSelected('FAQ');
+            setPausedPlanet('blue');
+          }
+        } else {
+          // Scrolling Up
+          if (scrollPosition < pageHeight / 2) {
+            setPageSelected('Home');
+            setPausedPlanet('');
+          } else if (
+            scrollPosition <
+            scrollRefList[2].current!.offsetTop - pageHeight / 2
+          ) {
+            setPageSelected('FAQ');
+            setPausedPlanet('blue');
+          } else if (
+            scrollPosition <
+            scrollRefList[3].current!.offsetTop - pageHeight / 2
+          ) {
+            setPageSelected('Timeline');
+            setPausedPlanet('purple');
+          }
+        }
+        lastScrollTopRef.current = scrollPosition <= 0 ? 0 : scrollPosition;
+      });
+    }
+  }, [scrollContainerRef, scrollRefList, setPausedPlanet, isDesktop]);
+
   return (
     // prettier-ignore
-    <nav role='navigation'>
+    <nav ref={navRef} role='navigation'>
       {/* Desktop Nav */}
-      <svg className="desktop-nav" width="44" height="284" viewBox="0 0 44 284" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <g clipPath="url(#clip0_853_10144)">
-        <rect x="44" width="44" height="44" rx="22" transform="rotate(90 44 0)" fill="#F1F1F1"/>
-        <rect x="38.5" y="5.5" width="33" height="33" rx="16.5" transform="rotate(90 38.5 5.5)" fill="#F1F1F1" stroke="#090921" strokeWidth="3"/>
-        <path d="M22 54L22 84" stroke="#F1F1F1" strokeWidth="3" strokeDasharray="10 10"/>
-        <rect x="35.5" y="95.5" width="27" height="27" rx="13.5" transform="rotate(90 35.5 95.5)" stroke="#F1F1F1" strokeWidth="3"/>
-        <path d="M22 134L22 164" stroke="#F1F1F1" strokeWidth="3" strokeDasharray="10 10"/>
-        <rect x="35.5" y="175.5" width="27" height="27" rx="13.5" transform="rotate(90 35.5 175.5)" stroke="#F1F1F1" strokeWidth="3"/>
-        <path d="M22 214L22 244" stroke="#F1F1F1" strokeWidth="3" strokeDasharray="10 10"/>
-        <rect x="35.5" y="255.5" width="27" height="27" rx="13.5" transform="rotate(90 35.5 255.5)" stroke="#F1F1F1" strokeWidth="3"/>
-        </g>
-        <defs>
-        <clipPath id="clip0_853_10144">
-        <rect width="284" height="44" fill="white" transform="matrix(0 1 -1 0 44 0)"/>
-        </clipPath>
-        </defs>
-      </svg>
+      <ul className='desktop-nav'>
+        {links.slice(0, -1).map(link => (
+          <li key={link.name} className={link.name === pageSelected ? 'active' : ''}>
+             <div className='outerCont' onClick={link.onClick}>
+             {link.name === pageSelected ? (
+              <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg" className={link.name === pageSelected ? 'active' : ''}>
+                <rect x="30" width="30" height="30" rx="15" transform="rotate(90 30 0)" fill="#F1F1F1"/>
+                <rect x="26.7271" y="3.27295" width="23.4545" height="23.4545" rx="11.7273" transform="rotate(90 26.7271 3.27295)" fill="#F1F1F1" stroke="#090921" strokeWidth="3"/>
+              </svg>
+             ) : (
+              <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="28.5" y="1.5" width="27" height="27" rx="13.5" transform="rotate(90 28.5 1.5)" stroke="#F1F1F1" strokeWidth="3"/>
+              </svg>
+            )}
+            </div>
+            <svg width="4" height="30" viewBox="0 0 4 30" fill="none" xmlns="http://www.w3.org/2000/svg" className='divider'>
+              <path d="M2 0L2 30" stroke="#F1F1F1" strokeWidth="3" strokeDasharray="10 10"/>
+            </svg>
+          </li>
+        ))}
+        {links.slice(-1).map(link => (
+          <li key={link.name} className={link.name === pageSelected ? 'active' : ''}>
+            <div className='outerCont' onClick={link.onClick}>
+             {link.name === pageSelected ? (
+              <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg" className={link.name === pageSelected ? 'active' : ''}>
+                <rect x="30" width="30" height="30" rx="15" transform="rotate(90 30 0)" fill="#F1F1F1"/>
+                <rect x="26.7271" y="3.27295" width="23.4545" height="23.4545" rx="11.7273" transform="rotate(90 26.7271 3.27295)" fill="#F1F1F1" stroke="#090921" strokeWidth="3"/>
+              </svg>
+             ) : (
+              <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg" >
+                <rect x="28.5" y="1.5" width="27" height="27" rx="13.5" transform="rotate(90 28.5 1.5)" stroke="#F1F1F1" strokeWidth="3"/>
+              </svg>
+            )}
+            </div>
+          </li>
+        ))}
+       
+      </ul>
+      
 
       {/* Mobile Nav */}
       <Hamburger isHamburgerOpen={isHamburgerOpen} toggleHamburger={toggleHamburger}/>
@@ -72,8 +206,8 @@ export default function Navbar() {
         >
           <HamrburgerPlanet />
           {links.map(link => (
-            <li key={link.text}>
-              <button onClick={link.onClick}>{link.text}</button>
+            <li key={link.name}>
+              <button onClick={link.onClick}>{link.name}</button>
             </li>
           ))}
         </ul>

@@ -1,4 +1,152 @@
-.home {
-  display: grid;
-  place-items: center;
+$heading-color: #ff671e;
+$text-color: white;
+
+//.one is for extra specificity to override App.scss styling
+.one.home {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  @media screen and (max-width: $mobile-breakpoint) {
+    position: relative;
+    padding-bottom: 20rem;
+    justify-content: flex-start;
+    margin-top: 5rem;
+
+    .home-info p {
+      display: none;
+    }
+  }
+
+  .home-info {
+    margin-bottom: 4rem;
+    max-width: 70ch;
+
+    @media (max-width: $mobile-breakpoint) {
+      max-width: 100%;
+      width: 100%;
+      margin-bottom: 2rem;
+      max-height: 100dvh;
+    }
+    .desktop-view {
+      display: grid;
+      gap: 1rem;
+
+      @media screen and (max-width: $mobile-breakpoint) {
+        display: none;
+      }
+    }
+
+    .mobile-h3-container {
+      display: none;
+
+      @media screen and (max-width: $mobile-breakpoint) {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 80%;
+      }
+
+      @media screen and (max-width: 550px) {
+        width: 100%;
+        flex-direction: column;
+        gap: 10px;
+
+        h3 {
+          font-size: 16px;
+        }
+      }
+    }
+  }
+
+  /* LOGO STYLING */
+
+  .logo-container {
+    @media screen and (max-width: $tablet-breakpoint) {
+      width: 80%;
+      position: relative;
+    }
+
+    @media (max-width: 550px) {
+      width: 100%;
+    }
+
+    .fake-logo {
+      opacity: 0;
+      @media screen and (max-width: $mobile-breakpoint) {
+        display: none;
+      }
+    }
+
+    .mobile-logo {
+      display: none;
+
+      @media screen and (max-width: $mobile-breakpoint) {
+        display: block;
+        width: 100%;
+        position: relative;
+      }
+    }
+  }
+
+  /* REGISTER BUTTON */
+  .register-button {
+    opacity: 0;
+    .button {
+      background: $primary-orange;
+      display: inline-block;
+      font-size: 1.5em;
+      padding: 0.5em 1.2em;
+      text-decoration: none;
+      color: $primary-white;
+      letter-spacing: 2.4px;
+      transition:
+        background-color 0.3s,
+        color 0.3s;
+
+      &:hover {
+        background-color: $primary-white;
+        color: $primary-orange;
+      }
+    }
+
+    .parallelogram {
+      transform: skew(-15deg);
+    }
+
+    .skew-fix {
+      display: inline-block;
+      transform: skew(15deg);
+    }
+
+    @media screen and (max-width: $mobile-breakpoint) {
+      opacity: 1;
+      margin: 0 auto 2rem;
+      width: 100%;
+    }
+
+    @media screen and (max-width: 550px) {
+      font-size: 0.8em;
+    }
+  }
+
+  /* MOBILE PLANETS */
+  .mobile-planets {
+    display: none;
+
+    @media screen and (max-width: $mobile-breakpoint) {
+      display: block;
+      z-index: -1;
+      margin: 0 auto;
+      position: absolute;
+      width: calc(450px + 25vw);
+      bottom: -35%;
+      right: -30%;
+    }
+
+    @media screen and (max-width: 500px) {
+      transform: scale(1.15);
+      bottom: calc(-20vw - 75px);
+    }
+  }
 }

@@ -1,24 +1,132 @@
-.main-content {
-  height: 100dvh;
-  overflow-y: scroll;
-  overflow-x: hidden;
-  scroll-snap-type: y mandatory;
-  margin-inline: auto;
+// Mobile Styling
+.scroll-cont {
+  height: 100vh;
   position: relative;
+  overflow-x: hidden;
   background-image: url('../images/stars-background.svg');
 
-  section {
-    height: 100dvh;
-    scroll-snap-align: start;
-    padding-left: $content-offset;
-    padding-right: calc($navbar-margin + $navbar-width + 3rem);
-
-    @media (max-width: $tablet-breakpoint) {
-      padding-right: 3rem;
-    }
+  &:before,
+  &:after {
+    content: '';
+    position: fixed;
+    pointer-events: none;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: calc(3.8rem + 4.2vw);
+    margin-left: calc($content-offset - (25rem - 15vw));
+    background-image: linear-gradient(to bottom, $primary-blue, transparent);
+    z-index: 1;
 
     @media (max-width: $mobile-breakpoint) {
-      padding: 0;
+      display: none;
+    }
+  }
+
+  &:after {
+    top: auto;
+    bottom: 0;
+    background-image: linear-gradient(to top, $primary-blue, transparent);
+  }
+
+  @media (max-width: $mobile-breakpoint) {
+    scroll-snap-type: none;
+  }
+
+  section {
+    height: 100vh;
+    max-width: 85ch;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+
+    @media (max-width: $mobile-breakpoint) {
+      padding: $mobile-padding;
+      height: auto;
+      padding-bottom: 5rem;
+      max-width: 100%;
+    }
+
+    h2 {
+      font-family: $header-font;
+      margin: 0;
+      font-size: 40px;
+      color: $primary-orange;
+    }
+  }
+}
+
+//Desktop Styling
+@media screen and (min-width: $tablet-breakpoint) {
+  .scroll-cont {
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+    //Card Stylings
+    .scroll-section-one,
+    .scroll-section-two,
+    .scroll-section-three,
+    .scroll-section-four,
+    .scroll-section-five,
+    .scroll-section-six {
+      scroll-snap-align: center;
+      height: 100vh;
+      padding-left: $content-offset;
+      padding-right: calc($navbar-margin + $navbar-width + 3rem);
+      @media (max-width: $tablet-breakpoint) {
+        padding-right: 3rem;
+      }
+
+      @media (max-width: $mobile-breakpoint) {
+        padding: 0;
+      }
+    }
+
+    .two,
+    .three,
+    .four,
+    .five,
+    .six {
+      opacity: 1;
+      height: 100vh;
+      transform: rotate(80deg);
+      transform-origin: '16% 74%';
+      //transform: translate(-400px, 0px) rotate(80deg);
+    }
+  }
+}
+
+//Desktop Styling
+@media screen and (min-width: $tablet-breakpoint) {
+  .scroll-cont {
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+    //Card Stylings
+    .scroll-section-one,
+    .scroll-section-two,
+    .scroll-section-three,
+    .scroll-section-four {
+      scroll-snap-align: center;
+      height: 100vh;
+      padding-left: $content-offset;
+      padding-right: calc($navbar-margin + $navbar-width + 3rem);
+      @media (max-width: $tablet-breakpoint) {
+        padding-right: 3rem;
+      }
+
+      @media (max-width: $mobile-breakpoint) {
+        padding: 0;
+      }
+    }
+
+    .two,
+    .three,
+    .four {
+      opacity: 1;
+      height: 100vh;
+      transform: rotate(80deg);
+      transform-origin: '16% 74%';
+      //transform: translate(-400px, 0px) rotate(80deg);
     }
   }
 }

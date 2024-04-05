@@ -251,7 +251,7 @@ export default function Asteroid({ homeRef }: AsteroidProps) {
               initial={asteroidAnimations[index]?.initial}
               animate={
                 index === 0
-                  ? { x: 1200, y: 100 }
+                  ? { x: window.innerWidth / 3, y: 100 }
                   : asteroidAnimations[index]?.animate
               }
               transition={asteroidAnimations[index]?.transition}
@@ -260,7 +260,14 @@ export default function Asteroid({ homeRef }: AsteroidProps) {
               }
             >
               <LargeAsteroid2 />
-              {index === 0 && <p className="asteroid-signifier">Click Me !</p>}
+              {index === 0 && (
+                <p
+                  style={{ textWrap: 'nowrap' }}
+                  className="asteroid-signifier"
+                >
+                  Click Me !
+                </p>
+              )}
             </motion.div>
           )
         )
