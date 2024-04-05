@@ -105,25 +105,37 @@ export default function Navbar({
         const scrollPosition = scrollContainerRef.current!.scrollTop || 0;
         if (scrollPosition > lastScrollTopRef.current) {
           // Scrolling Down
-          if (scrollPosition > scrollRefList[2].current!.offsetTop) {
+          if (
+            scrollPosition >
+            scrollRefList[2].current!.offsetTop + pageHeight / 2
+          ) {
             setPageSelected('Judges');
             setPausedPlanet('red');
-          } else if (scrollPosition > scrollRefList[1].current!.offsetTop) {
+          } else if (
+            scrollPosition >
+            scrollRefList[1].current!.offsetTop + pageHeight / 2
+          ) {
             setPageSelected('Timeline');
             setPausedPlanet('purple');
-          } else if (scrollPosition > pageHeight) {
+          } else if (scrollPosition > pageHeight / 2) {
             setPageSelected('FAQ');
             setPausedPlanet('blue');
           }
         } else {
           // Scrolling Up
-          if (scrollPosition < scrollRefList[1].current!.offsetTop) {
+          if (scrollPosition < pageHeight / 2) {
             setPageSelected('Home');
             setPausedPlanet('');
-          } else if (scrollPosition < scrollRefList[2].current!.offsetTop) {
+          } else if (
+            scrollPosition <
+            scrollRefList[2].current!.offsetTop - pageHeight / 2
+          ) {
             setPageSelected('FAQ');
             setPausedPlanet('blue');
-          } else if (scrollPosition < scrollRefList[3].current!.offsetTop) {
+          } else if (
+            scrollPosition <
+            scrollRefList[3].current!.offsetTop - pageHeight / 2
+          ) {
             setPageSelected('Timeline');
             setPausedPlanet('purple');
           }

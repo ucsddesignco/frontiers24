@@ -58,9 +58,11 @@ export default function LogoAndRegister({
 
     if (scrollContainerRef.current && logoRef.current) {
       scrollContainerRef.current.addEventListener('scroll', () => {
-        const st = scrollContainerRef.current!.scrollTop;
-        if (st > lastScrollTopRef.current && st > window.innerHeight / 2) {
+        const scrollPosition = scrollContainerRef.current!.scrollTop;
+        if (scrollPosition > lastScrollTopRef.current) {
           // Scrolling Down
+          if (scrollPosition < window.innerHeight / 8) return;
+
           const logoScaleFactor = 0.5;
           const registerScaleFactor = Math.min(
             (window.innerWidth * 1.2) / 1920,
@@ -69,7 +71,7 @@ export default function LogoAndRegister({
           logoRef.current!.style.transform = `translate(${window.innerWidth - (initialLogoWidth * logoScaleFactor * (1 + (1 - logoScaleFactor)) + navRightValue)}px) scale(${logoScaleFactor})`;
           registerRef.current!.style.transform = `translate(${window.innerWidth - (initialRegisterWidth * registerScaleFactor * (1 + (1 - registerScaleFactor)) + navRightValue)}px,
            ${window.innerHeight - (registerInfo!.height + 30)}px) scale(${registerScaleFactor})`;
-        } else if (st < window.innerHeight / 2) {
+        } else if (scrollPosition < window.innerHeight / 2) {
           // Scrolling Up
           logoRef.current!.style.scale = '1';
           if (fakeLogoInfo) {
@@ -79,7 +81,7 @@ export default function LogoAndRegister({
             registerRef.current!.style.transform = `translate(${fakeRegisterInfo?.x}px, ${fakeRegisterInfo?.y}px)`;
           }
         }
-        lastScrollTopRef.current = st <= 0 ? 0 : st;
+        lastScrollTopRef.current = scrollPosition <= 0 ? 0 : scrollPosition;
       });
     }
   }, [logoLoaded, fakeLogoRef, scrollContainerRef, fakeRegisterRef, navRef]);
