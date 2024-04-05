@@ -20,6 +20,7 @@ export default function Asteroid({ homeRef }: AsteroidProps) {
     animationProps[]
   >([]); // [ {x: number, y: number}
   const [asteroidVisibility, setAsteroidVisibility] = useState<boolean[]>([]);
+  const [fragmentVisibility, setFragmentVisibility] = useState<boolean[]>([]); // [ {x: number, y: number}
   const [asteroidExploded, setAsteroidExploded] = useState<boolean[]>([]);
   const [fragmentEdPts, setFragmentEndPts] = useState<Point[]>([]);
   const [asteroidRotations, setAsteroidRotations] = useState<number[]>([]);
@@ -46,11 +47,21 @@ export default function Asteroid({ homeRef }: AsteroidProps) {
       return newVisibility;
     });
 
+    setFragmentVisibility(Array(numAsteroids).fill(true));
+
     // Update the exploded state to show the fragments
     setAsteroidExploded(prevExploded => {
       const newExploded = [...prevExploded];
       newExploded[index] = true;
       return newExploded;
+    });
+  };
+
+  const onFragmentAnimationComplete = (index: number) => {
+    setFragmentVisibility(prevVisibility => {
+      const newVisibility = [...prevVisibility];
+      newVisibility[index] = false;
+      return newVisibility;
     });
   };
 
@@ -158,21 +169,31 @@ export default function Asteroid({ homeRef }: AsteroidProps) {
   return (
     <section className="asteroid-container">
       {Array.from({ length: numAsteroids }, (_, index) =>
-        asteroidExploded[index] ? (
+        asteroidExploded[index] && fragmentVisibility[index] ? (
           <>
             <motion.div
               className="fragment"
               initial={asteroidAnimations[index]?.animate}
-              animate={fragmentEdPts[index * 4 + 0]}
+              animate={{
+                x: fragmentEdPts[index * 4 + 0].x,
+                y: fragmentEdPts[index * 4 + 0].y,
+                scale: 0
+              }}
               transition={{ duration: 10, ease: [0.1, 0.87, 0.44, 1] }}
+              onAnimationComplete={() => {
+                onFragmentAnimationComplete(index);
+              }}
             >
               <FragmentAsteroid1 />
             </motion.div>
-
             <motion.div
               className="fragment"
               initial={asteroidAnimations[index]?.animate}
-              animate={fragmentEdPts[index * 4 + 1]}
+              animate={{
+                x: fragmentEdPts[index * 4 + 1].x,
+                y: fragmentEdPts[index * 4 + 1].y,
+                scale: 0
+              }}
               transition={{ duration: 10, ease: [0.1, 0.87, 0.44, 1] }}
             >
               <FragmentAsteroid2 />
@@ -181,7 +202,11 @@ export default function Asteroid({ homeRef }: AsteroidProps) {
             <motion.div
               className="fragment"
               initial={asteroidAnimations[index]?.animate}
-              animate={fragmentEdPts[index * 4 + 2]}
+              animate={{
+                x: fragmentEdPts[index * 4 + 2].x,
+                y: fragmentEdPts[index * 4 + 2].y,
+                scale: 0
+              }}
               transition={{ duration: 10, ease: [0.1, 0.87, 0.44, 1] }}
             >
               <FragmentAsteroid3 />
@@ -190,7 +215,11 @@ export default function Asteroid({ homeRef }: AsteroidProps) {
             <motion.div
               className="fragment"
               initial={asteroidAnimations[index]?.animate}
-              animate={fragmentEdPts[index * 4 + 3]}
+              animate={{
+                x: fragmentEdPts[index * 4 + 3].x,
+                y: fragmentEdPts[index * 4 + 3].y,
+                scale: 0
+              }}
               transition={{ duration: 10, ease: [0.1, 0.87, 0.44, 1] }}
             >
               <FragmentAsteroid4 />
