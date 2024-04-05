@@ -1,26 +1,26 @@
-.judge-stuff {
-  .judges {
+.judges {
+  section {
+    max-width: 1800px;
     overflow: hidden;
-    display: flex;
-    align-items: center;
 
     @media (max-width: $tablet-breakpoint) {
-      align-items: baseline;
+      align-content: baseline;
       padding-top: 3rem;
     }
 
-    .judges-container {
+    .card-container {
       display: grid;
       gap: 3rem;
+      width: 100%;
+
+      @media (max-width: $tablet-breakpoint) {
+        gap: 1rem;
+      }
+
+      @media (max-width: $mobile-breakpoint) {
+        margin-bottom: 5rem;
+      }
     }
-  }
-
-  h2 {
-    color: $primary-orange;
-  }
-
-  .judge-component {
-    margin-bottom: 35px;
   }
 
   .mobile {

@@ -22,6 +22,10 @@
     background-image: linear-gradient(to top, $primary-blue, transparent);
   }
 
+  @media (max-width: $mobile-breakpoint) {
+    scroll-snap-type: none;
+  }
+
   section {
     height: 100vh;
     display: grid;

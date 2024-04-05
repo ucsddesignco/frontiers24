@@ -8,6 +8,7 @@
 
   svg {
     transform: translateX($planet-offset);
+    height: 100%;
 
     @media (max-width: $tablet-breakpoint) {
       width: $planet-width;

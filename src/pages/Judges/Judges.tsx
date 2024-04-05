@@ -1,52 +1,52 @@
 import './Judges.scss';
-import JudgeComponent from '../../components/JudgeComponent/JudgeComponent';
+import JudgeCard from '../../components/JudgeCard/JudgeCard';
 import { useRef } from 'react';
-import { JudgeInfo } from './JudgeInfo';
+import { JudgeList } from './JudgeList';
 import useIsDesktop from '../../util/useIsDesktop';
 
-type JudgesProps = {
-  scroll4Ref: React.RefObject<HTMLElement>;
-};
-
-export default function Judges({ scroll4Ref }: JudgesProps) {
+export default function Judges() {
   const judge1Ref = useRef(null);
   const judge2Ref = useRef(null);
+  const judge1ContainerRef = useRef(null);
+  const judge2ContainerRef = useRef(null);
 
   const isDesktop = useIsDesktop();
 
   return (
-    <div className="judge-stuff">
+    <div className="judges">
       {isDesktop ? (
         <>
           <div className="scroll-section-five">
-            <section ref={scroll4Ref} className="five desktop judges">
-              <div ref={judge1Ref} className="judges-container">
+            <section className="five desktop" ref={judge1ContainerRef}>
+              <div ref={judge1Ref} className="card-container">
                 <h2>Judges</h2>
-                {JudgeInfo.slice(0, 3).map(item => (
-                  <JudgeComponent
+                {JudgeList.slice(0, 3).map(item => (
+                  <JudgeCard
                     key={item.name}
                     name={item.name}
                     pronouns={item.pronouns}
                     position={item.position}
                     funFact={item.funFact}
                     imgLink={item.imgLink}
+                    linkedin={item.linkedin}
                   />
                 ))}
               </div>
             </section>
           </div>
           <div className="scroll-section-six">
-            <section className="six desktop judges">
-              <div ref={judge2Ref} className="judges-container">
+            <section className="six desktop" ref={judge2ContainerRef}>
+              <div ref={judge2Ref} className="card-container">
                 <h2>Judges</h2>
-                {JudgeInfo.slice(3, 5).map(item => (
-                  <JudgeComponent
+                {JudgeList.slice(3, 5).map(item => (
+                  <JudgeCard
                     key={item.name}
                     name={item.name}
                     pronouns={item.pronouns}
                     position={item.position}
                     funFact={item.funFact}
                     imgLink={item.imgLink}
+                    linkedin={item.linkedin}
                   />
                 ))}
               </div>
@@ -54,17 +54,18 @@ export default function Judges({ scroll4Ref }: JudgesProps) {
           </div>
         </>
       ) : (
-        <section className="mobile judges">
+        <section className="mobile">
           <div ref={judge2Ref} className="judges-container">
             <h2>Judges</h2>
-            {JudgeInfo.map(item => (
-              <JudgeComponent
+            {JudgeList.map(item => (
+              <JudgeCard
                 key={item.name}
                 name={item.name}
                 pronouns={item.pronouns}
                 position={item.position}
                 funFact={item.funFact}
                 imgLink={item.imgLink}
+                linkedin={item.linkedin}
               />
             ))}
           </div>

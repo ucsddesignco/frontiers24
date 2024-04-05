@@ -7,11 +7,6 @@ $primary-white: #f1f1f1;
 $tablet-breakpoint: 1200px;
 $mobile-breakpoint: 800px;
 
-//Fonts
-$header-font: 'Ridge Obligque Regular';
-$subheader-font: 'NeuePlak Bold';
-$p-font: 'NB International Regular';
-
 // Font Sizes
 $p-size: 20px;
 $h4-size: 24px;
@@ -19,6 +14,13 @@ $h2-size: 40px;
 
 //Spacing and Sizing
 $mobile-padding: 34px 20px;
+$header-font: 'Ridge Obligque Regular';
+$subheader-font: 'NeuePlak Bold';
+$p-font: 'NB International Regular';
+$mono-font: 'NB International Mono', monospace;
+
+//Spacing and Sizing
+$mobile-padding: 34px 30px;
 
 $navbar-margin: clamp(2rem, calc(0.5rem + 5vw), 8rem);
 $navbar-width: 45px;
@@ -53,6 +55,11 @@ $content-offset: calc(
 @font-face {
   font-family: 'NB International Regular';
   src: url('/fonts/NB-International-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'NB International Mono';
+  src: url('/fonts/NB-International-Mono.ttf');
 }
 
 @font-face {
