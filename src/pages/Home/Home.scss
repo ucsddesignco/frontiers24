@@ -60,26 +60,28 @@
     @media (max-width: 550px) {
       width: 100%;
     }
-  }
 
-  .logo {
-    @media screen and (max-width: $mobile-breakpoint) {
-      display: none;
+    .fake-logo {
+      opacity: 0;
+      @media screen and (max-width: $mobile-breakpoint) {
+        display: none;
+      }
     }
-  }
 
-  .mobile-logo {
-    display: none;
+    .mobile-logo {
+      display: none;
 
-    @media screen and (max-width: $mobile-breakpoint) {
-      display: block;
-      margin: 0 auto 1rem;
-      position: relative;
+      @media screen and (max-width: $mobile-breakpoint) {
+        display: block;
+        margin: 0 auto 1rem;
+        position: relative;
+      }
     }
   }
 
   /* REGISTER BUTTON */
   .register-button {
+    opacity: 0;
     .button {
       background: $primary-orange;
       display: inline-block;

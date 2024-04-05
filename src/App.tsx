@@ -9,6 +9,7 @@ import FAQ from './pages/FAQ/FAQ';
 import Timeline from './pages/Timeline/Timeline';
 import Judges from './pages/Judges/Judges';
 import { useRef } from 'react';
+import LogoAndRegister from './components/LogoAndRegister/LogoAndRegister';
 
 function Rotate() {
   const scrollContainerRef = useRef<HTMLElement>(null);
@@ -17,6 +18,8 @@ function Rotate() {
   const scroll3Ref = useRef<HTMLElement>(null);
   const scroll4Ref = useRef<HTMLElement>(null);
   const planetRef = useRef<SVGSVGElement>(null);
+  const fakeLogoRef = useRef<HTMLImageElement>(null);
+  const fakeRegisterRef = useRef<HTMLDivElement>(null);
 
   const scrollRefList = [scroll1Ref, scroll2Ref, scroll3Ref, scroll4Ref];
 
@@ -31,7 +34,16 @@ function Rotate() {
         scrollRefList={scrollRefList}
         scrollContainerRef={scrollContainerRef}
       />
-      <Home scroll1Ref={scroll1Ref} />
+      <LogoAndRegister
+        scrollContainerRef={scrollContainerRef}
+        fakeLogoRef={fakeLogoRef}
+        fakeRegisterRef={fakeRegisterRef}
+      />
+      <Home
+        scroll1Ref={scroll1Ref}
+        fakeLogoRef={fakeLogoRef}
+        fakeRegisterRef={fakeRegisterRef}
+      />
       <FAQ scroll2Ref={scroll2Ref} />
       <Timeline scroll3Ref={scroll3Ref} />
       <Judges scroll4Ref={scroll4Ref} />

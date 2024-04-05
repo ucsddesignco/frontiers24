@@ -6,11 +6,15 @@ import { useRef } from 'react';
 
 type HomeProps = {
   scroll1Ref: React.RefObject<HTMLElement>;
+  fakeLogoRef: React.RefObject<HTMLImageElement>;
+  fakeRegisterRef: React.RefObject<HTMLDivElement>;
 };
 
-export default function Home({ scroll1Ref }: HomeProps) {
-  const registerRef = useRef(null);
-  const logoRef = useRef(null);
+export default function Home({
+  scroll1Ref,
+  fakeLogoRef,
+  fakeRegisterRef
+}: HomeProps) {
   const mobileDateRef = useRef(null);
 
   return (
@@ -20,9 +24,9 @@ export default function Home({ scroll1Ref }: HomeProps) {
           <div className="right-container">
             <div className="logo-container">
               <img
-                ref={logoRef}
+                ref={fakeLogoRef}
                 src={Logo}
-                className="logo"
+                className="fake-logo"
                 alt="Design Frontiers Logo"
               />
               <img src={Logo} className="mobile-logo" alt="" />
@@ -45,7 +49,7 @@ export default function Home({ scroll1Ref }: HomeProps) {
                 <h3>DIB ROOM 208</h3>
               </div>
             </div>
-            <div className="register-button" ref={registerRef}>
+            <div className="register-button" ref={fakeRegisterRef}>
               <a className="button parallelogram" href="#">
                 <span className="skew-fix">REGISTER NOW</span>
               </a>
