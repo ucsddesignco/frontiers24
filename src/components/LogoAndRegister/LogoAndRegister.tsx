@@ -27,12 +27,12 @@ export default function LogoAndRegister({
   useEffect(() => {
     if (!logoLoaded) return;
     const fakeLogoInfo = fakeLogoRef.current?.getBoundingClientRect();
-    // const logoInfo = logoRef.current?.getBoundingClientRect();
-    const initialLogoWidth =
-      parseInt(
-        window.getComputedStyle(fakeLogoRef.current!).getPropertyValue('width')
-      ) || 0;
-    // Change to ref in the future
+    const logoInfo = logoRef.current?.getBoundingClientRect();
+    const initialLogoWidth = logoInfo!.width || 0;
+    // const initialLogoWidth =
+    //   parseInt(
+    //     window.getComputedStyle(fakeLogoRef.current!).getPropertyValue('width')
+    //   ) || 0;
     const navRightValue = navRef.current
       ? parseInt(
           window.getComputedStyle(navRef.current).getPropertyValue('right')
@@ -66,9 +66,11 @@ export default function LogoAndRegister({
         const st = scrollContainerRef.current!.scrollTop;
         if (st > lastScrollTopRef.current && st > window.innerHeight / 2) {
           // Scrolling Down
-          const scaleFactor = 0.5;
-          logoRef.current!.style.transform = `translate(${window.innerWidth - (initialLogoWidth * scaleFactor * 1.5 + navRightValue)}px, 20px) scale(${scaleFactor})`;
-          registerRef.current!.style.transform = `translate(${window.innerWidth - (initialRegisterWidth + navRightValue)}px, ${window.innerHeight - (registerInfo!.height + 50)}px)`;
+          const logoScaleFactor = 0.5;
+          const registerScaleFactor = 0.7;
+          logoRef.current!.style.transform = `translate(${window.innerWidth - (initialLogoWidth * logoScaleFactor * (1 + (1 - logoScaleFactor)) + navRightValue)}px) scale(${logoScaleFactor})`;
+          registerRef.current!.style.transform = `translate(${window.innerWidth - (initialRegisterWidth * registerScaleFactor * (1 + (1 - registerScaleFactor)) + navRightValue)}px,
+           ${window.innerHeight - (registerInfo!.height + 30)}px) scale(${registerScaleFactor})`;
         } else if (st < window.innerHeight / 2) {
           // Scrolling Up
           logoRef.current!.style.scale = '1';
