@@ -260,7 +260,7 @@ export default function Asteroid({ homeRef }: AsteroidProps) {
               }
             >
               <LargeAsteroid2 />
-              {index === 0 && <h4 className="asteroid-signifier">Click Me</h4>}
+              {index === 0 && <p className="asteroid-signifier">Click Me !</p>}
             </motion.div>
           )
         )
