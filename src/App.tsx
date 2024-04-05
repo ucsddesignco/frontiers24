@@ -1,22 +1,54 @@
+import { useGSAP } from '@gsap/react';
+
 import './styles/App.scss';
+import { handleRotate } from './util/handleRotate';
 import OrbitingPlanets from './components/OrbitingPlanets/OrbitingPlanets';
-import Home from './pages/Home/Home';
 import Navbar from './components/Navbar/Navbar';
+import Home from './pages/Home/Home';
 import FAQ from './pages/FAQ/FAQ';
 import Timeline from './pages/Timeline/Timeline';
 import Judges from './pages/Judges/Judges';
+import { useRef } from 'react';
+import LogoAndRegister from './components/LogoAndRegister/LogoAndRegister';
 
-function App() {
+function Rotate() {
+  const scrollContainerRef = useRef<HTMLElement>(null);
+  const scroll1Ref = useRef<HTMLElement>(null);
+  const scroll2Ref = useRef<HTMLElement>(null);
+  const scroll3Ref = useRef<HTMLElement>(null);
+  const scroll4Ref = useRef<HTMLElement>(null);
+  const planetRef = useRef<SVGSVGElement>(null);
+  const fakeLogoRef = useRef<HTMLImageElement>(null);
+  const fakeRegisterRef = useRef<HTMLDivElement>(null);
+
+  const scrollRefList = [scroll1Ref, scroll2Ref, scroll3Ref, scroll4Ref];
+
+  useGSAP(() => {
+    handleRotate(planetRef);
+  });
+
   return (
-    <main className="main-content">
-      <OrbitingPlanets />
-      <Navbar />
-      <Home />
-      <FAQ />
-      <Timeline />
-      <Judges />
+    <main ref={scrollContainerRef} className="scroll-cont">
+      <OrbitingPlanets planetRef={planetRef} />
+      <Navbar
+        scrollRefList={scrollRefList}
+        scrollContainerRef={scrollContainerRef}
+      />
+      <LogoAndRegister
+        scrollContainerRef={scrollContainerRef}
+        fakeLogoRef={fakeLogoRef}
+        fakeRegisterRef={fakeRegisterRef}
+      />
+      <Home
+        scroll1Ref={scroll1Ref}
+        fakeLogoRef={fakeLogoRef}
+        fakeRegisterRef={fakeRegisterRef}
+      />
+      <FAQ scroll2Ref={scroll2Ref} />
+      <Timeline scroll3Ref={scroll3Ref} />
+      <Judges scroll4Ref={scroll4Ref} />
     </main>
   );
 }
 
-export default App;
+export default Rotate;

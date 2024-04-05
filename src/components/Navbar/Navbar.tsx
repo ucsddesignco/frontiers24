@@ -1,17 +1,44 @@
-import { useState } from 'react';
+import { MutableRefObject, useState } from 'react';
 import Hamburger from '../Hamburger/Hamburger';
 import './Navbar.scss';
 import HamrburgerPlanet from '../Hamburger/HamrburgerPlanet';
+import gsap from 'gsap';
+import useIsDesktop from '../../util/useIsDesktop';
 
-export default function Navbar() {
+type NavbarProps = {
+  scrollRefList: MutableRefObject<HTMLElement | null>[];
+  scrollContainerRef: MutableRefObject<HTMLElement | null>;
+};
+
+export default function Navbar({
+  scrollRefList,
+  scrollContainerRef
+}: NavbarProps) {
   const [isHamburgerOpen, setIsHamburgerOpen] = useState(false);
+  const pagesList = ['Home', 'FAQ', 'Timeline', 'Judges'];
+  const isDesktop = useIsDesktop();
 
-  const links = [
-    { onClick: () => {}, text: 'Home' },
-    { onClick: () => {}, text: 'FAQ' },
-    { onClick: () => {}, text: 'Timeline' },
-    { onClick: () => {}, text: 'Judges' }
-  ];
+  function scrollToSection(scrollOffset: number) {
+    if (isDesktop) {
+      gsap.to(scrollContainerRef.current, {
+        scrollTo: { y: scrollOffset },
+        ease: 'power2'
+      });
+    } else {
+      //Mobile Scroll
+      toggleHamburger();
+      window.scrollTo({ top: scrollOffset });
+    }
+  }
+
+  const links = pagesList.map((pageName, index) => {
+    return {
+      onClick: () => {
+        scrollToSection(scrollRefList[index].current?.offsetTop || 0);
+      },
+      name: pageName
+    };
+  });
 
   const toggleHamburger = () => {
     setIsHamburgerOpen(!isHamburgerOpen);
@@ -37,23 +64,14 @@ export default function Navbar() {
     // prettier-ignore
     <nav role='navigation'>
       {/* Desktop Nav */}
-      <svg className="desktop-nav" width="44" height="284" viewBox="0 0 44 284" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <g clipPath="url(#clip0_853_10144)">
-        <rect x="44" width="44" height="44" rx="22" transform="rotate(90 44 0)" fill="#F1F1F1"/>
-        <rect x="38.5" y="5.5" width="33" height="33" rx="16.5" transform="rotate(90 38.5 5.5)" fill="#F1F1F1" stroke="#090921" strokeWidth="3"/>
-        <path d="M22 54L22 84" stroke="#F1F1F1" strokeWidth="3" strokeDasharray="10 10"/>
-        <rect x="35.5" y="95.5" width="27" height="27" rx="13.5" transform="rotate(90 35.5 95.5)" stroke="#F1F1F1" strokeWidth="3"/>
-        <path d="M22 134L22 164" stroke="#F1F1F1" strokeWidth="3" strokeDasharray="10 10"/>
-        <rect x="35.5" y="175.5" width="27" height="27" rx="13.5" transform="rotate(90 35.5 175.5)" stroke="#F1F1F1" strokeWidth="3"/>
-        <path d="M22 214L22 244" stroke="#F1F1F1" strokeWidth="3" strokeDasharray="10 10"/>
-        <rect x="35.5" y="255.5" width="27" height="27" rx="13.5" transform="rotate(90 35.5 255.5)" stroke="#F1F1F1" strokeWidth="3"/>
-        </g>
-        <defs>
-        <clipPath id="clip0_853_10144">
-        <rect width="284" height="44" fill="white" transform="matrix(0 1 -1 0 44 0)"/>
-        </clipPath>
-        </defs>
-      </svg>
+      <ul className='desktop-nav'>
+        {links.map(link => (
+          <li key={link.name}>
+            <button onClick={link.onClick}>{link.name}</button>
+          </li>
+        ))}
+      </ul>
+      
 
       {/* Mobile Nav */}
       <Hamburger isHamburgerOpen={isHamburgerOpen} toggleHamburger={toggleHamburger}/>
@@ -72,8 +90,8 @@ export default function Navbar() {
         >
           <HamrburgerPlanet />
           {links.map(link => (
-            <li key={link.text}>
-              <button onClick={link.onClick}>{link.text}</button>
+            <li key={link.name}>
+              <button onClick={link.onClick}>{link.name}</button>
             </li>
           ))}
         </ul>

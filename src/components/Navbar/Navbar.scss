@@ -2,15 +2,22 @@ nav {
   position: fixed;
   display: grid;
   place-items: center;
-  height: 100dvh;
+  height: 100vh;
   width: 100%;
   right: $navbar-margin;
   pointer-events: none;
+  z-index: 1;
 
   .desktop-nav {
+    list-style-type: none;
+    padding-left: 0;
+    display: block;
     position: absolute;
     right: 0;
     pointer-events: auto;
+    li button {
+      font-size: 20px;
+    }
   }
 
   .mobile-nav {

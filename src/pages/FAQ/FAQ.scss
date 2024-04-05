@@ -1,2 +1,37 @@
-.faq {
+.faq-stuff {
+  .faq {
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+
+    @media (max-width: $tablet-breakpoint) {
+      align-items: baseline;
+      padding-top: 3rem;
+    }
+
+    .faq-container {
+      display: grid;
+      gap: 2rem;
+    }
+  }
+
+  h2 {
+    color: $primary-orange;
+  }
+
+  .mobile {
+    display: none;
+    background-color: $primary-white;
+    color: $primary-blue;
+  }
+
+  @media (max-width: $mobile-breakpoint) {
+    .mobile {
+      display: block;
+    }
+
+    .desktop {
+      display: none;
+    }
+  }
 }

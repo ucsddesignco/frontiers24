@@ -1,2 +1,41 @@
-.judges {
+.judge-stuff {
+  .judges {
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+
+    @media (max-width: $tablet-breakpoint) {
+      align-items: baseline;
+      padding-top: 3rem;
+    }
+
+    .judges-container {
+      display: grid;
+      gap: 3rem;
+    }
+  }
+
+  h2 {
+    color: $primary-orange;
+  }
+
+  .judge-component {
+    margin-bottom: 35px;
+  }
+
+  .mobile {
+    display: none;
+    background-color: $primary-white;
+    color: $primary-blue;
+  }
+
+  @media (max-width: $mobile-breakpoint) {
+    .mobile {
+      display: block;
+    }
+
+    .desktop {
+      display: none;
+    }
+  }
 }

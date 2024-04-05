@@ -1,11 +1,16 @@
 import './OrbitingPlanets.scss';
 
-export default function OrbitingPlanets() {
+//write the types for this prop
+type OrbitingPlanetsProps = {
+  planetRef: React.RefObject<SVGSVGElement>;
+};
+
+export default function OrbitingPlanets({ planetRef }: OrbitingPlanetsProps) {
   return (
     // prettier-ignore
     <div className="orbiting-planets-container">
 
-    <svg className="orbiting-planets" width="843" height="797" viewBox="0 0 843 797" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg ref={planetRef} className="orbiting-planets" width="843" height="797" viewBox="0 0 843 797" fill="none" xmlns="http://www.w3.org/2000/svg">
       <circle id="orbit4" cx="398.5" cy="398.5" r="397" transform="matrix(-1 0 0 1 797 0)" stroke="#F1F1F1" strokeWidth="3" strokeDasharray="7.43 7.43"></circle>
       <circle id="orbit2" cx="228" cy="228" r="226.5" transform="matrix(-1 0 0 1 626 170.254)" stroke="#F1F1F1" strokeWidth="3" strokeDasharray="7.43 7.43"></circle>
       <circle id="orbit3" cx="285" cy="285" r="283.5" transform="matrix(-1 0 0 1 683.992 113.004)" stroke="#F1F1F1" strokeWidth="3" strokeDasharray="7.43 7.43"></circle>
