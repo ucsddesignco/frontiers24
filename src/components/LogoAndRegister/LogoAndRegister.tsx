@@ -15,6 +15,9 @@ export default function LogoAndRegister({
   fakeRegisterRef,
   navRef
 }: LogoAndRegisterProps) {
+  //Temporarily disable animation
+  return;
+
   const logoRef = useRef<HTMLImageElement>(null);
   const registerRef = useRef<HTMLImageElement>(null);
   const lastScrollTopRef = useRef(0);
