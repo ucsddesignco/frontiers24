@@ -10,6 +10,7 @@ type NavbarProps = {
   scrollContainerRef: MutableRefObject<HTMLElement | null>;
   setPausedPlanet: (pausedPlanet: string) => void;
   navRef?: MutableRefObject<HTMLDivElement | null>;
+  mobileScrollRefList?: MutableRefObject<HTMLElement | null>[];
 };
 
 type Pages = 'Home' | 'FAQ' | 'Timeline' | 'Judges';
@@ -18,7 +19,8 @@ export default function Navbar({
   scrollRefList,
   scrollContainerRef,
   setPausedPlanet,
-  navRef
+  navRef,
+  mobileScrollRefList
 }: NavbarProps) {
   const [isHamburgerOpen, setIsHamburgerOpen] = useState(false);
   const pagesList = ['Home', 'FAQ', 'Timeline', 'Judges'];
@@ -31,6 +33,7 @@ export default function Navbar({
   const isDesktop = useIsDesktop();
   const [pageSelected, setPageSelected] = useState('Home');
   const currentlyNavigatingRef = useRef(false);
+  const lastScrollTopRef = useRef(0);
 
   const setCurrentlyNavigating = (value: boolean) => {
     currentlyNavigatingRef.current = value;
@@ -51,19 +54,24 @@ export default function Navbar({
     } else {
       //Mobile Scroll
       toggleHamburger();
-      setTimeout(() => {
-        window.scrollTo({ top: 30 });
-        window.scrollTo({ top: scrollOffset });
-      }, 2000);
+      scrollContainerRef.current?.scrollTo({
+        top: mobileScrollRefList
+          ? mobileScrollRefList[scrollOffset].current?.offsetTop || 0
+          : 0
+      });
     }
   }
 
   const links = pagesList.map((pageName, index) => {
     return {
       onClick: () => {
-        scrollToSection(scrollRefList[index].current?.offsetTop || 0);
-        setPageSelected(pageName);
-        setPausedPlanet(planetColorsPages[pageName as Pages]);
+        if (isDesktop) {
+          scrollToSection(scrollRefList[index].current?.offsetTop || 0);
+          setPageSelected(pageName);
+          setPausedPlanet(planetColorsPages[pageName as Pages]);
+        } else {
+          scrollToSection(index);
+        }
       },
       name: pageName
     };
@@ -91,23 +99,36 @@ export default function Navbar({
 
   useEffect(() => {
     if (scrollContainerRef.current && isDesktop) {
+      const pageHeight = window.innerHeight;
       scrollContainerRef.current.addEventListener('scroll', () => {
         if (currentlyNavigatingRef.current) return;
-        const scrollPosition = scrollContainerRef.current?.scrollTop || 0;
-
-        if (scrollPosition < scrollRefList[1].current!.offsetTop || 0) {
-          setPageSelected('Home');
-          setPausedPlanet('');
-        } else if (scrollPosition < scrollRefList[2].current!.offsetTop || 0) {
-          setPageSelected('FAQ');
-          setPausedPlanet('blue');
-        } else if (scrollPosition < scrollRefList[3].current!.offsetTop || 0) {
-          setPageSelected('Timeline');
-          setPausedPlanet('purple');
-        } else if (scrollPosition >= scrollRefList[3].current!.offsetTop || 0) {
-          setPageSelected('Judges');
-          setPausedPlanet('red');
+        const scrollPosition = scrollContainerRef.current!.scrollTop || 0;
+        if (scrollPosition > lastScrollTopRef.current) {
+          // Scrolling Down
+          if (scrollPosition > scrollRefList[2].current!.offsetTop) {
+            setPageSelected('Judges');
+            setPausedPlanet('red');
+          } else if (scrollPosition > scrollRefList[1].current!.offsetTop) {
+            setPageSelected('Timeline');
+            setPausedPlanet('purple');
+          } else if (scrollPosition > pageHeight) {
+            setPageSelected('FAQ');
+            setPausedPlanet('blue');
+          }
+        } else {
+          // Scrolling Up
+          if (scrollPosition < scrollRefList[1].current!.offsetTop) {
+            setPageSelected('Home');
+            setPausedPlanet('');
+          } else if (scrollPosition < scrollRefList[2].current!.offsetTop) {
+            setPageSelected('FAQ');
+            setPausedPlanet('blue');
+          } else if (scrollPosition < scrollRefList[3].current!.offsetTop) {
+            setPageSelected('Timeline');
+            setPausedPlanet('purple');
+          }
         }
+        lastScrollTopRef.current = scrollPosition <= 0 ? 0 : scrollPosition;
       });
     }
   }, [scrollContainerRef, scrollRefList, setPausedPlanet, isDesktop]);

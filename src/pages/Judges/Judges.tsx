@@ -5,9 +5,10 @@ import useIsDesktop from '../../util/useIsDesktop';
 
 type JudgesProps = {
   scroll4Ref: React.RefObject<HTMLDivElement>;
+  mobileJudgesRef: React.RefObject<HTMLDivElement>;
 };
 
-export default function Judges({ scroll4Ref }: JudgesProps) {
+export default function Judges({ scroll4Ref, mobileJudgesRef }: JudgesProps) {
   const isDesktop = useIsDesktop();
 
   return (
@@ -52,7 +53,7 @@ export default function Judges({ scroll4Ref }: JudgesProps) {
           </div>
         </>
       ) : (
-        <section className="mobile">
+        <section ref={mobileJudgesRef} className="mobile">
           <div className="card-container">
             <h2>Judges</h2>
             {JudgeList.map(item => (

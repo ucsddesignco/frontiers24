@@ -4,9 +4,10 @@ import useIsDesktop from '../../util/useIsDesktop';
 
 type FAQProps = {
   scroll2Ref: React.RefObject<HTMLElement>;
+  mobileFAQRef: React.RefObject<HTMLDivElement>;
 };
 
-export default function FAQ({ scroll2Ref }: FAQProps) {
+export default function FAQ({ scroll2Ref, mobileFAQRef }: FAQProps) {
   const isDesktop = useIsDesktop();
 
   return (
@@ -41,7 +42,7 @@ export default function FAQ({ scroll2Ref }: FAQProps) {
           </div>
         </>
       ) : (
-        <section className="mobile faq">
+        <section ref={mobileFAQRef} className="mobile faq">
           <div className="faq-container">
             <h2>FAQ</h2>
             {FAQInfo.map(item => (

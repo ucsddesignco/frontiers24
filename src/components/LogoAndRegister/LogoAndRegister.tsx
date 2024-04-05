@@ -17,6 +17,7 @@ export default function LogoAndRegister({
 }: LogoAndRegisterProps) {
   const logoRef = useRef<HTMLImageElement>(null);
   const registerRef = useRef<HTMLImageElement>(null);
+  const lastScrollTopRef = useRef(0);
 
   useEffect(() => {
     const fakeLogoInfo = fakeLogoRef.current?.getBoundingClientRect();
@@ -52,18 +53,16 @@ export default function LogoAndRegister({
       });
     }
 
-    const lastScrollTop = 0;
     if (scrollContainerRef.current && logoRef.current) {
       scrollContainerRef.current.addEventListener('scroll', () => {
         const st = scrollContainerRef.current!.scrollTop;
-        if (st > lastScrollTop && st > window.innerHeight / 2) {
-          // downscroll code
+        if (st > lastScrollTopRef.current && st > window.innerHeight / 2) {
+          // Scrolling Down
           const scaleFactor = 0.5;
           logoRef.current!.style.transform = `translate(${window.innerWidth - (initialLogoWidth * scaleFactor * 1.5 + navRightValue)}px, 20px) scale(${scaleFactor})`;
-
           registerRef.current!.style.transform = `translate(${window.innerWidth - (initialRegisterWidth + navRightValue)}px, ${window.innerHeight - (registerInfo!.height + 50)}px)`;
-        } else {
-          // upscroll code
+        } else if (st < window.innerHeight / 2) {
+          // Scrolling Up
           logoRef.current!.style.scale = '1';
           if (fakeLogoInfo) {
             logoRef.current!.style.transform = `translate(${fakeLogoInfo?.x}px, ${fakeLogoInfo?.y - 20}px)`;
@@ -72,6 +71,7 @@ export default function LogoAndRegister({
             registerRef.current!.style.transform = `translate(${fakeRegisterInfo?.x}px, ${fakeRegisterInfo?.y}px)`;
           }
         }
+        lastScrollTopRef.current = st <= 0 ? 0 : st;
       });
     }
   }, [fakeLogoRef, scrollContainerRef, fakeRegisterRef, navRef]);

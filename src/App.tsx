@@ -21,8 +21,16 @@ function Rotate() {
   const fakeLogoRef = useRef<HTMLImageElement>(null);
   const fakeRegisterRef = useRef<HTMLDivElement>(null);
   const navRef = useRef<HTMLDivElement>(null);
+  const mobileFAQRef = useRef<HTMLDivElement>(null);
+  const mobileJudgesRef = useRef<HTMLDivElement>(null);
 
   const scrollRefList = [scroll1Ref, scroll2Ref, scroll3Ref, scroll4Ref];
+  const mobileScrollRefList = [
+    scroll1Ref,
+    mobileFAQRef,
+    scroll3Ref,
+    mobileJudgesRef
+  ];
 
   const [pausedPlanet, setPausedPlanet] = useState('');
 
@@ -38,6 +46,7 @@ function Rotate() {
         scrollRefList={scrollRefList}
         scrollContainerRef={scrollContainerRef}
         setPausedPlanet={setPausedPlanet}
+        mobileScrollRefList={mobileScrollRefList}
       />
       <LogoAndRegister
         navRef={navRef}
@@ -50,9 +59,9 @@ function Rotate() {
         fakeLogoRef={fakeLogoRef}
         fakeRegisterRef={fakeRegisterRef}
       />
-      <FAQ scroll2Ref={scroll2Ref} />
+      <FAQ scroll2Ref={scroll2Ref} mobileFAQRef={mobileFAQRef} />
       <Timeline scroll3Ref={scroll3Ref} />
-      <Judges scroll4Ref={scroll4Ref} />
+      <Judges scroll4Ref={scroll4Ref} mobileJudgesRef={mobileJudgesRef} />
     </main>
   );
 }
