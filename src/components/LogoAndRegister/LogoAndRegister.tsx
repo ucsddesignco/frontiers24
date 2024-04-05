@@ -7,13 +7,15 @@ type LogoAndRegisterProps = {
   fakeLogoRef: React.RefObject<HTMLImageElement>;
   fakeRegisterRef: React.RefObject<HTMLDivElement>;
   navRef: React.RefObject<HTMLDivElement>;
+  logoLoaded: boolean;
 };
 
 export default function LogoAndRegister({
   scrollContainerRef,
   fakeLogoRef,
   fakeRegisterRef,
-  navRef
+  navRef,
+  logoLoaded
 }: LogoAndRegisterProps) {
   //Temporarily disable animation
   // return;
@@ -23,6 +25,7 @@ export default function LogoAndRegister({
   const lastScrollTopRef = useRef(0);
 
   useEffect(() => {
+    if (!logoLoaded) return;
     const fakeLogoInfo = fakeLogoRef.current?.getBoundingClientRect();
     // const logoInfo = logoRef.current?.getBoundingClientRect();
     const initialLogoWidth =
@@ -44,22 +47,15 @@ export default function LogoAndRegister({
     const initialRegisterWidth = registerInfo!.width;
 
     if (logoRef.current && fakeLogoInfo && fakeLogoRef.current) {
+      console.log('initial logo width', initialLogoWidth);
+      logoRef.current.style.width = initialLogoWidth + 'px';
+      logoRef.current.style.transform = `translate(${fakeLogoInfo.x}px, ${fakeLogoInfo.y - 20}px)`;
+      logoRef.current.style.opacity = '1';
       setTimeout(() => {
-        console.log('initial logo width', initialLogoWidth);
-        const recalculateWidth =
-          parseInt(
-            window
-              .getComputedStyle(fakeLogoRef.current!)
-              .getPropertyValue('width')
-          ) || 0;
-        logoRef.current!.style.width = recalculateWidth + 'px';
-        logoRef.current!.style.transform = `translate(${fakeLogoInfo.x}px, ${fakeLogoInfo.y - 20}px)`;
-        logoRef.current!.style.opacity = '1';
-        setTimeout(() => {
-          logoRef.current!.style.transition =
-            'transform 0.4s ease-out, scale 0.4s ease-out';
-        }, 0);
-      }, 1000);
+        (logoRef.current!.style.transition =
+          'transform 0.4s ease-out, scale 0.4s ease-out'),
+          300;
+      });
     }
 
     if (registerRef.current && fakeRegisterInfo) {
@@ -91,7 +87,7 @@ export default function LogoAndRegister({
         lastScrollTopRef.current = st <= 0 ? 0 : st;
       });
     }
-  }, [fakeLogoRef, scrollContainerRef, fakeRegisterRef, navRef]);
+  }, [logoLoaded, fakeLogoRef, scrollContainerRef, fakeRegisterRef, navRef]);
 
   return (
     <div className="logo-and-register">
