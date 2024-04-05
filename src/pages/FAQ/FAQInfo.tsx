@@ -17,7 +17,7 @@ export const FAQInfo = [
   {
     question: 'When is the deadline to register?',
     answer:
-      'Registration closes Friday, April 7th at 11:59 PM. We will cap the event at 70 participants, so register early!'
+      'Registration closes Tuesday, April 9th at 11:59 PM. We will cap the event at 70 participants, so register early!'
   },
   {
     question: 'Where is the Design and Innovation Building?',
