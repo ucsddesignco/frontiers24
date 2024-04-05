@@ -139,6 +139,7 @@ export default function Asteroid({ homeRef }: AsteroidProps) {
       const newAnimations = Array.from({ length: numAsteroids }, () =>
         generateAnimationProps()
       );
+
       setAsteroidAnimations(newAnimations);
 
       const generateFragmentEndPT = () => {
@@ -173,7 +174,11 @@ export default function Asteroid({ homeRef }: AsteroidProps) {
           <>
             <motion.div
               className="fragment"
-              initial={asteroidAnimations[index]?.animate}
+              initial={
+                index === 0
+                  ? { x: 1200, y: 100 }
+                  : asteroidAnimations[index]?.animate
+              }
               animate={{
                 x: fragmentEdPts[index * 4 + 0].x,
                 y: fragmentEdPts[index * 4 + 0].y,
@@ -188,7 +193,11 @@ export default function Asteroid({ homeRef }: AsteroidProps) {
             </motion.div>
             <motion.div
               className="fragment"
-              initial={asteroidAnimations[index]?.animate}
+              initial={
+                index === 0
+                  ? { x: 1200, y: 100 }
+                  : asteroidAnimations[index]?.animate
+              }
               animate={{
                 x: fragmentEdPts[index * 4 + 1].x,
                 y: fragmentEdPts[index * 4 + 1].y,
@@ -201,7 +210,11 @@ export default function Asteroid({ homeRef }: AsteroidProps) {
 
             <motion.div
               className="fragment"
-              initial={asteroidAnimations[index]?.animate}
+              initial={
+                index === 0
+                  ? { x: 1200, y: 100 }
+                  : asteroidAnimations[index]?.animate
+              }
               animate={{
                 x: fragmentEdPts[index * 4 + 2].x,
                 y: fragmentEdPts[index * 4 + 2].y,
@@ -214,7 +227,11 @@ export default function Asteroid({ homeRef }: AsteroidProps) {
 
             <motion.div
               className="fragment"
-              initial={asteroidAnimations[index]?.animate}
+              initial={
+                index === 0
+                  ? { x: 1200, y: 100 }
+                  : asteroidAnimations[index]?.animate
+              }
               animate={{
                 x: fragmentEdPts[index * 4 + 3].x,
                 y: fragmentEdPts[index * 4 + 3].y,
@@ -232,11 +249,18 @@ export default function Asteroid({ homeRef }: AsteroidProps) {
               className="asteroid"
               onClick={() => onButtonClick(index)}
               initial={asteroidAnimations[index]?.initial}
-              animate={asteroidAnimations[index]?.animate}
+              animate={
+                index === 0
+                  ? { x: 1200, y: 100 }
+                  : asteroidAnimations[index]?.animate
+              }
               transition={asteroidAnimations[index]?.transition}
-              style={{ rotate: `${asteroidRotations[index]}deg` }}
+              style={
+                index === 0 ? {} : { rotate: `${asteroidRotations[index]}deg` }
+              }
             >
               <LargeAsteroid2 />
+              {index === 0 && <h4 className="asteroid-signifier">Click Me</h4>}
             </motion.div>
           )
         )
