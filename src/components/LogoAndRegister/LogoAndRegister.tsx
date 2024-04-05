@@ -16,7 +16,7 @@ export default function LogoAndRegister({
   navRef
 }: LogoAndRegisterProps) {
   //Temporarily disable animation
-  return;
+  // return;
 
   const logoRef = useRef<HTMLImageElement>(null);
   const registerRef = useRef<HTMLImageElement>(null);
@@ -32,6 +32,9 @@ export default function LogoAndRegister({
           window.getComputedStyle(navRef.current).getPropertyValue('right')
         )
       : 0;
+
+    //DEBUGGING
+    console.log('fake logo info:', fakeLogoInfo);
 
     const fakeRegisterInfo = fakeRegisterRef.current?.getBoundingClientRect();
     const registerInfo = registerRef.current?.getBoundingClientRect();
