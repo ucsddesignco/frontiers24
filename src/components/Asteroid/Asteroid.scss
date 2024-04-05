@@ -1,21 +1,20 @@
 .asteroid-container {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  display: grid;
+  align-items: start;
+
+  .asteroid {
+    z-index: 100;
     position: absolute;
-    height: 100%;
-    width: 100%;
-    display: grid;
-    align-items: start;
+    top: 0;
+    left: 0;
+  }
 
-    .asteroid{
-        z-index: 100;
-        position: absolute;
-        top: 0;
-        left: 0;
-    }
-
-    .fragment{
-        position: absolute;
-        top: 0;
-        left: 0;
-    }
+  .fragment {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
 }
-

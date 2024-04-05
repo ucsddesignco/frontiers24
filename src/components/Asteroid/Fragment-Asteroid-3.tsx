@@ -1,5 +1,4 @@
-import * as React from "react"
-import { SVGProps } from "react"
+import { SVGProps } from 'react';
 const FragmentAsteroid3 = (props: SVGProps<SVGSVGElement>) => (
   <svg
     width={25}
@@ -14,7 +13,7 @@ const FragmentAsteroid3 = (props: SVGProps<SVGSVGElement>) => (
         <mask
           id="mask0_1643_231"
           style={{
-            maskType: "alpha",
+            maskType: 'alpha'
           }}
           maskUnits="userSpaceOnUse"
           x={1}
@@ -58,5 +57,5 @@ const FragmentAsteroid3 = (props: SVGProps<SVGSVGElement>) => (
       </clipPath>
     </defs>
   </svg>
-)
-export default FragmentAsteroid3
+);
+export default FragmentAsteroid3;

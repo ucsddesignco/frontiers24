@@ -2,8 +2,8 @@ import './Home.scss';
 
 type HomeProps = {
   homeRef: React.RefObject<HTMLElement>;
-}
-export default function Home({homeRef}: HomeProps) {
+};
+export default function Home({ homeRef }: HomeProps) {
   return (
     <section ref={homeRef} className="home">
       <svg

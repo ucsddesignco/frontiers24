@@ -13,10 +13,10 @@ function App() {
 
   return (
     <main className="main-content">
-      <Asteroid homeRef={homeRef}/>
+      <Asteroid homeRef={homeRef} />
       <OrbitingPlanets />
       <Navbar />
-      <Home homeRef={homeRef}/>
+      <Home homeRef={homeRef} />
       <FAQ />
       <Timeline />
       <Judges />
