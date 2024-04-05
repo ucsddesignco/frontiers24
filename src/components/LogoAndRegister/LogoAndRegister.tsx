@@ -59,7 +59,7 @@ export default function LogoAndRegister({
           logoRef.current!.style.transition =
             'transform 0.4s ease-out, scale 0.4s ease-out';
         }, 0);
-      }, 0);
+      }, 1000);
     }
 
     if (registerRef.current && fakeRegisterInfo) {
