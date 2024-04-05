@@ -16,6 +16,7 @@
 
 body {
   line-height: 1.5;
+  cursor: $cursor;
 }
 
 h1 {
@@ -73,8 +74,13 @@ svg {
 input,
 button,
 textarea,
-select {
+select,
+a {
   font-family: $p-font;
+
+  &:hover {
+    cursor: $cursor-pointer;
+  }
 }
 
 ::-webkit-scrollbar {

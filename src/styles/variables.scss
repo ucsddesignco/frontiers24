@@ -20,6 +20,13 @@ $subheader-font: 'NeuePlak Bold';
 $p-font: 'NB International Regular';
 $mono-font: 'NB International Mono', monospace;
 
+//Cursors
+$cursor: url('/images/cursor.svg'), auto;
+// Svg width is 35, cursor hotspot is located in the middle so we divide by 2
+$cursor-pointer:
+  url('/images/cursor-pointer.svg') 17.5 0,
+  pointer;
+
 //Spacing and Sizing
 $mobile-padding: 34px 30px;
 

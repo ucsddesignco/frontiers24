@@ -58,7 +58,7 @@
 
     .fun-fact-container {
       .trigger {
-        cursor: pointer;
+        cursor: $cursor-pointer;
         display: inline;
         border-bottom: 1.5px solid $primary-orange;
         padding-bottom: 1px;
