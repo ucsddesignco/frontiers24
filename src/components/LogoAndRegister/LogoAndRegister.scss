@@ -22,6 +22,14 @@
       text-decoration: none;
       color: $primary-white;
       letter-spacing: 2.4px;
+      transition:
+        background-color 0.3s,
+        color 0.3s;
+
+      &:hover {
+        background-color: $primary-white;
+        color: $primary-orange;
+      }
     }
 
     .parallelogram {

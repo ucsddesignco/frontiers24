@@ -8,10 +8,6 @@ nav {
   pointer-events: none;
   z-index: 1;
 
-  &:hover {
-    cursor: pointer;
-  }
-
   .desktop-nav {
     list-style-type: none;
     padding-left: 0;
@@ -33,6 +29,10 @@ nav {
 
       svg {
         transition: all 0.3s ease;
+
+        &:not(.divider):hover {
+          cursor: pointer;
+        }
       }
       .active {
         transform: scale(1.2);

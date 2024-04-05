@@ -58,7 +58,7 @@ export default function LogoAndRegister({
         if (st > lastScrollTop && st > window.innerHeight / 2) {
           // downscroll code
           const scaleFactor = 0.5;
-          logoRef.current!.style.transform = `translate(${window.innerWidth - (initialLogoWidth * scaleFactor * 1.5 + navRightValue)}px, 50px) scale(${scaleFactor})`;
+          logoRef.current!.style.transform = `translate(${window.innerWidth - (initialLogoWidth * scaleFactor * 1.5 + navRightValue)}px, 20px) scale(${scaleFactor})`;
 
           registerRef.current!.style.transform = `translate(${window.innerWidth - (initialRegisterWidth + navRightValue)}px, ${window.innerHeight - (registerInfo!.height + 50)}px)`;
         } else {
@@ -79,7 +79,12 @@ export default function LogoAndRegister({
     <div className="logo-and-register">
       <img ref={logoRef} src={Logo} alt="Design Frontiers Logo" />
       <div className="register-button" ref={registerRef}>
-        <a className="button parallelogram" href="#">
+        <a
+          className="button parallelogram"
+          href="https://forms.gle/3vDkncYXUpMrX7D17"
+          target="_blank"
+          rel="noreferrer"
+        >
           <span className="skew-fix">REGISTER NOW</span>
         </a>
       </div>

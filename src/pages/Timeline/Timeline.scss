@@ -4,26 +4,16 @@
     color: $primary-white;
   }
 
-  h2 {
-    font-family: $header-font;
-    color: $primary-orange;
-  }
-
   h3 {
-    font-family: $subheader-font;
-    color: $primary-white;
-  }
-
-  h4 {
-    font-family: $subheader-font;
-    line-height: 15vw;
-    color: $primary-white;
+    font-size: 1.4em;
+    line-height: 1;
+    margin-bottom: 12px;
   }
 
   li {
     display: flex;
     gap: 1ch;
-    margin-bottom: 2vw;
+    margin-bottom: 1.5rem;
 
     @media screen and (max-width: $mobile-breakpoint) {
       margin-bottom: 5vw;
