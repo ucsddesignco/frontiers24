@@ -16,7 +16,7 @@ function Rotate() {
   const scroll1Ref = useRef<HTMLElement>(null);
   const scroll2Ref = useRef<HTMLElement>(null);
   const scroll3Ref = useRef<HTMLElement>(null);
-  const scroll4Ref = useRef<HTMLElement>(null);
+  const scroll4Ref = useRef<HTMLDivElement>(null);
   const planetRef = useRef<SVGSVGElement>(null);
   const fakeLogoRef = useRef<HTMLImageElement>(null);
   const fakeRegisterRef = useRef<HTMLDivElement>(null);

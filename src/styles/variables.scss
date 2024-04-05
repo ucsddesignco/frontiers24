@@ -5,10 +5,11 @@ $primary-white: #f1f1f1;
 
 //Breakpoints
 $tablet-breakpoint: 1200px;
-$mobile-breakpoint: 800px;
+$mobile-breakpoint: 1200px;
 
 // Font Sizes
-$p-size: 20px;
+$p-size: clamp(16px, calc(8px + 0.7vw), 20px);
+
 $h4-size: 24px;
 $h2-size: 40px;
 

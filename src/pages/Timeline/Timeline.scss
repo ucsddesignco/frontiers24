@@ -4,11 +4,6 @@
     color: $primary-white;
   }
 
-  h1 {
-    font-family: $header-font;
-    color: $primary-orange;
-  }
-
   h2 {
     font-family: $header-font;
     color: $primary-orange;
@@ -27,6 +22,7 @@
 
   li {
     display: flex;
+    gap: 1ch;
     margin-bottom: 2vw;
 
     @media screen and (max-width: $mobile-breakpoint) {
@@ -60,7 +56,8 @@
 
   .time {
     display: flex-inline;
-    width: 5rem;
+    width: 9ch;
+    text-align: right;
     line-height: 34px;
     justify-content: start;
 
@@ -83,8 +80,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding-left: 15px;
-    width: 45vw;
+    width: 100%;
 
     @media screen and (max-width: $mobile-breakpoint) {
       width: 72vw;

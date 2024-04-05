@@ -15,7 +15,7 @@ export default function Timeline({ scroll3Ref }: TimelineProps) {
       <section ref={scroll3Ref} className="four timeline">
         <ul>
           <div>
-            <h1 className="title">Timeline</h1>
+            <h2 className="title">Timeline</h2>
             {TimelineInfo.map((item, index) => (
               <li key={index}>
                 <p className="time">{item.time}</p>

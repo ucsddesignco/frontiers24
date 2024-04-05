@@ -1,15 +1,13 @@
 import './Judges.scss';
 import JudgeCard from '../../components/JudgeCard/JudgeCard';
-import { useRef } from 'react';
 import { JudgeList } from './JudgeList';
 import useIsDesktop from '../../util/useIsDesktop';
 
-export default function Judges() {
-  const judge1Ref = useRef(null);
-  const judge2Ref = useRef(null);
-  const judge1ContainerRef = useRef(null);
-  const judge2ContainerRef = useRef(null);
+type JudgesProps = {
+  scroll4Ref: React.RefObject<HTMLDivElement>;
+};
 
+export default function Judges({ scroll4Ref }: JudgesProps) {
   const isDesktop = useIsDesktop();
 
   return (
@@ -17,8 +15,8 @@ export default function Judges() {
       {isDesktop ? (
         <>
           <div className="scroll-section-five">
-            <section className="five desktop" ref={judge1ContainerRef}>
-              <div ref={judge1Ref} className="card-container">
+            <section ref={scroll4Ref} className="five desktop">
+              <div className="card-container">
                 <h2>Judges</h2>
                 {JudgeList.slice(0, 3).map(item => (
                   <JudgeCard
@@ -35,8 +33,8 @@ export default function Judges() {
             </section>
           </div>
           <div className="scroll-section-six">
-            <section className="six desktop" ref={judge2ContainerRef}>
-              <div ref={judge2Ref} className="card-container">
+            <section className="six desktop">
+              <div className="card-container">
                 <h2>Judges</h2>
                 {JudgeList.slice(3, 5).map(item => (
                   <JudgeCard
@@ -55,7 +53,7 @@ export default function Judges() {
         </>
       ) : (
         <section className="mobile">
-          <div ref={judge2Ref} className="judges-container">
+          <div className="judges-container">
             <h2>Judges</h2>
             {JudgeList.map(item => (
               <JudgeCard
