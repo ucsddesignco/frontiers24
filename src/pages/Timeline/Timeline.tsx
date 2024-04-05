@@ -1,10 +1,6 @@
 import './Timeline.scss';
 import { TimelineInfo } from './TimelineInfo';
 
-{
-  /* Timeline List*/
-}
-
 type TimelineProps = {
   scroll3Ref: React.RefObject<HTMLElement>;
 };
