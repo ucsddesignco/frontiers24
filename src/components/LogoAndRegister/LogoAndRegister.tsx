@@ -24,10 +24,10 @@ export default function LogoAndRegister({
 
   useEffect(() => {
     const fakeLogoInfo = fakeLogoRef.current?.getBoundingClientRect();
-    //For cleanup
-    const fakeLogoRefCopy = fakeLogoRef.current;
     // const logoInfo = logoRef.current?.getBoundingClientRect();
-    const initialLogoWidth = fakeLogoInfo?.width || 0;
+    const initialLogoWidth =
+      window.getComputedStyle(fakeLogoRef.current!).getPropertyValue('width') ||
+      '0px';
     // Change to ref in the future
     const navRightValue = navRef.current
       ? parseInt(
@@ -35,27 +35,23 @@ export default function LogoAndRegister({
         )
       : 0;
 
-    const handleLoad = () => {
-      if (logoRef.current && fakeLogoInfo) {
-        logoRef.current.style.width = initialLogoWidth + 'px';
-        logoRef.current.style.transform = `translate(${fakeLogoInfo.x}px, ${fakeLogoInfo.y - 20}px)`;
-        logoRef.current.style.opacity = '1';
-        setTimeout(() => {
-          (logoRef.current!.style.transition =
-            'transform 0.4s ease-out, scale 0.4s ease-out'),
-            0;
-        });
-      }
-    };
-
-    fakeLogoRef.current?.addEventListener('load', handleLoad);
-
     //DEBUGGING
     console.log('fake logo info:', fakeLogoInfo);
 
     const fakeRegisterInfo = fakeRegisterRef.current?.getBoundingClientRect();
     const registerInfo = registerRef.current?.getBoundingClientRect();
     const initialRegisterWidth = registerInfo!.width;
+
+    if (logoRef.current && fakeLogoInfo) {
+      logoRef.current.style.width = initialLogoWidth;
+      logoRef.current.style.transform = `translate(${fakeLogoInfo.x}px, ${fakeLogoInfo.y - 20}px)`;
+      logoRef.current.style.opacity = '1';
+      setTimeout(() => {
+        (logoRef.current!.style.transition =
+          'transform 0.4s ease-out, scale 0.4s ease-out'),
+          0;
+      });
+    }
 
     if (registerRef.current && fakeRegisterInfo) {
       registerRef.current.style.transform = `translate(${fakeRegisterInfo.x}px, ${fakeRegisterInfo.y}px)`;
@@ -85,10 +81,6 @@ export default function LogoAndRegister({
         }
         lastScrollTopRef.current = st <= 0 ? 0 : st;
       });
-
-      return () => {
-        fakeLogoRefCopy?.removeEventListener('load', handleLoad);
-      };
     }
   }, [fakeLogoRef, scrollContainerRef, fakeRegisterRef, navRef]);
 
