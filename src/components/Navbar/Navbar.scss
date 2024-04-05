@@ -70,6 +70,10 @@ nav {
     align-items: start;
     justify-content: space-between;
 
+    @media (max-width: $mobile-breakpoint) {
+      position: fixed;
+    }
+
     .desktop-nav {
       display: none;
     }
@@ -78,8 +82,7 @@ nav {
       display: block;
       top: 0;
 
-      margin: $mobile-padding;
-      margin-top: 2.5rem;
+      padding: $mobile-padding;
     }
 
     .dco-logo {
