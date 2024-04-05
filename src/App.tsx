@@ -8,7 +8,7 @@ import Home from './pages/Home/Home';
 import FAQ from './pages/FAQ/FAQ';
 import Timeline from './pages/Timeline/Timeline';
 import Judges from './pages/Judges/Judges';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import LogoAndRegister from './components/LogoAndRegister/LogoAndRegister';
 
 function Rotate() {
@@ -20,8 +20,13 @@ function Rotate() {
   const planetRef = useRef<SVGSVGElement>(null);
   const fakeLogoRef = useRef<HTMLImageElement>(null);
   const fakeRegisterRef = useRef<HTMLDivElement>(null);
+  const navRef = useRef<HTMLDivElement>(null);
 
   const scrollRefList = [scroll1Ref, scroll2Ref, scroll3Ref, scroll4Ref];
+
+  const [pausedPlanet, setPausedPlanet] = useState('');
+
+  console.log(pausedPlanet);
 
   useGSAP(() => {
     handleRotate(planetRef);
@@ -29,12 +34,15 @@ function Rotate() {
 
   return (
     <main ref={scrollContainerRef} className="scroll-cont">
-      <OrbitingPlanets planetRef={planetRef} />
+      <OrbitingPlanets planetRef={planetRef} pausedPlanet={pausedPlanet} />
       <Navbar
+        navRef={navRef}
         scrollRefList={scrollRefList}
         scrollContainerRef={scrollContainerRef}
+        setPausedPlanet={setPausedPlanet}
       />
       <LogoAndRegister
+        navRef={navRef}
         scrollContainerRef={scrollContainerRef}
         fakeLogoRef={fakeLogoRef}
         fakeRegisterRef={fakeRegisterRef}

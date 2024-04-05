@@ -6,12 +6,14 @@ type LogoAndRegisterProps = {
   scrollContainerRef: React.RefObject<HTMLElement>;
   fakeLogoRef: React.RefObject<HTMLImageElement>;
   fakeRegisterRef: React.RefObject<HTMLDivElement>;
+  navRef: React.RefObject<HTMLDivElement>;
 };
 
 export default function LogoAndRegister({
   scrollContainerRef,
   fakeLogoRef,
-  fakeRegisterRef
+  fakeRegisterRef,
+  navRef
 }: LogoAndRegisterProps) {
   const logoRef = useRef<HTMLImageElement>(null);
   const registerRef = useRef<HTMLImageElement>(null);
@@ -21,10 +23,9 @@ export default function LogoAndRegister({
     const logoInfo = logoRef.current?.getBoundingClientRect();
     const initialLogoWidth = logoInfo!.width;
     // Change to ref in the future
-    const navigationElement = document.querySelector('nav');
-    const navRightValue = navigationElement
+    const navRightValue = navRef.current
       ? parseInt(
-          window.getComputedStyle(navigationElement).getPropertyValue('right')
+          window.getComputedStyle(navRef.current).getPropertyValue('right')
         )
       : 0;
 
@@ -57,7 +58,6 @@ export default function LogoAndRegister({
         if (st > lastScrollTop && st > window.innerHeight / 2) {
           // downscroll code
           const scaleFactor = 0.5;
-          console.log(window.innerWidth);
           logoRef.current!.style.transform = `translate(${window.innerWidth - (initialLogoWidth * scaleFactor * 1.5 + navRightValue)}px, 50px) scale(${scaleFactor})`;
 
           registerRef.current!.style.transform = `translate(${window.innerWidth - (initialRegisterWidth + navRightValue)}px, ${window.innerHeight - (registerInfo!.height + 50)}px)`;
@@ -73,7 +73,7 @@ export default function LogoAndRegister({
         }
       });
     }
-  }, [fakeLogoRef, scrollContainerRef, fakeRegisterRef]);
+  }, [fakeLogoRef, scrollContainerRef, fakeRegisterRef, navRef]);
 
   return (
     <div className="logo-and-register">

@@ -91,3 +91,38 @@
     }
   }
 }
+
+//Desktop Styling
+@media screen and (min-width: $tablet-breakpoint) {
+  .scroll-cont {
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+    //Card Stylings
+    .scroll-section-one,
+    .scroll-section-two,
+    .scroll-section-three,
+    .scroll-section-four {
+      scroll-snap-align: center;
+      height: 100vh;
+      padding-left: $content-offset;
+      padding-right: calc($navbar-margin + $navbar-width + 3rem);
+      @media (max-width: $tablet-breakpoint) {
+        padding-right: 3rem;
+      }
+
+      @media (max-width: $mobile-breakpoint) {
+        padding: 0;
+      }
+    }
+
+    .two,
+    .three,
+    .four {
+      opacity: 1;
+      height: 100vh;
+      transform: rotate(80deg);
+      transform-origin: '16% 74%';
+      //transform: translate(-400px, 0px) rotate(80deg);
+    }
+  }
+}

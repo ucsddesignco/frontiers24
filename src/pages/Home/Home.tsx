@@ -1,5 +1,5 @@
 import './Home.scss';
-import Logo from '../../../public/Logo.svg';
+import Logo from '/Logo.svg';
 import { useRef } from 'react';
 
 //write the typescript type for this prop
@@ -28,6 +28,7 @@ export default function Home({
                 src={Logo}
                 className="fake-logo"
                 alt="Design Frontiers Logo"
+                aria-hidden="true"
               />
               <img src={Logo} className="mobile-logo" alt="" />
             </div>
@@ -49,7 +50,11 @@ export default function Home({
                 <h3>DIB ROOM 208</h3>
               </div>
             </div>
-            <div className="register-button" ref={fakeRegisterRef}>
+            <div
+              className="register-button"
+              ref={fakeRegisterRef}
+              aria-hidden="true"
+            >
               <a className="button parallelogram" href="#">
                 <span className="skew-fix">REGISTER NOW</span>
               </a>

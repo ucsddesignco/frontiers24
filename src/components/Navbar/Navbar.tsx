@@ -1,4 +1,4 @@
-import { MutableRefObject, useState } from 'react';
+import { MutableRefObject, useEffect, useRef, useState } from 'react';
 import Hamburger from '../Hamburger/Hamburger';
 import './Navbar.scss';
 import HamrburgerPlanet from '../Hamburger/HamrburgerPlanet';
@@ -8,22 +8,45 @@ import useIsDesktop from '../../util/useIsDesktop';
 type NavbarProps = {
   scrollRefList: MutableRefObject<HTMLElement | null>[];
   scrollContainerRef: MutableRefObject<HTMLElement | null>;
+  setPausedPlanet: (pausedPlanet: string) => void;
+  navRef?: MutableRefObject<HTMLDivElement | null>;
 };
+
+type Pages = 'Home' | 'FAQ' | 'Timeline' | 'Judges';
 
 export default function Navbar({
   scrollRefList,
-  scrollContainerRef
+  scrollContainerRef,
+  setPausedPlanet,
+  navRef
 }: NavbarProps) {
   const [isHamburgerOpen, setIsHamburgerOpen] = useState(false);
   const pagesList = ['Home', 'FAQ', 'Timeline', 'Judges'];
+  const planetColorsPages = {
+    Home: '',
+    FAQ: 'blue',
+    Timeline: 'purple',
+    Judges: 'red'
+  };
   const isDesktop = useIsDesktop();
   const [pageSelected, setPageSelected] = useState('Home');
+  const currentlyNavigatingRef = useRef(false);
+
+  const setCurrentlyNavigating = (value: boolean) => {
+    currentlyNavigatingRef.current = value;
+  };
 
   function scrollToSection(scrollOffset: number) {
     if (isDesktop) {
       gsap.to(scrollContainerRef.current, {
         scrollTo: { y: scrollOffset },
-        ease: 'power2'
+        ease: 'power2',
+        onStart: function () {
+          setCurrentlyNavigating(true);
+        },
+        onComplete: function () {
+          setCurrentlyNavigating(false);
+        }
       });
     } else {
       //Mobile Scroll
@@ -37,6 +60,7 @@ export default function Navbar({
       onClick: () => {
         scrollToSection(scrollRefList[index].current?.offsetTop || 0);
         setPageSelected(pageName);
+        setPausedPlanet(planetColorsPages[pageName as Pages]);
       },
       name: pageName
     };
@@ -62,9 +86,32 @@ export default function Navbar({
     }
   };
 
+  useEffect(() => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.addEventListener('scroll', () => {
+        if (currentlyNavigatingRef.current) return;
+        const scrollPosition = scrollContainerRef.current?.scrollTop || 0;
+
+        if (scrollPosition < scrollRefList[1].current!.offsetTop || 0) {
+          setPageSelected('Home');
+          setPausedPlanet('');
+        } else if (scrollPosition < scrollRefList[2].current!.offsetTop || 0) {
+          setPageSelected('FAQ');
+          setPausedPlanet('blue');
+        } else if (scrollPosition < scrollRefList[3].current!.offsetTop || 0) {
+          setPageSelected('Timeline');
+          setPausedPlanet('purple');
+        } else if (scrollPosition >= scrollRefList[3].current!.offsetTop || 0) {
+          setPageSelected('Judges');
+          setPausedPlanet('red');
+        }
+      });
+    }
+  }, [scrollContainerRef, scrollRefList, setPausedPlanet]);
+
   return (
     // prettier-ignore
-    <nav role='navigation'>
+    <nav ref={navRef} role='navigation'>
       {/* Desktop Nav */}
       <ul className='desktop-nav'>
         {links.slice(0, -1).map(link => (

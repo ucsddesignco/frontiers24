@@ -29,6 +29,12 @@ $navbar-width: 45px;
 $planet-width: calc(50% + 20vw);
 $planet-radius: $planet-width / 2;
 
+//Planet Rotation Timings
+$yellow-full-rotation-duration: 12.5s;
+$red-full-rotation-duration: 15s;
+$purple-full-rotation-duration: 17.5s;
+$blue-full-rotation-duration: 20s;
+
 //SASS variables can't update with media queries, so we have to use CSS variables
 :root {
   --_planet-left-offset: 9;
