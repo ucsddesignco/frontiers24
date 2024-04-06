@@ -79,29 +79,18 @@ export default function asteroidLogic({
         ),
         rotate: Math.random() * 360
       };
-    }
-
-    //Right side content bottom
-    if (generatedCount < 8) {
-      generatedCount++;
-      return {
-        x: Math.min(
-          contentRight - 125 + Math.random() * (contentPaddingRight + 75),
-          window.innerWidth - 20
-        ),
-        y: Math.min(
-          100 +
-            window.innerHeight / 2 +
-            Math.random() * (window.innerHeight / 2),
-          window.innerHeight - 75
-        ),
-        rotate: Math.random() * 360
-      };
     } else {
       generatedCount++;
       return {
-        x: Math.max(Math.random() * (contentPaddingLeft - 100), 50),
-        y: Math.max(Math.random() * (window.innerHeight - 100), 100)
+        x: Math.min(
+          100 + Math.random() * window.innerWidth,
+          window.innerWidth - 100
+        ),
+        y: Math.min(
+          window.innerHeight * 0.75 +
+            Math.random() * (window.innerHeight * 0.25),
+          window.innerHeight - 35
+        )
       };
     }
   };
