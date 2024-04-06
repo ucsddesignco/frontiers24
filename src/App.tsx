@@ -11,6 +11,7 @@ import Judges from './pages/Judges/Judges';
 import { useRef, useState } from 'react';
 import LogoAndRegister from './components/LogoAndRegister/LogoAndRegister';
 import Asteroid from './components/Asteroid/Asteroid';
+import JudgeFunFacts from './components/JudgeFunFacts/JudgeFunFacts';
 
 function Rotate() {
   const scrollContainerRef = useRef<HTMLElement>(null);
@@ -69,6 +70,7 @@ function Rotate() {
       <FAQ scroll2Ref={scroll2Ref} mobileFAQRef={mobileFAQRef} />
       <Timeline scroll3Ref={scroll3Ref} />
       <Judges scroll4Ref={scroll4Ref} mobileJudgesRef={mobileJudgesRef} />
+      <JudgeFunFacts />
     </main>
   );
 }

@@ -56,61 +56,59 @@
       }
     }
 
-    .fun-fact-container {
-      .trigger {
-        cursor: $cursor-pointer;
-        display: inline;
-        border-bottom: 1.5px solid $primary-orange;
-        padding-bottom: 1px;
-      }
+    .trigger {
+      cursor: $cursor-pointer;
+      display: inline;
+      border-bottom: 1.5px solid $primary-orange;
+      padding-bottom: 1px;
+    }
 
-      .desc {
+    .desc {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+      margin-top: 1rem;
+      max-width: 50ch;
+      transition: opacity 0.3s;
+      margin-inline: auto;
+      color: rgb(9, 9, 33);
+      background-color: rgba(255, 255, 255, 0.8);
+      border: 1px solid rgba(255, 255, 255, 1);
+      backdrop-filter: blur(5px);
+      padding: 1rem;
+      color: $primary-blue;
+      z-index: 1;
+      // 15 ch is about the length of fun fact trigger text
+      transform: translateX(calc((-15ch / 2 + 50%) * -1));
+
+      &:after {
+        content: '▲';
+        $triangle-size: 20px;
+        font-size: $triangle-size;
+        line-height: 0.65;
         position: absolute;
-        opacity: 0;
-        pointer-events: none;
-        margin-top: 1rem;
-        max-width: 50ch;
-        transition: opacity 0.3s;
+        color: rgba(255, 255, 255, 0.9);
+        top: calc($triangle-size * -0.65);
+        left: 0;
+        right: 0;
         margin-inline: auto;
-        color: rgb(9, 9, 33);
-        background-color: rgba(255, 255, 255, 0.8);
-        border: 1px solid rgba(255, 255, 255, 1);
-        backdrop-filter: blur(5px);
-        padding: 1rem;
-        color: $primary-blue;
-        z-index: 1;
-        // 15 ch is about the length of fun fact trigger text
-        transform: translateX(calc((-15ch / 2 + 50%) * -1));
-
-        &:after {
-          content: '▲';
-          $triangle-size: 20px;
-          font-size: $triangle-size;
-          line-height: 0.65;
-          position: absolute;
-          color: rgba(255, 255, 255, 0.9);
-          top: calc($triangle-size * -0.65);
-          left: 0;
-          right: 0;
-          margin-inline: auto;
-          width: $triangle-size;
-          height: $triangle-size;
-
-          @media (max-width: $mobile-breakpoint) {
-            color: rgba(9, 9, 33, 0.8);
-          }
-        }
+        width: $triangle-size;
+        height: $triangle-size;
 
         @media (max-width: $mobile-breakpoint) {
-          background-color: rgba(9, 9, 33, 0.8);
-          border: 1px solid rgba(9, 9, 33, 1);
-          color: $primary-white;
-          width: fit-content;
-          max-width: calc(100% - 2rem);
-          transform: translateX(0);
-          left: 0;
-          right: 0;
+          color: rgba(9, 9, 33, 0.8);
         }
+      }
+
+      @media (max-width: $mobile-breakpoint) {
+        background-color: rgba(9, 9, 33, 0.8);
+        border: 1px solid rgba(9, 9, 33, 1);
+        color: $primary-white;
+        width: fit-content;
+        max-width: calc(100% - 2rem);
+        transform: translateX(0);
+        left: 0;
+        right: 0;
       }
     }
   }

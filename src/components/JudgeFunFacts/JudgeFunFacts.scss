@@ -1,0 +1,21 @@
+.judge-fun-facts {
+  .tooltip {
+    font-family: $p-font;
+    font-size: $p-size;
+    color: rgb(9, 9, 33);
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(255, 255, 255, 1);
+    backdrop-filter: blur(5px);
+    padding: 1rem;
+    color: $primary-blue;
+    z-index: 99;
+    max-width: 50ch;
+    width: fit-content;
+    border-radius: 0;
+  }
+}
+
+[class*='react-tooltip__place-bottom'] {
+  > .arrow {
+  }
+}

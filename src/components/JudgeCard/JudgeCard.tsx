@@ -1,6 +1,4 @@
-import { useRef } from 'react';
 import './JudgeCard.scss';
-
 interface JudgeProps {
   name: string;
   pronouns: string;
@@ -18,7 +16,6 @@ const JudgeCard = ({
   imgLink,
   linkedin
 }: JudgeProps) => {
-  const funFactRef = useRef<HTMLParagraphElement>(null);
   return (
     //prettier-ignore
     <div className="judge-card">
@@ -35,29 +32,16 @@ const JudgeCard = ({
           {name} <span>({pronouns})</span>
         </h3>
         <p>{position}</p>
-        <div className="fun-fact-container">
           <p
+            data-tooltip-id={`${name}-tooltip`}
+            data-tooltip-content={funFact}
+            data-tooltip-place="bottom"
             className="trigger"
-            onMouseEnter={() => {
-              if (funFactRef.current) {
-                funFactRef.current.style.opacity = '1';
-                funFactRef.current.style.pointerEvents = 'auto';
-              }
-            }}
-            onMouseLeave={() => {
-              if (funFactRef.current) {
-                funFactRef.current.style.opacity = '0';
-                funFactRef.current.style.pointerEvents = 'none';
-              }
-            }}
           >
             See my fun fact!
           </p>
-          <p className="desc" ref={funFactRef}>
-            {funFact}
-          </p>
-        </div>
       </div>
+      
     </div>
   );
 };

@@ -13,13 +13,14 @@
     "lint-check": "eslint . && prettier . --check"
   },
   "dependencies": {
-    "framer-motion": "^11.0.24",
     "@gsap/react": "^2.1.0",
+    "framer-motion": "^11.0.24",
     "gsap": "^3.12.5",
     "lint-staged": "^15.2.2",
     "prettier": "^3.2.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-tooltip": "^5.26.3",
     "sass": "^1.72.0"
   },
   "devDependencies": {
