@@ -33,7 +33,6 @@ export default function Asteroid({ homeRef }: AsteroidProps) {
   const [fragmentVisibility, setFragmentVisibility] = useState<boolean[]>([]); // [ {x: number, y: number}
   const [asteroidExploded, setAsteroidExploded] = useState<boolean[]>([]);
   const [fragmentEdPts, setFragmentEndPts] = useState<Point[]>([]);
-  const [asteroidRotations, setAsteroidRotations] = useState<number[]>([]);
   const numAsteroids = 7;
 
   const onButtonClick = (index: number) => {
@@ -79,15 +78,6 @@ export default function Asteroid({ homeRef }: AsteroidProps) {
     }
   }, [homeRef]);
 
-  // Initialize asteroid rotation values
-  useEffect(() => {
-    const rotations = Array.from(
-      { length: numAsteroids },
-      () => Math.random() * 360
-    );
-    setAsteroidRotations(rotations);
-  }, [numAsteroids]);
-
   const clickMeLocation = { x: window.innerWidth / 3, y: 100 };
 
   const FragmentAsteroidComponents = [
@@ -121,7 +111,7 @@ export default function Asteroid({ homeRef }: AsteroidProps) {
                   y: fragmentEdPts[index * 4 + i].y,
                   scale: 0
                 }}
-                transition={{ duration: 10, ease: [0.1, 0.87, 0.44, 1] }}
+                transition={{ duration: 5, ease: [0.1, 0.87, 0.44, 1] }}
                 onAnimationComplete={() =>
                   index === i && onFragmentAnimationComplete(index)
                 }
@@ -143,9 +133,6 @@ export default function Asteroid({ homeRef }: AsteroidProps) {
                   : asteroidAnimations[index]?.animate
               }
               transition={asteroidAnimations[index]?.transition}
-              style={
-                index === 0 ? {} : { rotate: `${asteroidRotations[index]}deg` }
-              }
             >
               <LargeAsteroid2 />
               {index === 0 && (

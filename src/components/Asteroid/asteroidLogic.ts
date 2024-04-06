@@ -16,7 +16,6 @@ export default function asteroidLogic({
   numAsteroids,
   contentPaddingLeft,
   contentPaddingRight,
-  contentWidth,
   setAsteroidVisibility,
   setAsteroidAnimations,
   setFragmentEndPts
@@ -55,15 +54,14 @@ export default function asteroidLogic({
   let generatedCount = 0;
   const generateEndPT = () => {
     const contentRight = window.innerWidth - contentPaddingRight;
-    console.log('width', contentWidth);
-    console.log(contentRight);
 
     //Let side of content
     if (generatedCount < 3) {
       generatedCount++;
       return {
         x: Math.max(Math.random() * (contentPaddingLeft - 100), 50),
-        y: Math.max(Math.random() * (window.innerHeight - 100), 100)
+        y: Math.max(Math.random() * (window.innerHeight - 100), 100),
+        rotate: Math.random() * 360
       };
     }
 
@@ -72,13 +70,14 @@ export default function asteroidLogic({
       generatedCount++;
       return {
         x: Math.min(
-          contentRight - 100 + Math.random() * (contentPaddingRight + 100),
+          contentRight - 125 + Math.random() * (contentPaddingRight + 75),
           window.innerWidth - 20
         ),
         y: Math.min(
           10 + Math.random() * (window.innerHeight / 3 + 100),
           window.innerHeight / 3
-        )
+        ),
+        rotate: Math.random() * 360
       };
     }
 
@@ -87,7 +86,7 @@ export default function asteroidLogic({
       generatedCount++;
       return {
         x: Math.min(
-          contentRight - 100 + Math.random() * (contentPaddingRight - 100),
+          contentRight - 125 + Math.random() * (contentPaddingRight + 75),
           window.innerWidth - 20
         ),
         y: Math.min(
@@ -95,7 +94,8 @@ export default function asteroidLogic({
             window.innerHeight / 2 +
             Math.random() * (window.innerHeight / 2),
           window.innerHeight - 75
-        )
+        ),
+        rotate: Math.random() * 360
       };
     } else {
       generatedCount++;
