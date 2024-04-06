@@ -7,7 +7,6 @@ type AsteroidProps = {
     contentPaddingLeft: number;
     contentPaddingRight: number;
     contentWidth: number;
-    setNumAsteroids: React.Dispatch<React.SetStateAction<number>>;
     setAsteroidVisibility: React.Dispatch<React.SetStateAction<boolean[]>>;
     setAsteroidAnimations: React.Dispatch<React.SetStateAction<{initial: Point; animate: Point; transition: {duration: number; ease: number[]}}[]>>;
     setFragmentEndPts: React.Dispatch<React.SetStateAction<Point[]>>;
@@ -15,16 +14,13 @@ type AsteroidProps = {
 
 export default function asteroidLogic({
   numAsteroids,
-  setNumAsteroids,
   contentPaddingLeft,
-  // contentPaddingRight,
+  contentPaddingRight,
   contentWidth,
   setAsteroidVisibility,
   setAsteroidAnimations,
   setFragmentEndPts
 }: AsteroidProps) {
-  setNumAsteroids(numAsteroids);
-
   setAsteroidVisibility(Array(numAsteroids).fill(true));
 
   //Startpt x: -window.innerWidth < x < 0
@@ -56,24 +52,58 @@ export default function asteroidLogic({
 
   //Endpt x: 0 < x < left padding || left padding + contentWidth < x < window.innerWidth
   //Endpt y: 0 < y < window.innerHeight
+  let generatedCount = 0;
   const generateEndPT = () => {
-    const contentMidPoint = contentPaddingLeft + contentWidth / 2;
+    const contentRight = window.innerWidth - contentPaddingRight;
+    console.log('width', contentWidth);
+    console.log(contentRight);
 
-    let endX = Math.random() * window.innerWidth;
-
-    if (endX < contentMidPoint) {
-      endX = Math.min(contentPaddingLeft - Math.random() * 100, endX);
+    //Let side of content
+    if (generatedCount < 3) {
+      generatedCount++;
+      return {
+        x: Math.max(Math.random() * (contentPaddingLeft - 100), 50),
+        y: Math.max(Math.random() * (window.innerHeight - 100), 100)
+      };
     }
 
-    if (endX > contentMidPoint) {
-      endX = Math.max(contentWidth - 500 - Math.random() * 100, endX);
+    //Right side of content top
+    if (generatedCount < 5) {
+      generatedCount++;
+      return {
+        x: Math.min(
+          contentRight - 100 + Math.random() * (contentPaddingRight + 100),
+          window.innerWidth - 20
+        ),
+        y: Math.min(
+          10 + Math.random() * (window.innerHeight / 3 + 100),
+          window.innerHeight / 3
+        )
+      };
     }
 
-    const endPT = {
-      x: endX,
-      y: Math.random() * (window.innerHeight - 100)
-    };
-    return endPT;
+    //Right side content bottom
+    if (generatedCount < 8) {
+      generatedCount++;
+      return {
+        x: Math.min(
+          contentRight - 100 + Math.random() * (contentPaddingRight - 100),
+          window.innerWidth - 20
+        ),
+        y: Math.min(
+          100 +
+            window.innerHeight / 2 +
+            Math.random() * (window.innerHeight / 2),
+          window.innerHeight - 75
+        )
+      };
+    } else {
+      generatedCount++;
+      return {
+        x: Math.max(Math.random() * (contentPaddingLeft - 100), 50),
+        y: Math.max(Math.random() * (window.innerHeight - 100), 100)
+      };
+    }
   };
 
   const calculateDistance = (startPT: Point, endPT: Point) => {

@@ -7,11 +7,27 @@
   pointer-events: none;
   z-index: 1;
 
+  @keyframes Float {
+    0% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+    100% {
+      transform: translateY(0px);
+    }
+  }
+
   .asteroid {
     position: absolute;
     top: 0;
     left: 0;
     pointer-events: auto;
+
+    .float {
+      animation: Float 5s infinite;
+    }
 
     &:hover {
       cursor: $cursor-pointer;

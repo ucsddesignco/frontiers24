@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useState } from 'react';
 
 import './Asteroid.scss';
@@ -26,7 +26,6 @@ export type Point = {
 };
 
 export default function Asteroid({ homeRef }: AsteroidProps) {
-  const [numAsteroids, setNumAsteroids] = useState(0);
   const [asteroidAnimations, setAsteroidAnimations] = useState<
     animationProps[]
   >([]); // [ {x: number, y: number}
@@ -35,6 +34,7 @@ export default function Asteroid({ homeRef }: AsteroidProps) {
   const [asteroidExploded, setAsteroidExploded] = useState<boolean[]>([]);
   const [fragmentEdPts, setFragmentEndPts] = useState<Point[]>([]);
   const [asteroidRotations, setAsteroidRotations] = useState<number[]>([]);
+  const numAsteroids = 7;
 
   const onButtonClick = (index: number) => {
     // Update the visibility state to hide the clicked asteroid
@@ -64,7 +64,6 @@ export default function Asteroid({ homeRef }: AsteroidProps) {
 
   useEffect(() => {
     const homeElement = homeRef.current;
-    const numAsteroids = 6;
 
     if (homeElement) {
       const style = window.getComputedStyle(homeElement);
@@ -73,7 +72,6 @@ export default function Asteroid({ homeRef }: AsteroidProps) {
         contentPaddingLeft: parseInt(style.paddingLeft),
         contentPaddingRight: parseInt(style.paddingRight),
         contentWidth: parseInt(style.width),
-        setNumAsteroids,
         setAsteroidVisibility,
         setAsteroidAnimations,
         setFragmentEndPts
@@ -98,6 +96,11 @@ export default function Asteroid({ homeRef }: AsteroidProps) {
     FragmentAsteroid3,
     FragmentAsteroid4
   ];
+
+  const asteroidRefs = useRef<(HTMLDivElement | null)[]>([]);
+  useEffect(() => {
+    asteroidRefs.current = asteroidRefs.current.slice(0, numAsteroids);
+  }, []);
 
   return (
     <section className="asteroid-container">
