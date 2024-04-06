@@ -12,10 +12,18 @@
     max-width: 50ch;
     width: fit-content;
     border-radius: 0;
+    margin-top: 1rem;
   }
-}
 
-[class*='react-tooltip__place-bottom'] {
-  > .arrow {
+  .react-tooltip-arrow {
+    $arrow-size: 6px;
+    transform: rotate(0deg) !important;
+    width: 0;
+    height: 0;
+    transform: translateY(-8px) !important;
+    border-left: $arrow-size solid transparent;
+    border-right: $arrow-size solid transparent;
+    border-bottom: calc($arrow-size * 2) solid rgba(255, 255, 255, 0.8); /* Change the color as needed */
+    background-color: transparent;
   }
 }
