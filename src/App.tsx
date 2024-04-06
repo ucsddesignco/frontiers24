@@ -25,6 +25,7 @@ function Rotate() {
   const mobileFAQRef = useRef<HTMLDivElement>(null);
   const mobileJudgesRef = useRef<HTMLDivElement>(null);
   const [logoLoaded, setLogoLoaded] = useState(false);
+  const homeRef = useRef<HTMLDivElement>(null);
 
   const scrollRefList = [scroll1Ref, scroll2Ref, scroll3Ref, scroll4Ref];
   const mobileScrollRefList = [
@@ -42,7 +43,7 @@ function Rotate() {
 
   return (
     <main ref={scrollContainerRef} className="scroll-cont">
-      <Asteroid homeRef={scroll1Ref} />
+      <Asteroid homeRef={homeRef} />
       <OrbitingPlanets planetRef={planetRef} pausedPlanet={pausedPlanet} />
       <Navbar
         navRef={navRef}
@@ -59,6 +60,7 @@ function Rotate() {
         logoLoaded={logoLoaded}
       />
       <Home
+        homeRef={homeRef}
         scroll1Ref={scroll1Ref}
         fakeLogoRef={fakeLogoRef}
         fakeRegisterRef={fakeRegisterRef}

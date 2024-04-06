@@ -27,7 +27,6 @@ export type Point = {
 
 export default function Asteroid({ homeRef }: AsteroidProps) {
   const [numAsteroids, setNumAsteroids] = useState(0);
-  const [contentInfo, setContentInfo] = useState({ paddingLeft: 0, width: 0 });
   const [asteroidAnimations, setAsteroidAnimations] = useState<
     animationProps[]
   >([]); // [ {x: number, y: number}
@@ -38,9 +37,6 @@ export default function Asteroid({ homeRef }: AsteroidProps) {
   const [asteroidRotations, setAsteroidRotations] = useState<number[]>([]);
 
   const onButtonClick = (index: number) => {
-    console.log(index);
-    console.log(fragmentEdPts);
-
     // Update the visibility state to hide the clicked asteroid
     setAsteroidVisibility(prevVisibility => {
       const newVisibility = [...prevVisibility];
@@ -68,19 +64,22 @@ export default function Asteroid({ homeRef }: AsteroidProps) {
 
   useEffect(() => {
     const homeElement = homeRef.current;
+    const numAsteroids = 6;
+
     if (homeElement) {
+      const style = window.getComputedStyle(homeElement);
       asteroidLogic({
-        homeElement,
-        setContentInfo,
-        contentPaddingLeft: contentInfo.paddingLeft,
-        contentWidth: contentInfo.width,
+        numAsteroids,
+        contentPaddingLeft: parseInt(style.paddingLeft),
+        contentPaddingRight: parseInt(style.paddingRight),
+        contentWidth: parseInt(style.width),
         setNumAsteroids,
         setAsteroidVisibility,
         setAsteroidAnimations,
         setFragmentEndPts
       });
     }
-  }, [homeRef, contentInfo.paddingLeft, contentInfo.width]);
+  }, [homeRef]);
 
   // Initialize asteroid rotation values
   useEffect(() => {
@@ -93,80 +92,40 @@ export default function Asteroid({ homeRef }: AsteroidProps) {
 
   const clickMeLocation = { x: window.innerWidth / 3, y: 100 };
 
+  const FragmentAsteroidComponents = [
+    FragmentAsteroid1,
+    FragmentAsteroid2,
+    FragmentAsteroid3,
+    FragmentAsteroid4
+  ];
+
   return (
     <section className="asteroid-container">
       {Array.from({ length: numAsteroids }, (_, index) =>
         asteroidExploded[index] && fragmentVisibility[index] ? (
           <>
-            <motion.div
-              className="fragment"
-              initial={
-                index === 0
-                  ? clickMeLocation
-                  : asteroidAnimations[index]?.animate
-              }
-              animate={{
-                x: fragmentEdPts[index * 4 + 0].x,
-                y: fragmentEdPts[index * 4 + 0].y,
-                scale: 0
-              }}
-              transition={{ duration: 10, ease: [0.1, 0.87, 0.44, 1] }}
-              onAnimationComplete={() => {
-                onFragmentAnimationComplete(index);
-              }}
-            >
-              <FragmentAsteroid1 />
-            </motion.div>
-            <motion.div
-              className="fragment"
-              initial={
-                index === 0
-                  ? clickMeLocation
-                  : asteroidAnimations[index]?.animate
-              }
-              animate={{
-                x: fragmentEdPts[index * 4 + 1].x,
-                y: fragmentEdPts[index * 4 + 1].y,
-                scale: 0
-              }}
-              transition={{ duration: 10, ease: [0.1, 0.87, 0.44, 1] }}
-            >
-              <FragmentAsteroid2 />
-            </motion.div>
-
-            <motion.div
-              className="fragment"
-              initial={
-                index === 0
-                  ? clickMeLocation
-                  : asteroidAnimations[index]?.animate
-              }
-              animate={{
-                x: fragmentEdPts[index * 4 + 2].x,
-                y: fragmentEdPts[index * 4 + 2].y,
-                scale: 0
-              }}
-              transition={{ duration: 10, ease: [0.1, 0.87, 0.44, 1] }}
-            >
-              <FragmentAsteroid3 />
-            </motion.div>
-
-            <motion.div
-              className="fragment"
-              initial={
-                index === 0
-                  ? clickMeLocation
-                  : asteroidAnimations[index]?.animate
-              }
-              animate={{
-                x: fragmentEdPts[index * 4 + 3].x,
-                y: fragmentEdPts[index * 4 + 3].y,
-                scale: 0
-              }}
-              transition={{ duration: 10, ease: [0.1, 0.87, 0.44, 1] }}
-            >
-              <FragmentAsteroid4 />
-            </motion.div>
+            {FragmentAsteroidComponents.map((FragmentComponent, i) => (
+              <motion.div
+                key={i}
+                className="fragment"
+                initial={
+                  index === 0
+                    ? clickMeLocation
+                    : asteroidAnimations[index]?.animate
+                }
+                animate={{
+                  x: fragmentEdPts[index * 4 + i].x,
+                  y: fragmentEdPts[index * 4 + i].y,
+                  scale: 0
+                }}
+                transition={{ duration: 10, ease: [0.1, 0.87, 0.44, 1] }}
+                onAnimationComplete={() =>
+                  index === i && onFragmentAnimationComplete(index)
+                }
+              >
+                <FragmentComponent />
+              </motion.div>
+            ))}
           </>
         ) : (
           asteroidVisibility[index] && (

@@ -5,6 +5,7 @@ import mobilePlanets from '/images/mobile-planets.svg';
 //write the typescript type for this prop
 
 type HomeProps = {
+  homeRef: React.RefObject<HTMLDivElement>;
   scroll1Ref: React.RefObject<HTMLElement>;
   fakeLogoRef: React.RefObject<HTMLImageElement>;
   fakeRegisterRef: React.RefObject<HTMLDivElement>;
@@ -12,6 +13,7 @@ type HomeProps = {
 };
 
 export default function Home({
+  homeRef,
   scroll1Ref,
   fakeLogoRef,
   fakeRegisterRef,
@@ -20,7 +22,7 @@ export default function Home({
   const mobileDateRef = useRef(null);
 
   return (
-    <div className="scroll-section-one">
+    <div ref={homeRef} className="scroll-section-one">
       <section ref={scroll1Ref} className="one home">
         <div className="logo-container">
           <img

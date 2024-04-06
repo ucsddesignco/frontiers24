@@ -3,10 +3,10 @@ import { Point } from './Asteroid';
 
 //prettier-ignore
 type AsteroidProps = {
-    homeElement: HTMLElement;
+  numAsteroids: number;
     contentPaddingLeft: number;
+    contentPaddingRight: number;
     contentWidth: number;
-    setContentInfo: React.Dispatch<React.SetStateAction<{paddingLeft: number; width: number;}>>;
     setNumAsteroids: React.Dispatch<React.SetStateAction<number>>;
     setAsteroidVisibility: React.Dispatch<React.SetStateAction<boolean[]>>;
     setAsteroidAnimations: React.Dispatch<React.SetStateAction<{initial: Point; animate: Point; transition: {duration: number; ease: number[]}}[]>>;
@@ -14,23 +14,15 @@ type AsteroidProps = {
 };
 
 export default function asteroidLogic({
-  homeElement,
-  setContentInfo,
+  numAsteroids,
   setNumAsteroids,
   contentPaddingLeft,
+  // contentPaddingRight,
   contentWidth,
   setAsteroidVisibility,
   setAsteroidAnimations,
   setFragmentEndPts
 }: AsteroidProps) {
-  const style = window.getComputedStyle(homeElement);
-  const paddingLeftValue = style.paddingLeft;
-  setContentInfo({
-    paddingLeft: parseFloat(paddingLeftValue),
-    width: homeElement.getBoundingClientRect().width
-  });
-
-  const numAsteroids = 5;
   setNumAsteroids(numAsteroids);
 
   setAsteroidVisibility(Array(numAsteroids).fill(true));
@@ -38,11 +30,28 @@ export default function asteroidLogic({
   //Startpt x: -window.innerWidth < x < 0
   //Startpt y: 0 < y < window.innerHeight
   const generateStartPT = () => {
-    const startPT = {
-      x: -((Math.random() * window.innerWidth) / 4),
-      y: Math.random() * window.innerHeight
-    };
-    return startPT;
+    // const startPT = {
+    //   x: -((Math.random() * window.innerWidth) / 4),
+    //   y: Math.random() * window.innerHeight
+    // };
+    // return startPT;
+
+    // Randomly decide whether to place the point offscreen to the left or the bottom
+    const isLeft = Math.random() > 0.5;
+
+    let x, y;
+
+    if (isLeft) {
+      // Place the point offscreen to the left
+      x = -Math.random() * 100 - 10; // Offscreen to the left
+      y = Math.random() * window.innerHeight; // Anywhere from top to bottom
+    } else {
+      // Place the point offscreen at the bottom
+      y = window.innerHeight + Math.random() * 100 + 10; // Offscreen at the bottom
+      x = Math.random() * window.innerWidth; // Anywhere from left to right
+    }
+
+    return { x, y };
   };
 
   //Endpt x: 0 < x < left padding || left padding + contentWidth < x < window.innerWidth
