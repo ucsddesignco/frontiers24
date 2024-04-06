@@ -169,7 +169,7 @@ export default function OrbitingPlanets({
         </g>
         <g id="Mask group">
           <mask id="mask0_1092_1256" maskUnits="userSpaceOnUse" x="430" y="314" width="67" height="66">
-            <circle id="Ellipse 298" cx="463.001" cy="347" r="33" fill="#D9D9D9"></circle>
+            <circle id="Ellipse 298" cx="463.001" cy="347" r="33" fill="#FFFFFF"></circle>
           </mask>
           <g mask="url(#mask0_1092_1256)">
             {/* Spin Animation */}
@@ -198,7 +198,7 @@ export default function OrbitingPlanets({
         </g>
         <g id="Mask group_2">
           <mask id="mask1_1092_1256" maskUnits="userSpaceOnUse" x="727" y="556" width="66" height="66">
-            <circle id="Ellipse 298_2" cx="760" cy="589" r="33" fill="#D9D9D9"></circle>
+            <circle id="Ellipse 298_2" cx="760" cy="589" r="33" fill="#FFFFFF"></circle>
           </mask>
           <g mask="url(#mask1_1092_1256)">
             {/* Spin Animation */}
@@ -210,6 +210,7 @@ export default function OrbitingPlanets({
             </image>
           </g>
         </g>
+        
         <circle id="Ellipse 302" cx="732.5" cy="569.5" r="12.5" fill="#A8E8FA"></circle>
         <circle id="Ellipse 301" cx="744.5" cy="549.5" r="7.5" fill="#A8E8FA"></circle>
       </g>
@@ -219,7 +220,7 @@ export default function OrbitingPlanets({
         </g>
         <g id="Mask group_3">
           <mask id="mask2_1092_1256" maskUnits="userSpaceOnUse" x="572" y="154" width="66" height="67">
-            <circle id="Ellipse 298_3" cx="605" cy="187.818" r="33" fill="#D9D9D9"></circle>
+            <circle id="Ellipse 298_3" cx="605" cy="187.818" r="33" fill="#FFFFFF"></circle>
           </mask>
           <g mask="url(#mask2_1092_1256)">
             {/* Spin Animation */}
@@ -246,7 +247,7 @@ export default function OrbitingPlanets({
             <circle cx="500.753" cy="588.755" r="32.7554" fill="#AD1457"></circle>
           </g>
           <mask id="mask3_1092_1256"  maskUnits="userSpaceOnUse" x="467" y="556" width="67" height="66">
-            <circle id="Ellipse 299_4" cx="500.753" cy="588.755" r="32.7554" fill="#D9D9D9"></circle>
+            <circle id="Ellipse 299_4" cx="500.753" cy="588.755" r="32.7554" fill="#FFFFFF"></circle>
           </mask>
           <g mask="url(#mask3_1092_1256)">
             {/* Spin Animation */}
@@ -275,7 +276,7 @@ export default function OrbitingPlanets({
         <feGaussianBlur stdDeviation="10" result="effect1_foregroundBlur_1092_1256"></feGaussianBlur>
       </filter>
       <filter id="filter1_f_1092_1256" x="677" y="506" width="165.511" height="165.511" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
-        <feFlood floodOpacity="0" result="BackgroundImageFix"></feFlood>
+        <feFlood floodOpacity="0.2" result="BackgroundImageFix"></feFlood>
         <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"></feBlend>
         <feGaussianBlur stdDeviation="25" result="effect1_foregroundBlur_1092_1256"></feGaussianBlur>
       </filter>
