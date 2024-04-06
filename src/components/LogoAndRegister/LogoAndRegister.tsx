@@ -52,8 +52,8 @@ export default function LogoAndRegister({
       registerRef.current.style.transform = `translate(${fakeRegisterInfo.x}px, ${fakeRegisterInfo.y}px)`;
       registerRef.current.style.opacity = '1';
       setTimeout(() => {
-        (registerRef.current!.style.transition = 'transform 0.4s ease-out'), 0;
-      });
+        registerRef.current!.style.transition = 'transform 0.4s ease-out';
+      }, 500);
     }
 
     if (scrollContainerRef.current && logoRef.current) {
