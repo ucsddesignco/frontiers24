@@ -49,7 +49,7 @@ export default function Home({
           </div>
           <div ref={mobileDateRef} className="mobile-h3-container">
             <h3>
-              Saturday, May 20th <br />
+              Saturday, April 13th <br />
               9am-5pm
             </h3>
             <h3>DIB 208</h3>
