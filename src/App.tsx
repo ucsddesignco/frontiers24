@@ -12,6 +12,7 @@ import { useRef, useState } from 'react';
 import LogoAndRegister from './components/LogoAndRegister/LogoAndRegister';
 import Asteroid from './components/Asteroid/Asteroid';
 import JudgeFunFacts from './components/JudgeFunFacts/JudgeFunFacts';
+import MobileFooter from './components/MobileFooter/MobileFooter';
 
 function Rotate() {
   const scrollContainerRef = useRef<HTMLElement>(null);
@@ -71,6 +72,7 @@ function Rotate() {
       <Timeline scroll3Ref={scroll3Ref} />
       <Judges scroll4Ref={scroll4Ref} mobileJudgesRef={mobileJudgesRef} />
       <JudgeFunFacts />
+      <MobileFooter />
     </main>
   );
 }

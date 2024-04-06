@@ -1,0 +1,29 @@
+footer {
+  color: $primary-orange;
+  padding: $mobile-padding;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  span {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    svg {
+      height: $p-size;
+    }
+
+    #heart {
+      margin-inline-start: calc($footer-font-size / 2);
+      margin-inline-end: calc($footer-font-size / 3);
+    }
+  }
+
+  @media (min-width: $mobile-breakpoint) {
+    display: none;
+  }
+}

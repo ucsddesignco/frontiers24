@@ -11,8 +11,8 @@ $mobile-breakpoint: 1200px;
 $p-size: clamp(16px, calc(10px + 0.7vw), 20px);
 $h3-size: clamp(22px, calc(12px + 0.8vw), 32px);
 $h2-size: 40px;
+$footer-font-size: clamp(8px, 2.5vw, $p-size);
 
-//Spacing and Sizing
 $header-font: 'Ridge Obligque Regular';
 $subheader-font: 'NeuePlak Bold';
 $p-font: 'NB International Regular';
