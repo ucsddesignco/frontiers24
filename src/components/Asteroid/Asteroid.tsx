@@ -169,14 +169,7 @@ export default function Asteroid({ homeRef }: AsteroidProps) {
               style={{ scale: index === 0 ? 1 : scale }}
             >
               <LargeAsteroid2 />
-              {index === 0 && (
-                <p
-                  style={{ textWrap: 'nowrap' }}
-                  className="asteroid-signifier"
-                >
-                  Click Me !
-                </p>
-              )}
+              {index === 0 && <p className="asteroid-signifier">Click Me !</p>}
             </motion.div>
           )
         )

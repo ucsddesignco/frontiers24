@@ -90,7 +90,8 @@ export default function asteroidLogic({
           window.innerHeight * 0.75 +
             Math.random() * (window.innerHeight * 0.25),
           window.innerHeight - 35
-        )
+        ),
+        rotate: Math.random() * 360
       };
     }
   };
