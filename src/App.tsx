@@ -10,6 +10,7 @@ import Timeline from './pages/Timeline/Timeline';
 import Judges from './pages/Judges/Judges';
 import { useRef, useState } from 'react';
 import LogoAndRegister from './components/LogoAndRegister/LogoAndRegister';
+import Asteroid from './components/Asteroid/Asteroid';
 
 function Rotate() {
   const scrollContainerRef = useRef<HTMLElement>(null);
@@ -24,6 +25,7 @@ function Rotate() {
   const mobileFAQRef = useRef<HTMLDivElement>(null);
   const mobileJudgesRef = useRef<HTMLDivElement>(null);
   const [logoLoaded, setLogoLoaded] = useState(false);
+  const homeRef = useRef<HTMLDivElement>(null);
 
   const scrollRefList = [scroll1Ref, scroll2Ref, scroll3Ref, scroll4Ref];
   const mobileScrollRefList = [
@@ -41,6 +43,7 @@ function Rotate() {
 
   return (
     <main ref={scrollContainerRef} className="scroll-cont">
+      <Asteroid homeRef={homeRef} />
       <OrbitingPlanets planetRef={planetRef} pausedPlanet={pausedPlanet} />
       <Navbar
         navRef={navRef}
@@ -57,6 +60,7 @@ function Rotate() {
         logoLoaded={logoLoaded}
       />
       <Home
+        homeRef={homeRef}
         scroll1Ref={scroll1Ref}
         fakeLogoRef={fakeLogoRef}
         fakeRegisterRef={fakeRegisterRef}

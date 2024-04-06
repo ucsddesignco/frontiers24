@@ -13,6 +13,7 @@
     "lint-check": "eslint . && prettier . --check"
   },
   "dependencies": {
+    "framer-motion": "^11.0.24",
     "@gsap/react": "^2.1.0",
     "gsap": "^3.12.5",
     "lint-staged": "^15.2.2",

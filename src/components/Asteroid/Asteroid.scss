@@ -1,0 +1,33 @@
+.asteroid-container {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  display: grid;
+  align-items: start;
+  pointer-events: none;
+  z-index: 1;
+
+  .asteroid {
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: auto;
+
+    &:hover {
+      cursor: $cursor-pointer;
+    }
+  }
+
+  .fragment {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .asteroid-signifier {
+    position: absolute;
+    top: -26px;
+    left: -15px;
+    width: 5rem;
+  }
+}
