@@ -3,7 +3,7 @@ export const TimelineInfo = [
     time: '9:00 AM',
     title: 'Event Kickoff',
     description:
-      'Designers will begin with registration and sign-in, an intorduction to the event, and energizing lighting talks.'
+      'Designers will begin with registration and sign-in, an introduction to the event, and energizing lighting talks.'
   },
   {
     time: '10:00 AM',
