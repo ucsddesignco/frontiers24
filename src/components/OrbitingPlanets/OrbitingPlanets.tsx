@@ -80,6 +80,16 @@ export default function OrbitingPlanets({
   );
 
   useEffect(() => {
+    const twoPI = Math.PI * 2;
+
+    // Display planets initially because animation starting position is different from svg position
+    orbitingElements.forEach(planet => {
+      const orbitingElement = planet.ref.current;
+      if (orbitingElement) {
+        // orbitingElement.setAttribute('transform', `translate(${x}, ${y})`);
+        orbitingElement.style.opacity = '1';
+      }
+    });
     function animateOrbits(timestamp: number) {
       if (lastFrameTime.current === null) {
         lastFrameTime.current = timestamp;
@@ -87,20 +97,6 @@ export default function OrbitingPlanets({
 
       const deltaTime = timestamp - lastFrameTime.current;
       lastFrameTime.current = timestamp;
-
-      // Display planets initially
-      orbitingElements.forEach(planet => {
-        const { ref, offsetX, offsetY, centerX, centerY, radius } = planet;
-
-        const x = centerX + radius * Math.cos(planet.angle) - offsetX;
-        const y = centerY + radius * Math.sin(planet.angle) - offsetY;
-
-        const orbitingElement = ref.current;
-        if (orbitingElement) {
-          orbitingElement.setAttribute('transform', `translate(${x}, ${y})`);
-          ref.current.style.opacity = '1';
-        }
-      });
 
       // Update each element's position based on its unique properties
       orbitingElements.forEach(planet => {
@@ -115,13 +111,12 @@ export default function OrbitingPlanets({
           color
         } = planet;
 
-        const speed = (2 * Math.PI) / (duration * 1000);
+        const speed = twoPI / (duration * 1000);
         planet.angle += speed * deltaTime; // Update the angle based on elapsed time and speed
 
-        ref.current ? (ref.current.style.opacity = '1') : null;
         if (pausedPlanet === color) {
-          const normalized_angle = (planet.angle + 2 * Math.PI) % (2 * Math.PI);
-          if (normalized_angle > -0.3 && normalized_angle < 0.3) {
+          const normalized_angle = (planet.angle + twoPI) % twoPI;
+          if (normalized_angle > -0.2 && normalized_angle < 0.2) {
             planet.angle = speed;
             return;
           }
@@ -143,9 +138,6 @@ export default function OrbitingPlanets({
     requestID.current = requestAnimationFrame(animateOrbits);
 
     return () => {
-      if (lastFrameTime.current) {
-        cancelAnimationFrame(lastFrameTime.current);
-      }
       if (requestID.current) {
         cancelAnimationFrame(requestID.current);
       }
