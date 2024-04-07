@@ -1,5 +1,5 @@
 import React from 'react';
-import { Point } from './Asteroid';
+import { Point, animationProps } from './Asteroid';
 
 //prettier-ignore
 type AsteroidProps = {
@@ -8,7 +8,7 @@ type AsteroidProps = {
     contentPaddingRight: number;
     contentWidth: number;
     setAsteroidVisibility: React.Dispatch<React.SetStateAction<boolean[]>>;
-    setAsteroidAnimations: React.Dispatch<React.SetStateAction<{initial: Point; animate: Point; transition: {duration: number; ease: number[]}}[]>>;
+    setAsteroidAnimations: React.Dispatch<React.SetStateAction<animationProps[]>>;
     setFragmentEndPts: React.Dispatch<React.SetStateAction<Point[]>>;
 };
 
@@ -22,15 +22,7 @@ export default function asteroidLogic({
 }: AsteroidProps) {
   setAsteroidVisibility(Array(numAsteroids).fill(true));
 
-  //Startpt x: -window.innerWidth < x < 0
-  //Startpt y: 0 < y < window.innerHeight
   const generateStartPT = () => {
-    // const startPT = {
-    //   x: -((Math.random() * window.innerWidth) / 4),
-    //   y: Math.random() * window.innerHeight
-    // };
-    // return startPT;
-
     // Randomly decide whether to place the point offscreen to the left or the bottom
     const isLeft = Math.random() > 0.5;
 

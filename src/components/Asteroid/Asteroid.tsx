@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { Transition, motion } from 'framer-motion';
 import React, { useEffect, useRef } from 'react';
 import { useState } from 'react';
 
@@ -14,15 +14,19 @@ type AsteroidProps = {
   homeRef: React.RefObject<HTMLElement>;
 };
 
-type animationProps = {
+export type animationProps = {
   initial: Point;
-  animate: Point;
-  transition: { duration: number; ease: number[] };
+  animate: EndPoint;
+  transition: Transition;
 };
 
 export type Point = {
   x: number;
   y: number;
+};
+
+type EndPoint = Point & {
+  rotate: number;
 };
 
 export default function Asteroid({ homeRef }: AsteroidProps) {
@@ -100,7 +104,7 @@ export default function Asteroid({ homeRef }: AsteroidProps) {
     }
   }, [homeRef, numAsteroids]);
 
-  const clickMeLocation = { x: window.innerWidth / 3, y: 100 };
+  const clickMeLocation = { x: window.innerWidth / 3 - 50, y: 100 };
 
   const FragmentAsteroidComponents = [
     FragmentAsteroid1,
@@ -123,8 +127,35 @@ export default function Asteroid({ homeRef }: AsteroidProps) {
   );
 
   const asteroidScales = useRef(
-    Array.from({ length: numAsteroids }, () => Math.random() * 0.7 + 0.6)
+    Array.from({ length: numAsteroids }, () => Math.random() * 0.6 + 0.7)
   ).current;
+
+  const beginFloatAnimation = (index: number) => {
+    const asteroidElement = asteroidRefs.current[index]?.current;
+    if (asteroidElement) {
+      setAsteroidAnimations(allPrevAnimations => {
+        const newAnimations = [...allPrevAnimations];
+        const previousAnimation = newAnimations[index];
+        const { y, rotate } = previousAnimation.animate;
+        const rotateLeft = Math.random() > 0.5;
+        newAnimations[index] = {
+          ...previousAnimation,
+          animate: {
+            ...previousAnimation.animate,
+            y: y + 12,
+            rotate: rotateLeft ? rotate + 10 : rotate - 10
+          },
+          transition: {
+            duration: 3.5,
+            repeat: Infinity,
+            repeatType: 'reverse',
+            ease: 'easeInOut'
+          }
+        };
+        return newAnimations;
+      });
+    }
+  };
 
   return (
     <section className="asteroid-container">
@@ -167,6 +198,9 @@ export default function Asteroid({ homeRef }: AsteroidProps) {
               transition={asteroidAnimations[index]?.transition}
               ref={asteroidRefs.current[index]}
               style={{ scale: index === 0 ? 1 : scale }}
+              onAnimationComplete={() => {
+                beginFloatAnimation(index);
+              }}
             >
               <LargeAsteroid2 />
               {index === 0 && <p className="asteroid-signifier">Click Me !</p>}
