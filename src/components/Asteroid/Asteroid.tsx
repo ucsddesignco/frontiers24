@@ -104,6 +104,21 @@ export default function Asteroid({ homeRef }: AsteroidProps) {
     }
   }, [homeRef, numAsteroids]);
 
+  const calculateClickMeInitial = () => {
+    const isLeft = Math.random() > 0.5;
+    let x, y;
+    if (isLeft) {
+      x = -Math.random() * 200 - 10;
+      y = Math.random() * window.innerHeight;
+    } else {
+      x = (Math.random() * window.innerWidth) / 3;
+      y = -Math.random() * 100 - 10;
+    }
+    return { x, y };
+  };
+
+  const clickMeInitial = calculateClickMeInitial();
+
   const clickMeLocation = { x: window.innerWidth / 3 - 50, y: 100 };
 
   const FragmentAsteroidComponents = [
@@ -189,7 +204,11 @@ export default function Asteroid({ homeRef }: AsteroidProps) {
               key={'asteroid' + index}
               className="asteroid"
               onClick={() => onButtonClick(index)}
-              initial={asteroidAnimations[index]?.initial}
+              initial={
+                index === 0
+                  ? clickMeInitial
+                  : asteroidAnimations[index]?.initial
+              }
               animate={
                 index === 0
                   ? clickMeLocation
