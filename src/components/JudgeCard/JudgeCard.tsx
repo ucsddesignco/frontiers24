@@ -12,7 +12,6 @@ const JudgeCard = ({
   name,
   pronouns,
   position,
-  funFact,
   imgLink,
   linkedin
 }: JudgeProps) => {
@@ -34,10 +33,9 @@ const JudgeCard = ({
         <p>{position}</p>
           <p
             data-tooltip-id={`${name}-tooltip`}
-            data-tooltip-content={funFact}
-            data-tooltip-place="bottom"
             className="trigger"
           >
+            {/* Fun fact pop-up is defined in JudgeFunFacts.tsx */}
             See my fun fact!
           </p>
       </div>

@@ -1,15 +1,16 @@
 import { JudgeInfo } from '../../pages/Judges/JudgeInfo';
-import { Tooltip } from 'react-tooltip';
 import './JudgeFunFacts.scss';
+import CustomToolTip from '../CustomToolTIp/CustomToolTip';
 
 export default function JudgeFunFacts() {
   return (
     <div className="judge-fun-facts">
       {JudgeInfo.map(item => (
-        <Tooltip
+        <CustomToolTip
           key={`${item.name}-tooltip`}
           id={`${item.name}-tooltip`}
-          className="tooltip"
+          content={item.funFact}
+          place="bottom"
         />
       ))}
     </div>

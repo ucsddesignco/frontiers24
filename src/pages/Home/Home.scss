@@ -104,6 +104,12 @@ $text-color: white;
         background-color 0.3s,
         color 0.3s;
 
+      &.disabled:hover {
+        cursor: not-allowed;
+        background-color: $primary-orange;
+        color: $primary-white;
+      }
+
       &:hover {
         background-color: $primary-white;
         color: $primary-orange;
@@ -121,8 +127,6 @@ $text-color: white;
 
     @media screen and (max-width: $mobile-breakpoint) {
       opacity: 1;
-      margin: 0 auto 2rem;
-      width: 100%;
     }
 
     @media screen and (max-width: 550px) {

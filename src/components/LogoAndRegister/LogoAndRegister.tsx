@@ -1,6 +1,7 @@
 import './LogoAndRegister.scss';
 import { useEffect, useRef } from 'react';
 import Logo from '/images/Logo.svg';
+import CustomToolTip from '../CustomToolTIp/CustomToolTip';
 
 type LogoAndRegisterProps = {
   scrollContainerRef: React.RefObject<HTMLElement>;
@@ -8,6 +9,7 @@ type LogoAndRegisterProps = {
   fakeRegisterRef: React.RefObject<HTMLDivElement>;
   navRef: React.RefObject<HTMLDivElement>;
   logoLoaded: boolean;
+  registerClosed: boolean;
 };
 
 export default function LogoAndRegister({
@@ -15,7 +17,8 @@ export default function LogoAndRegister({
   fakeLogoRef,
   fakeRegisterRef,
   navRef,
-  logoLoaded
+  logoLoaded,
+  registerClosed
 }: LogoAndRegisterProps) {
   const logoRef = useRef<HTMLImageElement>(null);
   const registerRef = useRef<HTMLImageElement>(null);
@@ -50,7 +53,7 @@ export default function LogoAndRegister({
 
     if (registerRef.current && fakeRegisterInfo) {
       registerRef.current.style.transform = `translate(${fakeRegisterInfo.x}px, ${fakeRegisterInfo.y}px)`;
-      registerRef.current.style.opacity = '1';
+      registerRef.current.style.opacity = registerClosed ? '0.5' : '1';
       setTimeout(() => {
         registerRef.current!.style.transition = 'transform 0.4s ease-out';
       }, 500);
@@ -84,21 +87,44 @@ export default function LogoAndRegister({
         lastScrollTopRef.current = scrollPosition <= 0 ? 0 : scrollPosition;
       });
     }
-  }, [logoLoaded, fakeLogoRef, scrollContainerRef, fakeRegisterRef, navRef]);
+  }, [
+    logoLoaded,
+    fakeLogoRef,
+    scrollContainerRef,
+    fakeRegisterRef,
+    navRef,
+    registerClosed
+  ]);
 
   return (
     <div className="logo-and-register">
       <img ref={logoRef} src={Logo} alt="Design Frontiers Logo" />
-      <div className="register-button" ref={registerRef}>
+      <div
+        data-tooltip-id={`fake-register-tooltip`}
+        data-tooltip-content={'Registration is closed.'}
+        data-tooltip-place="top"
+        className="register-button disabled"
+        ref={registerRef}
+      >
         <a
-          className="button parallelogram"
-          href="https://forms.gle/3vDkncYXUpMrX7D17"
-          target="_blank"
+          className={`button parallelogram ${registerClosed ? 'disabled' : ''}`}
+          href={
+            registerClosed
+              ? 'javascript:;'
+              : 'https://forms.gle/3vDkncYXUpMrX7D17'
+          }
+          target={registerClosed ? '_self' : '_blank'}
           rel="noreferrer"
+          aria-disabled={registerClosed}
         >
           <span className="skew-fix">REGISTER NOW</span>
         </a>
       </div>
+      <CustomToolTip
+        id="fake-register-tooltip"
+        place="top"
+        content="Registration is closed."
+      />
     </div>
   );
 }

@@ -2,7 +2,7 @@ import './Home.scss';
 import Logo from '/images/Logo.svg';
 import { useRef } from 'react';
 import mobilePlanets from '/images/mobile-planets.svg';
-//write the typescript type for this prop
+import CustomToolTip from '../../components/CustomToolTIp/CustomToolTip';
 
 type HomeProps = {
   homeRef: React.RefObject<HTMLDivElement>;
@@ -10,6 +10,7 @@ type HomeProps = {
   fakeLogoRef: React.RefObject<HTMLImageElement>;
   fakeRegisterRef: React.RefObject<HTMLDivElement>;
   setLogoLoaded: React.Dispatch<React.SetStateAction<boolean>>;
+  registerClosed: boolean;
 };
 
 export default function Home({
@@ -17,7 +18,8 @@ export default function Home({
   scroll1Ref,
   fakeLogoRef,
   fakeRegisterRef,
-  setLogoLoaded
+  setLogoLoaded,
+  registerClosed
 }: HomeProps) {
   const mobileDateRef = useRef(null);
 
@@ -56,14 +58,20 @@ export default function Home({
           </div>
         </div>
         <div
-          className="register-button"
+          data-tooltip-id={`register-tooltip`}
+          className={`register-button`}
           ref={fakeRegisterRef}
           aria-hidden="true"
         >
           <a
-            className="button parallelogram"
-            href="https://forms.gle/3vDkncYXUpMrX7D17"
-            target="_blank"
+            style={{ opacity: registerClosed ? 0.5 : 1 }}
+            className={`button parallelogram ${registerClosed ? 'disabled' : ''}`}
+            href={
+              registerClosed
+                ? 'javascript:;'
+                : 'https://forms.gle/3vDkncYXUpMrX7D17'
+            }
+            target={registerClosed ? '_self' : '_blank'}
             rel="noreferrer"
           >
             <span className="skew-fix">REGISTER NOW</span>
@@ -75,6 +83,13 @@ export default function Home({
           alt="A blue, purple, red, and yellow planet on orbit lines"
         />
       </section>
+      {/* Theme is light because the home page on mobile is dark */}
+      <CustomToolTip
+        id="register-tooltip"
+        place="top-start"
+        content="Registration is closed."
+        theme="light"
+      />
     </div>
   );
 }

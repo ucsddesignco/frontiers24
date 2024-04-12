@@ -38,6 +38,7 @@ function Rotate() {
   ];
 
   const [pausedPlanet, setPausedPlanet] = useState('');
+  const registerClosed = true;
 
   useGSAP(() => {
     handleRotate(planetRef);
@@ -55,6 +56,7 @@ function Rotate() {
         mobileScrollRefList={mobileScrollRefList}
       />
       <LogoAndRegister
+        registerClosed={registerClosed}
         navRef={navRef}
         scrollContainerRef={scrollContainerRef}
         fakeLogoRef={fakeLogoRef}
@@ -62,6 +64,7 @@ function Rotate() {
         logoLoaded={logoLoaded}
       />
       <Home
+        registerClosed={registerClosed}
         homeRef={homeRef}
         scroll1Ref={scroll1Ref}
         fakeLogoRef={fakeLogoRef}
