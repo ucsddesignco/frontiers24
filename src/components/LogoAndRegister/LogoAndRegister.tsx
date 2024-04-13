@@ -24,10 +24,7 @@ export default function LogoAndRegister({
 
   useEffect(() => {
     const fakeLogoInfo = fakeLogoRef.current?.getBoundingClientRect();
-    const initialLogoWidth =
-      parseInt(
-        window.getComputedStyle(fakeLogoRef.current!).getPropertyValue('width')
-      ) || 0;
+    let initialLogoWidth = 0;
     const navRightValue = navRef.current
       ? parseInt(
           window.getComputedStyle(navRef.current).getPropertyValue('right')
@@ -40,6 +37,9 @@ export default function LogoAndRegister({
 
     if (logoRef.current && fakeLogoInfo && fakeLogoRef.current) {
       fakeLogoRef.current.onload = () => {
+        console.log('onload triggered');
+        initialLogoWidth =
+          parseInt(window.getComputedStyle(fakeLogoRef.current!).width) || 0;
         logoRef.current!.style.width = initialLogoWidth + 'px';
         logoRef.current!.style.transform = `translate(${fakeLogoInfo.x}px, ${fakeLogoInfo.y - 20}px)`;
         logoRef.current!.style.opacity = '1';
