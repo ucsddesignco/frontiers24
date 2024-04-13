@@ -9,7 +9,6 @@ type HomeProps = {
   scroll1Ref: React.RefObject<HTMLElement>;
   fakeLogoRef: React.RefObject<HTMLImageElement>;
   fakeRegisterRef: React.RefObject<HTMLDivElement>;
-  setLogoLoaded: React.Dispatch<React.SetStateAction<boolean>>;
   registerClosed: boolean;
 };
 
@@ -18,7 +17,6 @@ export default function Home({
   scroll1Ref,
   fakeLogoRef,
   fakeRegisterRef,
-  setLogoLoaded,
   registerClosed
 }: HomeProps) {
   const mobileDateRef = useRef(null);
@@ -33,9 +31,6 @@ export default function Home({
             className="fake-logo"
             alt="Design Frontiers Logo"
             aria-hidden="true"
-            onLoad={() => {
-              setLogoLoaded(true);
-            }}
           />
           <img src={Logo} className="mobile-logo" alt="" />
         </div>
@@ -58,7 +53,7 @@ export default function Home({
           </div>
         </div>
         <div
-          data-tooltip-id={`register-tooltip`}
+          data-tooltip-id={`fake-register-tooltip`}
           className={`register-button`}
           ref={fakeRegisterRef}
           aria-hidden="true"
@@ -85,7 +80,7 @@ export default function Home({
       </section>
       {/* Theme is light because the home page on mobile is dark */}
       <CustomToolTip
-        id="register-tooltip"
+        id="fake-register-tooltip"
         place="top-start"
         content="Registration is closed."
         theme="light"

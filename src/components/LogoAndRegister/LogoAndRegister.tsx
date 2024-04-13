@@ -8,7 +8,6 @@ type LogoAndRegisterProps = {
   fakeLogoRef: React.RefObject<HTMLImageElement>;
   fakeRegisterRef: React.RefObject<HTMLDivElement>;
   navRef: React.RefObject<HTMLDivElement>;
-  logoLoaded: boolean;
   registerClosed: boolean;
 };
 
@@ -17,7 +16,6 @@ export default function LogoAndRegister({
   fakeLogoRef,
   fakeRegisterRef,
   navRef,
-  logoLoaded,
   registerClosed
 }: LogoAndRegisterProps) {
   const logoRef = useRef<HTMLImageElement>(null);
@@ -25,7 +23,6 @@ export default function LogoAndRegister({
   const lastScrollTopRef = useRef(0);
 
   useEffect(() => {
-    if (!logoLoaded) return;
     const fakeLogoInfo = fakeLogoRef.current?.getBoundingClientRect();
     const initialLogoWidth =
       parseInt(
@@ -42,13 +39,15 @@ export default function LogoAndRegister({
     const initialRegisterWidth = registerInfo!.width;
 
     if (logoRef.current && fakeLogoInfo && fakeLogoRef.current) {
-      logoRef.current.style.width = initialLogoWidth + 'px';
-      logoRef.current.style.transform = `translate(${fakeLogoInfo.x}px, ${fakeLogoInfo.y - 20}px)`;
-      logoRef.current.style.opacity = '1';
-      setTimeout(() => {
-        logoRef.current!.style.transition =
-          'transform 0.4s ease-out, scale 0.4s ease-out';
-      }, 500);
+      fakeLogoRef.current.onload = () => {
+        logoRef.current!.style.width = initialLogoWidth + 'px';
+        logoRef.current!.style.transform = `translate(${fakeLogoInfo.x}px, ${fakeLogoInfo.y - 20}px)`;
+        logoRef.current!.style.opacity = '1';
+        setTimeout(() => {
+          logoRef.current!.style.transition =
+            'transform 0.4s ease-out, scale 0.4s ease-out';
+        }, 500);
+      };
     }
 
     if (registerRef.current && fakeRegisterInfo) {
@@ -88,7 +87,6 @@ export default function LogoAndRegister({
       });
     }
   }, [
-    logoLoaded,
     fakeLogoRef,
     scrollContainerRef,
     fakeRegisterRef,
@@ -100,7 +98,7 @@ export default function LogoAndRegister({
     <div className="logo-and-register">
       <img ref={logoRef} src={Logo} alt="Design Frontiers Logo" />
       <div
-        data-tooltip-id={`fake-register-tooltip`}
+        data-tooltip-id={`register-tooltip`}
         data-tooltip-content={'Registration is closed.'}
         data-tooltip-place="top"
         className="register-button disabled"
@@ -121,7 +119,7 @@ export default function LogoAndRegister({
         </a>
       </div>
       <CustomToolTip
-        id="fake-register-tooltip"
+        id="register-tooltip"
         place="top"
         content="Registration is closed."
       />
