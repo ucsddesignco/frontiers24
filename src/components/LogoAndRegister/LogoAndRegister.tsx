@@ -23,7 +23,7 @@ export default function LogoAndRegister({
   const lastScrollTopRef = useRef(0);
 
   useEffect(() => {
-    const fakeLogoInfo = fakeLogoRef.current?.getBoundingClientRect();
+    let fakeLogoInfo: DOMRect | undefined = undefined;
     let initialLogoWidth = 0;
     const navRightValue = navRef.current
       ? parseInt(
@@ -35,9 +35,10 @@ export default function LogoAndRegister({
     const registerInfo = registerRef.current?.getBoundingClientRect();
     const initialRegisterWidth = registerInfo!.width;
 
-    if (logoRef.current && fakeLogoInfo && fakeLogoRef.current) {
+    if (logoRef.current && fakeLogoRef.current) {
       fakeLogoRef.current.onload = () => {
         console.log('onload triggered');
+        fakeLogoInfo = fakeLogoRef.current!.getBoundingClientRect();
         initialLogoWidth =
           parseInt(window.getComputedStyle(fakeLogoRef.current!).width) || 0;
         logoRef.current!.style.width = initialLogoWidth + 'px';
