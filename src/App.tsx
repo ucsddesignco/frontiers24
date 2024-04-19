@@ -13,6 +13,7 @@ import LogoAndRegister from './components/LogoAndRegister/LogoAndRegister';
 import Asteroid from './components/Asteroid/Asteroid';
 import JudgeFunFacts from './components/JudgeFunFacts/JudgeFunFacts';
 import MobileFooter from './components/MobileFooter/MobileFooter';
+import Recap from './pages/Recap/Recap';
 
 function Rotate() {
   const scrollContainerRef = useRef<HTMLElement>(null);
@@ -20,6 +21,7 @@ function Rotate() {
   const scroll2Ref = useRef<HTMLElement>(null);
   const scroll3Ref = useRef<HTMLElement>(null);
   const scroll4Ref = useRef<HTMLDivElement>(null);
+  const scroll5Ref = useRef<HTMLDivElement>(null);
   const planetRef = useRef<SVGSVGElement>(null);
   const fakeLogoRef = useRef<HTMLImageElement>(null);
   const fakeRegisterRef = useRef<HTMLDivElement>(null);
@@ -28,13 +30,21 @@ function Rotate() {
   const mobileJudgesRef = useRef<HTMLDivElement>(null);
   const [logoLoaded, setLogoLoaded] = useState(false);
   const homeRef = useRef<HTMLDivElement>(null);
+  const mobileRecapRef = useRef<HTMLDivElement>(null);
 
-  const scrollRefList = [scroll1Ref, scroll2Ref, scroll3Ref, scroll4Ref];
+  const scrollRefList = [
+    scroll1Ref,
+    scroll2Ref,
+    scroll3Ref,
+    scroll4Ref,
+    scroll5Ref
+  ];
   const mobileScrollRefList = [
     scroll1Ref,
     mobileFAQRef,
     scroll3Ref,
-    mobileJudgesRef
+    mobileJudgesRef,
+    mobileRecapRef
   ];
 
   const [pausedPlanet, setPausedPlanet] = useState('');
@@ -75,6 +85,8 @@ function Rotate() {
       <Timeline scroll3Ref={scroll3Ref} />
       <Judges scroll4Ref={scroll4Ref} mobileJudgesRef={mobileJudgesRef} />
       <JudgeFunFacts />
+      <Recap scroll5Ref={scroll5Ref} mobileRecapRef={mobileRecapRef} />
+
       <MobileFooter />
     </main>
   );

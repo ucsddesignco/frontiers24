@@ -13,7 +13,7 @@ type NavbarProps = {
   mobileScrollRefList?: MutableRefObject<HTMLElement | null>[];
 };
 
-type Pages = 'Home' | 'FAQ' | 'Timeline' | 'Judges';
+type Pages = 'Home' | 'FAQ' | 'Timeline' | 'Judges' | 'Recap';
 
 export default function Navbar({
   scrollRefList,
@@ -23,12 +23,13 @@ export default function Navbar({
   mobileScrollRefList
 }: NavbarProps) {
   const [isHamburgerOpen, setIsHamburgerOpen] = useState(false);
-  const pagesList = ['Home', 'FAQ', 'Timeline', 'Judges'];
+  const pagesList = ['Home', 'FAQ', 'Timeline', 'Judges', 'Recap'];
   const planetColorsPages = {
     Home: '',
     FAQ: 'blue',
     Timeline: 'purple',
-    Judges: 'red'
+    Judges: 'red',
+    Recap: 'yellow'
   };
   const isDesktop = useIsDesktop();
   const [pageSelected, setPageSelected] = useState('Home');
@@ -107,6 +108,12 @@ export default function Navbar({
           // Scrolling Down
           if (
             scrollPosition >
+            scrollRefList[3].current!.offsetTop + pageHeight / 2
+          ) {
+            setPageSelected('Recap');
+            setPausedPlanet('yellow');
+          } else if (
+            scrollPosition >
             scrollRefList[2].current!.offsetTop + pageHeight / 2
           ) {
             setPageSelected('Judges');
@@ -138,6 +145,12 @@ export default function Navbar({
           ) {
             setPageSelected('Timeline');
             setPausedPlanet('purple');
+          } else if (
+            scrollPosition <
+            scrollRefList[4].current!.offsetTop - pageHeight / 2
+          ) {
+            setPageSelected('Judges');
+            setPausedPlanet('red');
           }
         }
         lastScrollTopRef.current = scrollPosition <= 0 ? 0 : scrollPosition;

@@ -10,17 +10,23 @@ footer {
     display: flex;
     flex-direction: row;
     align-items: center;
+    p {
+      font-size: $footer-font-size;
+    }
 
     flex-wrap: wrap;
 
     svg {
-      height: $p-size;
+      height: $footer-font-size;
     }
 
     #heart {
       margin-inline-start: calc($footer-font-size / 2);
       margin-inline-end: calc($footer-font-size / 3);
     }
+  }
+  a {
+    font-size: $footer-font-size;
   }
 
   @media (min-width: $mobile-breakpoint) {

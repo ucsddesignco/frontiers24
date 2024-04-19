@@ -1,0 +1,191 @@
+.scroll-section-seven,
+.scroll-section-eight {
+  display: none;
+}
+.mobile {
+  display: block;
+  .recap {
+    padding-top: 4rem;
+
+    h1 {
+      font-size: 2.5rem;
+      color: $primary-orange;
+      margin-bottom: 0.5rem;
+    }
+    p {
+      margin-bottom: 0rem;
+    }
+    .last {
+      margin-bottom: 1rem;
+    }
+    .grid-layout {
+      height: auto;
+      width: 100%;
+      margin-bottom: 0rem;
+      display: grid;
+      grid-template-columns: 4fr;
+      grid-template-rows: repeat(16, 1fr);
+      grid-column-gap: 0px;
+      grid-row-gap: 3rem;
+
+      .project-item {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        height: calc(2rem + 3vw);
+
+        .left {
+          display: inline-block;
+          align-items: start;
+          justify-content: center;
+          height: auto;
+          line-height: 1.85rem;
+        }
+
+        .right {
+          width: 88%;
+          height: 4rem;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          align-items: start;
+          .project-name {
+            font-size: 1.25rem;
+            font-family: $p-font;
+          }
+          .button-cont {
+            display: flex;
+            flex-direction: row;
+            justify-content: start;
+
+            width: 90%;
+            .btn {
+              text-decoration: none;
+              transform: skew(-15deg);
+
+              display: inline-block;
+
+              padding: 0.4em 1.2em;
+              text-overflow: none;
+              white-space: nowrap;
+
+              p {
+                font-size: clamp(0.625rem, 0.9vw, 1rem);
+                letter-spacing: 2.4px;
+                margin-bottom: 0;
+                transform: skew(15deg);
+              }
+            }
+
+            .btn.case-study {
+              background-color: $primary-orange;
+              color: $primary-white;
+            }
+
+            .btn.slide-deck {
+              background-color: $primary-white;
+              color: $primary-blue;
+              margin-left: clamp(0.5rem, 0.78vw, 1rem);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: $mobile-breakpoint) {
+  .scroll-section-seven,
+  .scroll-section-eight {
+    display: block;
+  }
+
+  .mobile {
+    display: none;
+  }
+  .recap {
+    h1 {
+      font-size: 2.5rem;
+      color: $primary-orange;
+      margin-bottom: 1.5rem;
+    }
+    p {
+      margin-bottom: 0.5rem;
+    }
+    .last {
+      margin-bottom: 1.5rem;
+    }
+
+    .grid-layout {
+      height: 50%;
+      width: 95%;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(4, 1fr);
+      grid-column-gap: 10%;
+      grid-row-gap: 2%;
+
+      .project-item {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        height: calc(2rem + 3vw);
+
+        .left {
+          display: inline-block;
+          align-items: start;
+          justify-content: center;
+          height: auto;
+          line-height: 1.85rem;
+        }
+
+        .right {
+          width: 88%;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          align-items: start;
+          .project-name {
+            font-size: 1.25rem;
+            font-family: $p-font;
+          }
+          .button-cont {
+            display: flex;
+            flex-direction: row;
+            justify-content: start;
+
+            width: 90%;
+            .btn {
+              text-decoration: none;
+              transform: skew(-15deg);
+
+              display: inline-block;
+
+              padding: 0.4em 1.2em;
+              text-overflow: none;
+              white-space: nowrap;
+
+              p {
+                font-size: clamp(0.625rem, 0.9vw, 1rem);
+                letter-spacing: 2.4px;
+                margin-bottom: 0;
+                transform: skew(15deg);
+              }
+            }
+
+            .btn.case-study {
+              background-color: $primary-orange;
+              color: $primary-white;
+            }
+
+            .btn.slide-deck {
+              background-color: $primary-white;
+              color: $primary-blue;
+              margin-left: clamp(0.5rem, 0.78vw, 1rem);
+            }
+          }
+        }
+      }
+    }
+  }
+}
