@@ -39,16 +39,10 @@
   }
 
   .title {
-    display: flex;
-    width: 30vw;
-    line-height: 34px;
-    margin-bottom: 60px;
-    justify-content: start;
-    font-size: 40px;
+    margin-bottom: 3rem;
 
     @media screen and (max-width: $mobile-breakpoint) {
-      width: 50vw;
-      margin-bottom: 60px;
+      margin-bottom: 2rem;
     }
   }
 
@@ -56,7 +50,6 @@
     display: flex-inline;
     text-align: right;
     width: calc($p-size * 6);
-    line-height: 34px;
     justify-content: start;
 
     @media screen and (max-width: $mobile-breakpoint) {

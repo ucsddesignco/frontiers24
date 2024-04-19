@@ -53,6 +53,10 @@
       margin: 0;
       font-size: 40px;
       color: $primary-orange;
+
+      @media (max-width: $mobile-breakpoint) {
+        padding-top: 1.5rem;
+      }
     }
   }
 }

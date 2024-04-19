@@ -15,7 +15,7 @@ import JudgeFunFacts from './components/JudgeFunFacts/JudgeFunFacts';
 import MobileFooter from './components/MobileFooter/MobileFooter';
 import Recap from './pages/Recap/Recap';
 
-function Rotate() {
+function App() {
   const scrollContainerRef = useRef<HTMLElement>(null);
   const scroll1Ref = useRef<HTMLElement>(null);
   const scroll2Ref = useRef<HTMLElement>(null);
@@ -92,4 +92,4 @@ function Rotate() {
   );
 }
 
-export default Rotate;
+export default App;
