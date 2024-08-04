@@ -259,6 +259,90 @@ export function handleRotate(planetRef: React.RefObject<SVGSVGElement>) {
       duration: 1,
       ease: 'none'
     });
+    gsap.from('.seven', {
+      scrollTrigger: {
+        scroller: '.scroll-cont',
+        trigger: '.scroll-section-seven',
+        scrub: 0.1,
+        start: 'top 100%',
+        end: 'top'
+      },
+      opacity: 0,
+      duration: 1,
+      ease: 'out',
+      x: -1000,
+      y: 200
+    });
+
+    gsap.from('.seven', {
+      scrollTrigger: {
+        scroller: '.scroll-cont',
+        trigger: '.scroll-section-seven',
+        scrub: 0.1,
+        //Where animation starts and ends
+        start: 'bottom 100%',
+        end: 'bottom'
+      },
+      opacity: 1,
+      duration: 1,
+      ease: 'none'
+    });
+
+    gsap.to('.seven', {
+      scrollTrigger: {
+        scroller: '.scroll-cont',
+        trigger: '.scroll-section-seven',
+        scrub: 0.01,
+        start: 'top 100%',
+        end: 'bottom'
+      },
+      rotation: -80,
+      transformOrigin: transformOrigin,
+      duration: 1,
+      ease: 'none'
+    });
+    gsap.from('.eight', {
+      scrollTrigger: {
+        scroller: '.scroll-cont',
+        trigger: '.scroll-section-eight',
+        scrub: 0.1,
+        start: 'top 100%',
+        end: 'top'
+      },
+      opacity: 0,
+      duration: 1,
+      ease: 'out',
+      x: -1000,
+      y: 200
+    });
+
+    gsap.from('.eight', {
+      scrollTrigger: {
+        scroller: '.scroll-cont',
+        trigger: '.scroll-section-eight',
+        scrub: 0.1,
+        //Where animation starts and ends
+        start: 'bottom 100%',
+        end: 'bottom'
+      },
+      opacity: 1,
+      duration: 1,
+      ease: 'none'
+    });
+
+    gsap.to('.eight', {
+      scrollTrigger: {
+        scroller: '.scroll-cont',
+        trigger: '.scroll-section-eight',
+        scrub: 0.01,
+        start: 'top 100%',
+        end: 'bottom'
+      },
+      rotation: -80,
+      transformOrigin: transformOrigin,
+      duration: 1,
+      ease: 'none'
+    });
 
     return () => {
       // optionally return a cleanup function that will be called when none of the conditions match anymore (after having matched)

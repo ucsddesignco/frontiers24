@@ -3,16 +3,18 @@ import { Point, animationProps } from './Asteroid';
 
 //prettier-ignore
 type AsteroidProps = {
+  isDesktop: boolean;
   numAsteroids: number;
-    contentPaddingLeft: number;
-    contentPaddingRight: number;
-    contentWidth: number;
-    setAsteroidVisibility: React.Dispatch<React.SetStateAction<boolean[]>>;
-    setAsteroidAnimations: React.Dispatch<React.SetStateAction<animationProps[]>>;
-    setFragmentEndPts: React.Dispatch<React.SetStateAction<Point[]>>;
+  contentPaddingLeft: number;
+  contentPaddingRight: number;
+  contentWidth: number;
+  setAsteroidVisibility: React.Dispatch<React.SetStateAction<boolean[]>>;
+  setAsteroidAnimations: React.Dispatch<React.SetStateAction<animationProps[]>>;
+  setFragmentEndPts: React.Dispatch<React.SetStateAction<Point[]>>;
 };
 
 export default function asteroidLogic({
+  isDesktop,
   numAsteroids,
   contentPaddingLeft,
   contentPaddingRight,
@@ -45,6 +47,42 @@ export default function asteroidLogic({
   //Endpt y: 0 < y < window.innerHeight
   let generatedCount = 0;
   const generateEndPT = () => {
+    if (!isDesktop) {
+      // Top of content
+      if (generatedCount < 2) {
+        generatedCount++;
+        return {
+          x: Math.max(
+            Math.random() * (window.innerWidth - 100),
+            window.innerWidth / 2
+          ),
+          y: Math.max(Math.random() * 80, 25),
+          rotate: Math.random() * 360
+        };
+      }
+
+      //Bottom Left of Content
+      if (generatedCount < 5) {
+        generatedCount++;
+        return {
+          x: Math.random() * (window.innerWidth / 2) + 5,
+          y:
+            Math.random() * (window.innerHeight / 2 - 100) +
+            window.innerHeight / 2,
+          rotate: Math.random() * 360
+        };
+      } else {
+        //Bottom Right of Content
+        generatedCount++;
+        return {
+          x:
+            (Math.random() * window.innerWidth - 50) / 2 +
+            window.innerWidth / 2,
+          y: Math.random() * (window.innerHeight / 2) + window.innerHeight / 2,
+          rotate: Math.random() * 360
+        };
+      }
+    }
     const contentRight = window.innerWidth - contentPaddingRight;
 
     //Let side of content

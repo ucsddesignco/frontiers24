@@ -53,6 +53,10 @@
       margin: 0;
       font-size: 40px;
       color: $primary-orange;
+
+      @media (max-width: $mobile-breakpoint) {
+        padding-top: 1.5rem;
+      }
     }
   }
 }
@@ -68,7 +72,9 @@
     .scroll-section-three,
     .scroll-section-four,
     .scroll-section-five,
-    .scroll-section-six {
+    .scroll-section-six,
+    .scroll-section-seven,
+    .scroll-section-eight {
       scroll-snap-align: center;
       height: 100vh;
       padding-left: $content-offset;
@@ -86,7 +92,9 @@
     .three,
     .four,
     .five,
-    .six {
+    .six,
+    .seven,
+    .eight {
       opacity: 1;
       height: 100vh;
       transform: rotate(80deg);

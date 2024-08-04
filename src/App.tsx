@@ -13,13 +13,16 @@ import LogoAndRegister from './components/LogoAndRegister/LogoAndRegister';
 import Asteroid from './components/Asteroid/Asteroid';
 import JudgeFunFacts from './components/JudgeFunFacts/JudgeFunFacts';
 import MobileFooter from './components/MobileFooter/MobileFooter';
+import Recap from './pages/Recap/Recap';
+import { useNavigation } from './util/useNavigation';
 
-function Rotate() {
+function App() {
   const scrollContainerRef = useRef<HTMLElement>(null);
   const scroll1Ref = useRef<HTMLElement>(null);
   const scroll2Ref = useRef<HTMLElement>(null);
   const scroll3Ref = useRef<HTMLElement>(null);
   const scroll4Ref = useRef<HTMLDivElement>(null);
+  const scroll5Ref = useRef<HTMLDivElement>(null);
   const planetRef = useRef<SVGSVGElement>(null);
   const fakeLogoRef = useRef<HTMLImageElement>(null);
   const fakeRegisterRef = useRef<HTMLDivElement>(null);
@@ -28,20 +31,40 @@ function Rotate() {
   const mobileJudgesRef = useRef<HTMLDivElement>(null);
   const [logoLoaded, setLogoLoaded] = useState(false);
   const homeRef = useRef<HTMLDivElement>(null);
+  const mobileRecapRef = useRef<HTMLDivElement>(null);
 
-  const scrollRefList = [scroll1Ref, scroll2Ref, scroll3Ref, scroll4Ref];
+  const scrollRefList = [
+    scroll1Ref,
+    scroll2Ref,
+    scroll3Ref,
+    scroll4Ref,
+    scroll5Ref
+  ];
   const mobileScrollRefList = [
     scroll1Ref,
     mobileFAQRef,
     scroll3Ref,
-    mobileJudgesRef
+    mobileJudgesRef,
+    mobileRecapRef
   ];
 
   const [pausedPlanet, setPausedPlanet] = useState('');
-  const registerClosed = true;
 
   useGSAP(() => {
     handleRotate(planetRef);
+  });
+
+  const {
+    navigateToPage,
+    pageSelected,
+    navLinks,
+    isHamburgerOpen,
+    toggleHamburger
+  } = useNavigation({
+    scrollContainerRef,
+    mobileScrollRefList,
+    scrollRefList,
+    setPausedPlanet
   });
 
   return (
@@ -49,35 +72,36 @@ function Rotate() {
       <Asteroid homeRef={homeRef} />
       <OrbitingPlanets planetRef={planetRef} pausedPlanet={pausedPlanet} />
       <Navbar
+        navLinks={navLinks}
+        isHamburgerOpen={isHamburgerOpen}
+        toggleHamburger={toggleHamburger}
+        pageSelected={pageSelected}
         navRef={navRef}
-        scrollRefList={scrollRefList}
-        scrollContainerRef={scrollContainerRef}
-        setPausedPlanet={setPausedPlanet}
-        mobileScrollRefList={mobileScrollRefList}
       />
       <LogoAndRegister
-        registerClosed={registerClosed}
         navRef={navRef}
         scrollContainerRef={scrollContainerRef}
         fakeLogoRef={fakeLogoRef}
         fakeRegisterRef={fakeRegisterRef}
         logoLoaded={logoLoaded}
+        navigateToPage={navigateToPage}
       />
       <Home
-        registerClosed={registerClosed}
         homeRef={homeRef}
         scroll1Ref={scroll1Ref}
         fakeLogoRef={fakeLogoRef}
         fakeRegisterRef={fakeRegisterRef}
         setLogoLoaded={setLogoLoaded}
+        navigateToPage={navigateToPage}
       />
       <FAQ scroll2Ref={scroll2Ref} mobileFAQRef={mobileFAQRef} />
       <Timeline scroll3Ref={scroll3Ref} />
       <Judges scroll4Ref={scroll4Ref} mobileJudgesRef={mobileJudgesRef} />
       <JudgeFunFacts />
+      <Recap scroll5Ref={scroll5Ref} mobileRecapRef={mobileRecapRef} />
       <MobileFooter />
     </main>
   );
 }
 
-export default Rotate;
+export default App;
