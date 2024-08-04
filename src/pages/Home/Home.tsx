@@ -2,7 +2,7 @@ import './Home.scss';
 import Logo from '/images/Logo.svg';
 import { useRef } from 'react';
 import mobilePlanets from '/images/mobile-planets.svg';
-import CustomToolTip from '../../components/CustomToolTIp/CustomToolTip';
+import { Pages } from '../../util/useNavigation';
 
 type HomeProps = {
   homeRef: React.RefObject<HTMLDivElement>;
@@ -10,7 +10,7 @@ type HomeProps = {
   fakeLogoRef: React.RefObject<HTMLImageElement>;
   fakeRegisterRef: React.RefObject<HTMLDivElement>;
   setLogoLoaded: React.Dispatch<React.SetStateAction<boolean>>;
-  registerClosed: boolean;
+  navigateToPage: (page: Pages, pageIndex: number) => void;
 };
 
 export default function Home({
@@ -19,7 +19,7 @@ export default function Home({
   fakeLogoRef,
   fakeRegisterRef,
   setLogoLoaded,
-  registerClosed
+  navigateToPage
 }: HomeProps) {
   const mobileDateRef = useRef(null);
 
@@ -58,24 +58,18 @@ export default function Home({
           </div>
         </div>
         <div
-          data-tooltip-id={`register-tooltip`}
           className={`register-button`}
           ref={fakeRegisterRef}
           aria-hidden="true"
         >
-          <a
-            style={{ opacity: registerClosed ? 0.5 : 1 }}
-            className={`button parallelogram ${registerClosed ? 'disabled' : ''}`}
-            href={
-              registerClosed
-                ? 'javascript:;'
-                : 'https://forms.gle/3vDkncYXUpMrX7D17'
-            }
-            target={registerClosed ? '_self' : '_blank'}
-            rel="noreferrer"
+          <button
+            onClick={() => {
+              navigateToPage('Recap', 4);
+            }}
+            className="button parallelogram"
           >
-            <span className="skew-fix">REGISTER NOW</span>
-          </a>
+            <span className="skew-fix">VIEW CASE STUDIES</span>
+          </button>
         </div>
         <img
           className="mobile-planets"
@@ -83,13 +77,6 @@ export default function Home({
           alt="A blue, purple, red, and yellow planet on orbit lines"
         />
       </section>
-      {/* Theme is light because the home page on mobile is dark */}
-      <CustomToolTip
-        id="register-tooltip"
-        place="top-start"
-        content="Registration is closed."
-        theme="light"
-      />
     </div>
   );
 }

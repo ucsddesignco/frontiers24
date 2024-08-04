@@ -9,6 +9,7 @@ import FragmentAsteroid2 from './Fragments/Fragment-Asteroid-2';
 import FragmentAsteroid3 from './Fragments/Fragment-Asteroid-3';
 import FragmentAsteroid4 from './Fragments/Fragment-Asteroid-4';
 import asteroidLogic from './asteroidLogic';
+import useIsDesktop from '../../util/useIsDesktop';
 
 type AsteroidProps = {
   homeRef: React.RefObject<HTMLElement>;
@@ -30,11 +31,17 @@ type EndPoint = Point & {
 };
 
 export default function Asteroid({ homeRef }: AsteroidProps) {
+  const isDesktop = useIsDesktop();
+
   const [asteroidAnimations, setAsteroidAnimations] = useState<
     animationProps[]
   >([]); // [ {x: number, y: number}
   //Read-only value that persists across renders
-  const numAsteroids = useRef(Math.floor(Math.random() * 4) + 6).current;
+  let numAsteroids = useRef(Math.floor(Math.random() * 4) + 6).current;
+
+  if (!isDesktop) {
+    numAsteroids = 6;
+  }
 
   const [asteroidVisibility, setAsteroidVisibility] = useState<boolean[]>(
     Array(numAsteroids).fill(false)
@@ -93,6 +100,7 @@ export default function Asteroid({ homeRef }: AsteroidProps) {
     if (homeElement) {
       const style = window.getComputedStyle(homeElement);
       asteroidLogic({
+        isDesktop,
         numAsteroids,
         contentPaddingLeft: parseInt(style.paddingLeft),
         contentPaddingRight: parseInt(style.paddingRight),
@@ -102,7 +110,7 @@ export default function Asteroid({ homeRef }: AsteroidProps) {
         setFragmentEndPts
       });
     }
-  }, [homeRef, numAsteroids]);
+  }, [homeRef, isDesktop, numAsteroids]);
 
   const calculateClickMeInitial = () => {
     const isLeft = Math.random() > 0.5;
@@ -119,7 +127,10 @@ export default function Asteroid({ homeRef }: AsteroidProps) {
 
   const clickMeInitial = calculateClickMeInitial();
 
-  const clickMeLocation = { x: window.innerWidth / 3 - 50, y: 100 };
+  const clickMeLocation = {
+    x: window.innerWidth / 3 - 50,
+    y: !isDesktop ? 75 : 100
+  };
 
   const FragmentAsteroidComponents = [
     FragmentAsteroid1,
@@ -182,7 +193,6 @@ export default function Asteroid({ homeRef }: AsteroidProps) {
                 key={`fragment-${index}-${i}`}
                 className="fragment"
                 initial={currentAsteroidLocation[index]}
-                // initial={asteroidAnimations[index]?.animate}
                 animate={{
                   x: fragmentEdPts[index * 4 + i].x,
                   y: fragmentEdPts[index * 4 + i].y,
@@ -222,7 +232,11 @@ export default function Asteroid({ homeRef }: AsteroidProps) {
               }}
             >
               <LargeAsteroid2 />
-              {index === 0 && <p className="asteroid-signifier">Click Me !</p>}
+              {index === 0 && (
+                <p className="asteroid-signifier">
+                  {isDesktop ? 'Click' : 'Tap'} Me !
+                </p>
+              )}
             </motion.div>
           )
         )

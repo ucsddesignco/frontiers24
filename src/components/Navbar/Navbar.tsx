@@ -1,169 +1,29 @@
-import { MutableRefObject, useEffect, useRef, useState } from 'react';
+import { MutableRefObject } from 'react';
 import Hamburger from '../Hamburger/Hamburger';
 import './Navbar.scss';
 import HamrburgerPlanet from '../Hamburger/HamrburgerPlanet';
-import gsap from 'gsap';
-import useIsDesktop from '../../util/useIsDesktop';
 
 type NavbarProps = {
-  scrollRefList: MutableRefObject<HTMLElement | null>[];
-  scrollContainerRef: MutableRefObject<HTMLElement | null>;
-  setPausedPlanet: (pausedPlanet: string) => void;
-  navRef?: MutableRefObject<HTMLDivElement | null>;
-  mobileScrollRefList?: MutableRefObject<HTMLElement | null>[];
+  navLinks: { name: string; onClick: () => void }[];
+  isHamburgerOpen: boolean;
+  toggleHamburger: () => void;
+  pageSelected: string;
+  navRef: MutableRefObject<HTMLDivElement | null>;
 };
 
-type Pages = 'Home' | 'FAQ' | 'Timeline' | 'Judges' | 'Recap';
-
 export default function Navbar({
-  scrollRefList,
-  scrollContainerRef,
-  setPausedPlanet,
-  navRef,
-  mobileScrollRefList
+  navLinks,
+  isHamburgerOpen,
+  toggleHamburger,
+  pageSelected,
+  navRef
 }: NavbarProps) {
-  const [isHamburgerOpen, setIsHamburgerOpen] = useState(false);
-  const pagesList = ['Home', 'FAQ', 'Timeline', 'Judges', 'Recap'];
-  const planetColorsPages = {
-    Home: '',
-    FAQ: 'blue',
-    Timeline: 'purple',
-    Judges: 'red',
-    Recap: 'yellow'
-  };
-  const isDesktop = useIsDesktop();
-  const [pageSelected, setPageSelected] = useState('Home');
-  const currentlyNavigatingRef = useRef(false);
-  const lastScrollTopRef = useRef(0);
-
-  const setCurrentlyNavigating = (value: boolean) => {
-    currentlyNavigatingRef.current = value;
-  };
-
-  function scrollToSection(scrollOffset: number) {
-    if (isDesktop) {
-      gsap.to(scrollContainerRef.current, {
-        scrollTo: { y: scrollOffset },
-        ease: 'power2',
-        onStart: function () {
-          setCurrentlyNavigating(true);
-        },
-        onComplete: function () {
-          setCurrentlyNavigating(false);
-        }
-      });
-    } else {
-      //Mobile Scroll
-      toggleHamburger();
-      scrollContainerRef.current?.scrollTo({
-        top: mobileScrollRefList
-          ? mobileScrollRefList[scrollOffset].current?.offsetTop || 0
-          : 0
-      });
-    }
-  }
-
-  const links = pagesList.map((pageName, index) => {
-    return {
-      onClick: () => {
-        if (isDesktop) {
-          scrollToSection(scrollRefList[index].current?.offsetTop || 0);
-          setPageSelected(pageName);
-          setPausedPlanet(planetColorsPages[pageName as Pages]);
-        } else {
-          scrollToSection(index);
-        }
-      },
-      name: pageName
-    };
-  });
-
-  const toggleHamburger = () => {
-    setIsHamburgerOpen(!isHamburgerOpen);
-
-    if (!isHamburgerOpen) {
-      const handleKeyDown = (e: KeyboardEvent) => {
-        if (e.key === 'Escape') {
-          setIsHamburgerOpen(false);
-          document.body.style.overflow = 'auto';
-          document.removeEventListener('keydown', handleKeyDown);
-        }
-      };
-      document.querySelector('main')?.setAttribute('aria-hidden', 'true');
-      document.addEventListener('keydown', handleKeyDown);
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'auto';
-      document.querySelector('main')?.removeAttribute('aria-hidden');
-    }
-  };
-
-  useEffect(() => {
-    if (scrollContainerRef.current && isDesktop) {
-      const pageHeight = window.innerHeight;
-      scrollContainerRef.current.addEventListener('scroll', () => {
-        if (currentlyNavigatingRef.current) return;
-        const scrollPosition = scrollContainerRef.current!.scrollTop || 0;
-        if (scrollPosition > lastScrollTopRef.current) {
-          // Scrolling Down
-          if (
-            scrollPosition >
-            scrollRefList[3].current!.offsetTop + pageHeight / 2
-          ) {
-            setPageSelected('Recap');
-            setPausedPlanet('yellow');
-          } else if (
-            scrollPosition >
-            scrollRefList[2].current!.offsetTop + pageHeight / 2
-          ) {
-            setPageSelected('Judges');
-            setPausedPlanet('red');
-          } else if (
-            scrollPosition >
-            scrollRefList[1].current!.offsetTop + pageHeight / 2
-          ) {
-            setPageSelected('Timeline');
-            setPausedPlanet('purple');
-          } else if (scrollPosition > pageHeight / 2) {
-            setPageSelected('FAQ');
-            setPausedPlanet('blue');
-          }
-        } else {
-          // Scrolling Up
-          if (scrollPosition < pageHeight / 2) {
-            setPageSelected('Home');
-            setPausedPlanet('');
-          } else if (
-            scrollPosition <
-            scrollRefList[2].current!.offsetTop - pageHeight / 2
-          ) {
-            setPageSelected('FAQ');
-            setPausedPlanet('blue');
-          } else if (
-            scrollPosition <
-            scrollRefList[3].current!.offsetTop - pageHeight / 2
-          ) {
-            setPageSelected('Timeline');
-            setPausedPlanet('purple');
-          } else if (
-            scrollPosition <
-            scrollRefList[4].current!.offsetTop - pageHeight / 2
-          ) {
-            setPageSelected('Judges');
-            setPausedPlanet('red');
-          }
-        }
-        lastScrollTopRef.current = scrollPosition <= 0 ? 0 : scrollPosition;
-      });
-    }
-  }, [scrollContainerRef, scrollRefList, setPausedPlanet, isDesktop]);
-
   return (
     // prettier-ignore
     <nav ref={navRef} role='navigation'>
       {/* Desktop Nav */}
       <ul className='desktop-nav'>
-        {links.slice(0, -1).map(link => (
+        {navLinks.slice(0, -1).map(link => (
           <li key={link.name} className={link.name === pageSelected ? 'active' : ''}>
              <div className='outerCont' onClick={link.onClick}>
              {link.name === pageSelected ? (
@@ -182,7 +42,7 @@ export default function Navbar({
             </svg>
           </li>
         ))}
-        {links.slice(-1).map(link => (
+        {navLinks.slice(-1).map(link => (
           <li key={link.name} className={link.name === pageSelected ? 'active' : ''}>
             <div className='outerCont' onClick={link.onClick}>
              {link.name === pageSelected ? (
@@ -218,7 +78,7 @@ export default function Navbar({
           className={isHamburgerOpen ? 'panel-open is-active' : 'panel-close'}
         >
           <HamrburgerPlanet />
-          {links.map(link => (
+          {navLinks.map(link => (
             <li key={link.name}>
               <button onClick={link.onClick}>{link.name}</button>
             </li>

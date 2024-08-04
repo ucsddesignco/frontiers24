@@ -44,7 +44,7 @@ export const Projects = [
     name: 'Teen Tritons Go ',
     casestudylink:
       'https://www.notion.so/Savory-Design-Frontiers-2024-6a5cf428ce474ba7b10829822ea59daa',
-    slidedecklink: ''
+    slidedecklink: '#'
   },
   {
     //Seven
@@ -122,6 +122,6 @@ export const Projects = [
     name: 'Mini Crosswords',
     casestudylink:
       'https://www.notion.so/17-Design-Frontiers-2024-85184fb23c4e4aa6947072c36f78132a',
-    slidedecklink: ''
+    slidedecklink: '#'
   }
 ];

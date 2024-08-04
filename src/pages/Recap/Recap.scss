@@ -8,22 +8,25 @@
       margin-bottom: 0;
     }
     .last {
-      margin-bottom: 1rem;
+      margin-bottom: 1.5rem;
     }
     .grid-layout {
       height: auto;
       width: 100%;
       margin-bottom: 0rem;
       display: grid;
-      grid-template-columns: 4fr;
-      grid-template-rows: repeat(16, 1fr);
       grid-column-gap: 0px;
       grid-row-gap: 3rem;
+      grid-template-columns: 1fr;
+
+      @media (min-width: 770px) {
+        grid-template-columns: repeat(2, 1fr);
+      }
 
       .project-item {
         display: flex;
         flex-direction: row;
-        justify-content: space-between;
+
         height: calc(2rem + 3vw);
 
         .left {
@@ -31,6 +34,7 @@
           align-items: start;
           justify-content: center;
           height: auto;
+          margin-right: 0.5rem;
           line-height: 1.85rem;
         }
 
@@ -41,8 +45,10 @@
           flex-direction: column;
           justify-content: space-between;
           align-items: start;
+
           .project-name {
             font-size: 1.25rem;
+            margin-bottom: 0.5rem;
             font-family: $p-font;
           }
           .button-cont {
@@ -62,8 +68,6 @@
               white-space: nowrap;
 
               p {
-                font-size: clamp(0.625rem, 0.9vw, 1rem);
-                letter-spacing: 2.4px;
                 margin-bottom: 0;
                 transform: skew(15deg);
               }
@@ -148,8 +152,8 @@
               white-space: nowrap;
 
               p {
-                font-size: clamp(0.625rem, 0.9vw, 1rem);
-                letter-spacing: 2.4px;
+                font-size: calc(0.85 * $p-size);
+                letter-spacing: 0.5px;
                 margin-bottom: 0;
                 transform: skew(15deg);
               }

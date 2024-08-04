@@ -44,7 +44,7 @@ export default function Recap({ scroll5Ref, mobileRecapRef }: RecapProps) {
                         <a
                           className="btn slide-deck"
                           href={project.slidedecklink}
-                          target={'_blank'}
+                          target={project.slidedecklink != '#' ? '_blank' : ''}
                           rel="noreferrer"
                         >
                           <p>Slide Deck</p>
@@ -80,7 +80,7 @@ export default function Recap({ scroll5Ref, mobileRecapRef }: RecapProps) {
                         <a
                           className="btn slide-deck"
                           href={project.slidedecklink}
-                          target={'_blank'}
+                          target={project.slidedecklink != '#' ? '_blank' : ''}
                           rel="noreferrer"
                         >
                           <p>Slide Deck</p>
@@ -122,7 +122,7 @@ export default function Recap({ scroll5Ref, mobileRecapRef }: RecapProps) {
                       <a
                         className="btn slide-deck"
                         href={project.slidedecklink}
-                        target={'_blank'}
+                        target={project.slidedecklink != '#' ? '_blank' : ''}
                         rel="noreferrer"
                       >
                         <p>Slide Deck</p>
